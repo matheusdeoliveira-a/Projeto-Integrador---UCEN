@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <title>Configurações - Portal do Suporte - FTAN</title>
+    <link rel="stylesheet" href="suporte_configuracoes.css">
+
+    <link rel="icon" type="image/svg+xml" href="favicon/engrenagem.svg">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="cabecalho">
+        <div class="barra-portal">
+            <a class="logo" href="suporte_inicio.html">
+                <img src="logo-ucen.png" alt="Logo">
+            </a>
+
+            <div class="caixa-pesquisa" id="caixaPesquisa">
+                <input type="text" placeholder="Pesquisar..." readonly>
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <div class="overlay-pesquisa" id="overlayPesquisa">
+                <div class="painel-pesquisa">
+                    <div class="barra-expandida">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+                        <button id="fecharPesquisa" type="button">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <div class="resultado-pesquisa">
+                        <ul id="lista-header">
+                            <li data-url="suporte_inicio.html">Início</li>
+                            <li data-url="suporte_academico.html">Acadêmico</li>
+                            <li data-url="suporte_professores.html">Professores</li>
+                            <li data-url="suporte_financeiro.html">Financeiro</li>
+                            <li data-url="suporte_atendimento.html">Central de Atendimento</li>
+                            <!-- <li data-url="suporte_salas.html">Salas & Agenda</li> --> 
+                            <li data-url="suporte_relatorios.html">Relatórios</li>
+                            <li data-url="suporte_configuracoes.html">Configurações</li>
+                        </ul>
+                        <div id="mensagem-header">Nenhum resultado encontrado.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acoes-cabecalho">
+                <a href="suporte_configuracoes.html" class="perfil">S</a>
+                <a href="tela-de-carregamento.html?destino=logout_suporte.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MENU LATERAL -->
+    <aside class="menu" id="menu">
+        <div class="menu-cabecalho">
+            <button class="botao-menu-fechar" id="botaoMenuFechar" type="button">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <span>Menu</span>
+        </div>
+
+        <nav class="menu-navegacao">
+            <a class="item-menu" href="suporte_inicio.html">
+                <i class="fa-solid fa-house"></i> Início
+            </a>
+            <a class="item-menu" href="suporte_academico.html">
+                <i class="fa-solid fa-users"></i> Acadêmico
+            </a>
+            <a class="item-menu" href="suporte_professores.html">
+                <i class="fa-solid fa-briefcase"></i> Professores
+            </a>
+            <a class="item-menu" href="suporte_financeiro.html">
+                <i class="fa-solid fa-wallet"></i> Financeiro
+            </a>
+            <a class="item-menu" href="suporte_atendimento.html">
+                <i class="fa-solid fa-envelope"></i> Central de Atendimento
+            </a>
+            
+            <!-- <a class="item-menu" href="suporte_salas.html"><i class="fa-solid fa-calendar-days"></i> Salas & Agenda</a> --> 
+
+            <a class="item-menu" href="suporte_relatorios.html">
+                <i class="fa-solid fa-chart-simple"></i> Relatórios
+            </a>
+            <a class="item-menu ativo" href="suporte_configuracoes.html">
+                <i class="fa-solid fa-gear"></i> Configurações
+            </a>
+        </nav>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo">
+        <div class="area-conteudo" id="areaConteudo">
+            <section class="pagina pagina-interna perfil-container">
+
+                <div class="cabecalho-pagina">
+                    <span class="categoria-pagina">Sistema & conta</span>
+                    <div class="titulo-linha">
+                        <h1>Configurações</h1>
+                        <span></span>
+                    </div>
+                    <p>Gerencie dados do operador, regras de atendimento, avisos globais, equipe e auditoria do portal.</p>
+                </div>
+
+                <!-- CARD HEADER: PERFIL DO OPERADOR DE SUPORTE -->
+                <section class="perfil-header-card">
+                    <div class="avatar-wrapper" id="avatar-container">
+                        <label for="upload-foto" class="avatar-clicavel">
+                            <div class="avatar-placeholder" id="avatar-placeholder">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <img src="" alt="Foto de Perfil" id="foto-perfil-img" style="display: none;">
+                            <input type="file" id="upload-foto" accept="image/*">
+                            <div class="btn-alterar-foto" title="Alterar foto">
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
+                        </label>
+                        <button type="button" class="btn-remover-foto" id="btn-remover-foto" title="Remover foto" style="display: none;">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+
+                    <div class="perfil-header-info">
+                        <div class="nome-status-wrapper">
+                            <h2>Suporte Técnico / TI</h2>
+                            <span class="badge ok">Sistema ativo</span>
+                        </div>
+                        <p class="meta-info"><i class="fa-solid fa-shield-halved"></i> Nível de acesso: <strong>Administrador Geral</strong></p>
+                        <p class="meta-info"><i class="fa-solid fa-id-card"></i> ID do operador: <strong>SUP-2026-99</strong></p>
+                    </div>
+                </section>
+
+                <!-- AVISOS GLOBAIS & MODO DE MANUTENÇÃO 
+                <section class="perfil-secao-card">
+                    <div class="secao-titulo">
+                        <i class="fa-solid fa-bullhorn"></i>
+                        <h3>Avisos globais & modo de manutenção</h3>
+                    </div>
+
+                    <div class="lista-configuracoes">
+                        <div class="item-configuracao">
+                            <div class="texto-configuracao">
+                                <h4>Modo de manutenção no portal</h4>
+                                <p>Bloqueia temporariamente o acesso de alunos e professores para atualizações de infraestrutura.</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="chk-modo-manutencao" data-campo="modo_manutencao">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <form id="form-aviso-global" class="form-margin-top">
+                        <div class="form-grid-1">
+                            <div class="input-group">
+                                <label for="texto-banner-aviso">Banner de alerta geral (exibido no topo dos portais)</label>
+                                <input type="text" id="texto-banner-aviso" placeholder="Ex.: Manutenção agendada para o sistema financeiro às 23:00.">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-principal">
+                                <i class="fa-solid fa-paper-plane"></i> Publicar aviso
+                            </button>
+                        </div>
+                    </form>
+                </section> 
+                -->
+                
+
+                <!-- DADOS DO OPERADOR / ATENDIMENTO -->
+                <section class="perfil-secao-card">
+                    <form id="form-suporte-dados">
+                        <div class="secao-titulo">
+                            <i class="fa-solid fa-user-gear"></i>
+                            <h3>Dados de atendimento & contato</h3>
+                        </div>
+
+                        <div class="form-grid-3">
+                            <div class="input-group span-2">
+                                <label for="nome-operador">Nome da equipe / operador responsável</label>
+                                <input type="text" id="nome-operador" maxlength="150" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="email-oficial">E-mail oficial de suporte</label>
+                                <input type="email" id="email-oficial" maxlength="150" required>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="telefone-suporte">Telefone direto</label>
+                                <input type="text" id="telefone-suporte" maxlength="30">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="whatsapp-suporte">WhatsApp de atendimento</label>
+                                <input type="text" id="whatsapp-suporte" maxlength="30">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="horario-atendimento">Horário de atendimento</label>
+                                <input type="text" id="horario-atendimento" maxlength="100">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-principal">
+                                <i class="fa-solid fa-floppy-disk"></i> Salvar dados
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- EQUIPE & PERMISSÕES -->
+                <section class="perfil-secao-card">
+                    <div class="secao-titulo-alinhado">
+                        <div class="secao-titulo">
+                            <i class="fa-solid fa-users-gear"></i>
+                            <h3>Equipe & permissões do suporte</h3>
+                        </div>
+                        <button type="button" class="btn-secundario btn-pequeno" id="btn-add-operador">
+                            <i class="fa-solid fa-user-plus"></i> Novo operador
+                        </button>
+                    </div>
+
+                    <div class="tabela-container">
+                        <table class="tabela">
+                            <thead>
+                                <tr>
+                                    <th>Operador</th>
+                                    <th>E-mail</th>
+                                    <th>Nível de acesso</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaEquipe"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- LOGS DE AUDITORIA -->
+               <!-- <section class="perfil-secao-card">
+                    <div class="secao-titulo-alinhado">
+                        <div class="secao-titulo">
+                            <i class="fa-solid fa-list-check"></i>
+                            <h3>Logs recentes de auditoria</h3>
+                        </div>
+                        <button type="button" class="btn-tabela" id="btn-ver-logs" title="Ver todos os logs" aria-label="Ver todos os logs">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+
+                    <div class="lista-logs">
+                        <div class="item-log">
+                            <span class="data-log">12/05 14:32</span>
+                            <span class="desc-log"><strong>SUP-2026-99</strong> alterou as preferências de notificações de chamados.</span>
+                        </div>
+                        <div class="item-log">
+                            <span class="data-log">12/05 11:15</span>
+                            <span class="desc-log"><strong>Carlos Eduardo</strong> atualizou as regras de SLA para a prioridade alta.</span>
+                        </div>
+                        <div class="item-log">
+                            <span class="data-log">11/05 09:00</span>
+                            <span class="desc-log"><strong>Sistema</strong> gerou o relatório automático diário de atendimentos.</span>
+                        </div>
+                    </div>
+                </section> --> 
+
+                <!-- MODAL PARA ZOOM DA FOTO DE PERFIL -->
+                <div id="modal-foto-perfil" class="modal-foto-overlay">
+                    <div class="modal-foto-content">
+                        <img id="img-modal-zoom" src="" alt="Foto Ampliada">
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- MODAL: CADASTRAR / EDITAR OPERADOR -->
+    <div class="modal-overlay" id="modalOperador">
+        <div class="modal">
+            <button class="fechar-modal" id="fecharModalOperador" type="button">&times;</button>
+            <h2 id="tituloModalOperador">Novo operador</h2>
+            <p id="textoModalOperador">O operador receberá um e-mail com o acesso e uma senha provisória. Ele só verá os menus que você marcar abaixo.</p>
+            <form id="formOperador">
+                <div class="form-grid">
+                    <div class="input-group"><label for="nomeOperadorNovo">Nome completo</label><input id="nomeOperadorNovo" maxlength="150" required></div>
+                    <div class="input-group"><label for="cargoOperador">Nível de acesso (rótulo)</label><input id="cargoOperador" maxlength="60" placeholder="Ex.: Atendimento N1"></div>
+                    <div class="input-group full"><label for="emailOperador">E-mail</label><input id="emailOperador" type="email" required></div>
+
+                    <div class="input-group full">
+                        <label>Menus liberados</label>
+                        <label class="check-linha check-total"><input type="checkbox" id="operadorAcessoTotal"><i class="fa-solid fa-shield-halved"></i> Acesso total (administrador)</label>
+                        <div class="grid-permissoes" id="gridPermissoes"></div>
+                    </div>
+
+                    <div class="input-group" id="grupoStatusOperador" style="display:none">
+                        <label for="statusOperador">Status</label>
+                        <select id="statusOperador"><option value="ativo">Ativo</option><option value="inativo">Inativo</option></select>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn-secundario" type="button" id="cancelarModalOperador">Cancelar</button>
+                    <button class="btn-principal" type="submit" id="btnSalvarOperador"><i class="fa-solid fa-check"></i> Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: CONFIRMAR EXCLUSÃO DE OPERADOR -->
+    <div class="modal-overlay" id="modalExcluirOperador">
+        <div class="modal">
+            <h2>Excluir operador</h2>
+            <p id="textoModalExcluirOperador"></p>
+            <div class="form-actions">
+                <button class="btn-secundario" type="button" id="cancelarExcluirOperador">Cancelar</button>
+                <button class="btn-perigo" type="button" id="confirmarExcluirOperador"><i class="fa-solid fa-trash"></i> Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-area" id="toastArea"></div>
+
+    <!-- RODAPÉ -->
+    <footer id="contato">
+
+        <!-- <div class="footer-superior">
+            <div class="footer-esquerda">
+                <img src="logo-ucen.png" alt="Logo">
+                <h3 class="texto-footer">
+                    Campus central: Avenida das Estrelas, nº 372,<br>
+                    Jardim Primavera, Cidade Altas Flores/SP - CEP 14797-000
+                </h3>
+            </div>
+        </div> -->
+
+        <div class="footer-inferior">
+            <h3 class="copyright">
+                © 2026 Universidade de Ciências e Exatas Nebula<br>
+                Todos os direitos reservados.
+            </h3>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="suporte_permissoes.js" defer></script>
+    <script src="suporte_configuracoes.js" defer></script>
+</body>
+</html>

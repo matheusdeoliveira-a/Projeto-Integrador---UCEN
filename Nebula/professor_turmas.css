@@ -1,0 +1,1841 @@
+/* ==========================================================
+   PORTAL DO PROFESSOR - MINHAS TURMAS
+   Estilos base (header, menu, rodapé) + estilos da página Minhas Turmas
+   ========================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    background-color: black;
+}
+
+
+/* ==========================================
+   LOGO
+========================================== */
+
+
+.logo img {
+    width: 125px;
+    height: auto;
+    display: block;
+    transition: .35s ease;
+}
+
+
+.logo img:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+
+
+/* ==========================================
+   BARRA DE ROLAGEM
+========================================== */
+
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: #050912;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: #8a2be2;
+    border-radius: 6px;
+    border: 2px solid #050912;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9932cc;
+}
+
+
+
+
+
+/* ==========================================
+   HEADER
+   Campus + Pesquisa + Perfil
+========================================== */
+
+
+.cabecalho {
+    width: 100%;
+    height: 90px;
+
+
+    background-color: #050505;
+
+
+    display: flex;
+    align-items: center;
+
+
+    z-index: 900;
+
+
+    border-bottom: 1px solid #292929;
+}
+
+
+
+
+/* ==========================================
+   BARRA DO PORTAL
+========================================== */
+
+
+.barra-portal {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Espaça igualmente: Logo na ponta esquerda, Pesquisa no meio, Perfil na ponta direita */
+    padding: 0 40px; /* Margem das bordas da tela */
+}
+
+
+/* ==========================================
+   PESQUISA
+========================================== */
+
+
+.caixa-pesquisa {
+    display: flex;
+    align-items: center;
+
+
+    width: min(400px, 90%);
+
+
+    padding: 10px 15px;
+
+
+    border: 1px solid #333;
+
+
+    border-radius: 20px;
+
+
+    background-color: white;
+}
+
+
+.caixa-pesquisa input {
+    width: 100%;
+
+
+    border: none;
+    background: transparent;
+
+
+    color: black;
+
+
+    outline: none;
+
+
+    font-size: 16px;
+}
+
+
+.caixa-pesquisa input::placeholder {
+    color: #777;
+}
+
+
+.caixa-pesquisa i {
+    color: #888;
+
+
+    font-size: 15px;
+
+
+    margin-left: 6px;
+}
+
+
+/* ===========================
+    Pesquisa Cabeçalho
+   =========================== */
+
+
+.overlay-pesquisa{
+
+
+    position:fixed;
+
+
+    inset:0;
+
+
+    background:rgba(0,0,0,.55);
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:flex-start;
+
+
+    opacity:0;
+
+
+    visibility:hidden;
+
+
+    transition:.35s;
+
+
+    z-index:5000;
+
+
+}
+
+
+.overlay-pesquisa.ativo{
+
+
+    opacity:1;
+
+
+    visibility:visible;
+
+
+}
+
+
+.painel-pesquisa{
+
+
+    width:100%;
+
+
+    background:#050912;
+
+
+    padding:35px;
+
+
+    transform:translateY(-30px);
+
+
+    transition:.35s;
+
+
+}
+
+
+.overlay-pesquisa.ativo .painel-pesquisa{
+
+
+    transform:translateY(0);
+
+
+}
+
+
+.barra-expandida{
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    background:white;
+
+
+    border-radius:50px;
+
+
+    padding:15px 25px;
+
+
+}
+
+
+.barra-expandida input{
+
+
+    flex:1;
+
+
+    border:none;
+
+
+    outline:none;
+
+
+    font-size:20px;
+
+
+    margin:0 15px;
+
+
+}
+
+
+#fecharPesquisa{
+
+
+    border:none;
+
+
+    background:none;
+
+
+    cursor:pointer;
+
+
+    font-size:22px;
+
+
+}
+
+
+.resultado-pesquisa{
+
+
+    margin-top:30px;
+    display:none;
+
+
+}
+
+
+.resultado-pesquisa li{
+
+
+    list-style:none;
+
+
+    color:#e47de4d9;
+
+
+    padding:12px;
+
+
+    cursor:pointer;
+
+
+    border-bottom:1px solid rgba(255,255,255,.1);
+
+
+    transition:
+        background-color .25s,
+        padding-left .25s;
+
+
+}
+
+
+.resultado-pesquisa li:hover{
+
+
+    background:#111d33;
+    padding-left:20px;
+
+
+}
+
+
+/* Esconde os resultados inicialmente */
+
+
+#lista-header li{
+
+
+    display:none;
+
+
+}
+
+
+#mensagem-header{
+
+
+    display:none;
+
+
+    padding:18px 12px;
+
+
+    color:#9b9b9b;
+
+
+    font-family:"Sora", sans-serif;
+
+
+    font-size:16px;
+
+
+}
+
+
+.barra-expandida i{
+
+
+    font-size:22px;
+
+
+    color:#666;
+
+
+}
+
+
+
+/* ==========================================
+   PERFIL
+========================================== */
+.perfil {
+    /* Removido position: absolute e right: 50px */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #fafafa;
+    background-color: #240D31;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    flex-shrink: 0; /* Impede o botão de deformar */
+}
+
+
+.perfil:hover {
+    transform: scale(1.05);
+
+
+    box-shadow:
+        0 0 15px rgba(255, 249, 63, 0.25);
+}
+
+/* Perfil + botão Sair lado a lado, no canto direito do cabeçalho */
+.acoes-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.btn-sair {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .25);
+    background: transparent;
+    color: #fafafa;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: .25s;
+}
+
+.btn-sair:hover {
+    background: rgba(255, 90, 90, .15);
+    border-color: #ff5a5a;
+    color: #ff5a5a;
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+/* ==========================================
+   MENU LATERAL FIXO
+========================================== */
+
+
+.menu {
+    position: fixed;
+
+
+    left: 48px;
+    top: 50%;
+
+
+    transform: translateY(-50%);
+
+
+    width: 91px;
+    height: 240px;
+
+
+    overflow: hidden;
+
+
+    border-radius: 45px;
+
+
+    background-color: #303030;
+
+
+    z-index: 1000;
+
+
+    transition:
+        width 0.45s ease,
+        height 0.45s ease,
+        border-radius 0.45s ease;
+}
+
+
+
+
+/* ==========================================
+   MENU ABERTO
+========================================== */
+
+
+.menu.aberto {
+    width: 340px;
+    height: auto;
+    max-height: min(640px, 88vh);
+    border-radius: 30px;
+    overflow-y: auto;
+}
+
+
+
+
+/* ==========================================
+   CABEÇALHO DO MENU
+========================================== */
+
+
+.menu-cabecalho {
+    height: 90px;
+
+
+    display: flex;
+    align-items: center;
+
+
+    padding-left: 20px;
+
+
+    color: #E3AC6C; /* Aqui muda o span "Menu" */
+
+
+    font-family: 'Sora', sans-serif;
+
+
+    font-size: 26px;
+    font-weight: 500;
+
+
+    white-space: nowrap;
+}
+
+
+.menu-cabecalho span {
+    margin-left: 18px;
+
+
+    opacity: 0;
+
+
+    transition: opacity 0.2s ease;
+}
+
+
+.menu.aberto .menu-cabecalho span {
+    opacity: 1;
+
+
+    transition-delay: 0.25s;
+}
+
+
+
+
+/* ==========================================
+   BOTÃO DO MENU
+========================================== */
+
+
+.botao-menu-fechar {
+    width: 45px;
+    height: 45px;
+
+
+    border: none;
+
+
+    background: transparent;
+
+
+    color: #E3AC6C;
+
+
+    cursor: pointer;
+
+
+    font-size: 40px;
+
+
+    display: flex;
+
+
+    align-items: center;
+    justify-content: center;
+
+
+    flex-shrink: 0;
+}
+
+
+.menu.aberto .botao-menu-fechar {
+    display: flex;
+}
+
+/* ==========================================
+   NAVEGAÇÃO
+========================================== */
+
+
+.menu-navegacao {
+    display: flex;
+
+
+    flex-direction: column;
+
+
+    padding: 0 20px 25px 48px;
+}
+
+/* ==========================================
+   ITENS DO MENU
+========================================== */
+
+
+.item-menu {
+    width: 100%;
+    padding: 12px 22px;
+    border: none;
+    background: transparent;
+    color: #c9c9c9;
+
+
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+
+
+    border-left: 3px solid transparent;   /* espaço para a barra */
+    transition: .25s;
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+
+/* Hover */
+.item-menu:hover {
+    color: #E3AC6C;
+    transform: translateX(4px);
+    background: rgb(71, 71, 71);
+    border-left-color: #E3AC6C; /* barra dourada */
+}
+
+
+/* Página atual */
+.item-menu.ativo {
+    background: rgb(71, 71, 71);
+    color: #E3AC6C;
+    border-left-color: #E3AC6C;
+}
+
+.item-menu i{
+    width: 22px;
+    font-size: 19px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   MOSTRAR ITENS QUANDO ABERTO
+========================================== */
+
+
+.menu.aberto .item-menu {
+    opacity: 1;
+}
+
+
+
+/* ==========================================
+   ESCONDER ITENS QUANDO FECHADO
+========================================== */
+
+
+.menu:not(.aberto) .menu-navegacao {
+    opacity: 0;
+
+
+    pointer-events: none;
+}
+
+
+
+
+
+/* ==========================================
+   CONTEÚDO PRINCIPAL
+========================================== */
+
+
+.conteudo {
+    width: 100%;
+
+
+    min-height: 100vh;
+
+
+    background-color: black;
+
+
+    display: flex;
+
+
+    flex-direction: column;
+
+
+    align-items: center;
+
+
+    position: relative;
+}
+
+
+
+
+/* ==========================================
+   ÁREA DO CONTEÚDO
+========================================== */
+
+
+.area-conteudo {
+    width: 100%;
+}
+
+
+
+
+
+/* ==========================================
+   PÁGINAS DO MENU
+========================================== */
+
+
+.pagina {
+    width: 100%;
+
+
+    min-height: 100vh;
+
+
+    color: white;
+
+
+    font-family: 'Sora', sans-serif;
+}
+
+
+
+
+/* ==========================================
+   PÁGINAS INTERNAS
+========================================== */
+
+/* Correção: cada seção agora é seu próprio HTML, então a página
+   precisa nascer visível (antes dependia de um JS de troca de
+   página que não existe mais nesse modelo com arquivos separados) */
+.pagina-interna {
+    display: block;
+    min-height: calc(100vh - 90px);
+    padding: 35px 8% 40px 180px;
+    background-color: transparent;
+}
+
+
+
+
+
+/* ==========================================
+   CABEÇALHO DA PÁGINA
+========================================== */
+
+
+.cabecalho-pagina {
+    width: 100%;
+
+
+    display: flex;
+
+
+    flex-direction: column;
+
+
+    align-items: center;
+
+
+    padding-top: 0;
+}
+
+
+
+
+/* ==========================================
+   CATEGORIA
+========================================== */
+
+
+.categoria-pagina {
+    width: 100%;
+
+
+    font-size: 13px;
+
+
+    font-weight: 500;
+
+
+    color: #8b8b93;
+
+
+    text-align: left;
+
+
+    margin-bottom: 4px;
+
+
+    letter-spacing: 0.5px;
+}
+
+
+
+
+/* ==========================================
+   TÍTULO + LINHA
+========================================== */
+
+
+.titulo-linha {
+    width: 100%;
+
+
+    display: flex;
+
+
+    align-items: center;
+
+
+    gap: 20px;
+}
+
+
+
+
+/* ==========================================
+   TÍTULO
+========================================== */
+
+
+.titulo-linha h1 {
+    margin: 0;
+
+
+    color: #E3AC6C;
+
+
+    font-size: 42px;
+
+
+    font-weight: 600;
+
+
+    line-height: 1;
+
+
+    letter-spacing: 0.2px;
+
+
+    white-space: nowrap;
+}
+
+
+
+
+/* ==========================================
+   LINHA AO LADO DO TÍTULO
+========================================== */
+
+
+.titulo-linha span {
+    height: 1px;
+
+
+    flex: 1;
+
+
+    max-width: 420px;
+
+
+    background-color: #E3AC6C;
+
+
+    opacity: 0.8;
+}
+
+
+
+
+/* ==========================================
+   SUBTÍTULO
+========================================== */
+
+
+.cabecalho-pagina p {
+    width: 100%;
+
+
+    margin-top: 18px;
+
+
+    font-size: 22px;
+
+
+    font-weight: 400;
+
+
+    color: white;
+
+
+    text-align: center;
+}
+
+
+
+/* =========================================
+   RODAPÉ COM O FOOTER  
+   ========================================= */
+footer{
+
+
+    width:100%;
+    background:#151515;
+    margin-top: 210px;
+
+
+}
+
+
+.footer-superior{
+
+
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:50px 70px;
+
+
+}
+
+
+.footer-esquerda{
+
+
+    display:flex;
+    flex-direction:column;
+    margin-left: 105px;
+
+
+}
+
+
+.footer-direita{
+
+
+    position: relative;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    left: -65px;
+
+
+}
+
+
+.footer-esquerda img{
+
+
+    width:80px;
+    margin-bottom:25px;
+
+
+}
+
+
+.titulo-footer{
+
+
+    color:#D78EDB;
+    font-size:2rem;
+    margin-bottom:20px;
+    font-weight:normal;
+
+
+}
+
+
+.texto-footer{
+
+
+    color:white;
+    font-size:1.1rem;
+    line-height:1.7;
+    font-weight:normal;
+
+
+}
+
+
+.footer-inferior{
+
+
+    border-top:1px solid #5d5d5d;
+    background:#101010;
+    text-align:center;
+    padding:28px 20px;
+
+
+}
+
+
+.copyright{
+
+
+    color:#d6d6d6;
+    font-size:1rem;
+    font-weight:normal;
+    line-height:1.5;
+
+
+}
+
+
+
+/* Estilo base dos botões pill */
+.btn-opcao {
+    background-color: #121214;
+    color: #e1e1e6;
+    border: 1px solid #323238;
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+
+.btn-opcao:hover {
+    border-color: #7a7a7a;
+}
+
+
+/* Estado Ativo: Mantém a borda original e aplica o degradê de luz roxa */
+.btn-opcao.ativo {
+    background-color: #16121e;
+   
+    /* Mantém a mesma cor de borda do estado normal */
+    border-color: #323238;
+   
+    /* Aplica apenas o degradê de brilho/sombra roxa */
+    box-shadow: 0px 8px 22px rgba(255, 255, 255, 0.3);
+}
+
+
+.btn-opcao.ativo:hover {
+    border-color: #7a7a7a; 
+}
+
+.box-detalhes-semestre {
+    background-color: #131316;
+    border: 1px solid #26262c;
+    border-radius: 14px;
+    padding: 30px;
+    margin-top: 35px;
+    margin-left: 50px;
+    margin-right: 50px;
+    box-sizing: border-box;
+}
+
+
+/* Cabeçalho superior dentro da box */
+.cabecalho-box-semestre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+
+.titulo-semestre-materia {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0;
+}
+
+
+.destaque-rosa {
+    color: #E3AC6C;
+}
+
+
+/* Badge 'Cursando Atualmente' azul */
+/*
+.badge-status-curso {
+    background-color: rgba(94, 200, 255, 0.12);
+    color: #5EC8FF;
+    border: 1px solid rgba(94, 200, 255, 0.3);
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+*/
+/* ---------- RESUMO RÁPIDO (mesmo padrão do painel do Suporte) ---------- */
+.grid-cards-estatisticas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-top: 35px;
+}
+
+.card-estatistica {
+    background-color: #131316;
+    border: 1px solid #26262c;
+    border-radius: 14px;
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s ease;
+}
+
+.card-estatistica:hover {
+    border-color: #3a3a42;
+}
+
+.cabecalho-card-estatistica {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #9b9ba3;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.cabecalho-card-estatistica i {
+    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.valor-estatistica {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+.legenda-estatistica {
+    color: #8b8b93;
+    font-size: 12.5px;
+}
+
+/* Cores de destaque de cada cartão, no mesmo espírito do painel Início do Suporte */
+.card-roxo .cabecalho-card-estatistica i {
+    color: #B99CFF;
+    background: rgba(185, 156, 255, 0.1);
+}
+
+.card-verde .cabecalho-card-estatistica i {
+    color: #94FF69;
+    background: rgba(148, 255, 105, 0.1);
+}
+
+.card-amarelo .cabecalho-card-estatistica i {
+    color: #FFC800;
+    background: rgba(255, 200, 0, 0.1);
+}
+
+.card-azul .cabecalho-card-estatistica i {
+    color: #5EC8FF;
+    background: rgba(94, 200, 255, 0.1);
+}
+
+/* ---------- MINHAS TURMAS (listagem) ---------- */
+.grid-turmas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.card-turma {
+    background-color: #121214;
+    border: 1px solid #292930;
+    border-radius: 14px;
+    padding: 24px;
+    cursor: pointer;
+    transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-turma::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 3px;
+    background: #E3AC6C;
+    opacity: .85;
+}
+
+.card-turma:hover {
+    border-color: #E3AC6C;
+    background-color: #16161a;
+    transform: translateY(-3px);
+}
+
+.card-turma .semestre-tag {
+    color: #a0a0a0;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.card-turma h3 {
+    color: #E3AC6C;
+    font-size: 24px;
+    margin: 10px 0 16px 0;
+}
+
+.detalhes-card-turma {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: #cfcfcf;
+    margin-bottom: 18px;
+}
+
+.detalhes-card-turma i {
+    width: 16px;
+    color: #E3AC6C;
+    margin-right: 8px;
+}
+
+.rodape-card-turma {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding-top: 14px;
+}
+
+.rodape-card-turma .btn-entrar-turma {
+    background: transparent;
+    border: 1px solid #E3AC6C;
+    color: #E3AC6C;
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.rodape-card-turma .btn-entrar-turma:hover {
+    background: rgba(227, 172, 108, 0.15);
+}
+
+/* ---------- DETALHE DA TURMA ---------- */
+.turma-detalhe {
+    display: none;
+    margin-top: 35px;
+}
+
+.turma-detalhe.ativo {
+    display: block;
+}
+
+.grid-turmas.escondido {
+    display: none;
+}
+
+.btn-voltar-turmas {
+    background: transparent;
+    border: none;
+    color: #E3AC6C;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    transition: all 0.3s ease; 
+}
+
+.btn-voltar-turmas:hover {
+    color: #dddddd;
+    padding-left: 10px;
+}
+
+.cabecalho-turma-detalhe {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: #131316;
+    border: 1px solid #26262c;
+    border-radius: 14px;
+    padding: 26px 30px;
+    margin-bottom: 25px;
+}
+
+.cabecalho-turma-detalhe h2 {
+    color: #E3AC6C;
+    font-size: 28px;
+}
+
+.cabecalho-turma-detalhe p {
+    color: #cfcfcf;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+.stats-rapidas-turma {
+    display: flex;
+    gap: 28px;
+}
+
+.stats-rapidas-turma div {
+    text-align: center;
+}
+
+.stats-rapidas-turma strong {
+    display: block;
+    font-size: 22px;
+    color: #E3AC6C;
+}
+
+.stats-rapidas-turma span {
+    font-size: 11px;
+    color: #a0a0a0;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+/* Uma cor de destaque para cada indicador, no mesmo espírito
+   dos cartões coloridos do painel do Suporte */
+.stats-rapidas-turma div:nth-child(1) strong { color: #B99CFF; }
+.stats-rapidas-turma div:nth-child(2) strong { color: #B99CFF; }
+.stats-rapidas-turma div:nth-child(3) strong { color: #B99CFF; }
+
+.container-botoes-turma {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.conteudo-aba-turma {
+    display: none;
+}
+
+.conteudo-aba-turma.ativo {
+    display: block;
+}
+
+
+.btn-nova-pasta,
+.btn-adicionar-arquivo {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #E3AC6C;
+    padding: 9px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: .2s;
+
+    text-decoration: none;
+}
+
+.btn-nova-pasta:hover,
+.btn-adicionar-arquivo:hover {
+    background: rgba(133, 133, 133, 0.15);
+    border-color: #bdbdbd;
+    color: #b98c59;
+}
+/* ==========================================================
+   RESPONSIVO (mesmo ponto de quebra usado no Portal do Suporte)
+   ========================================================== */
+@media (max-width: 1100px) {
+    .grid-cards-estatisticas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-turmas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-cards-estatisticas,
+    .grid-turmas {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   PESQUISA EXPANDIDA x MENU
+   O cabeçalho fixo cria um contexto próprio de empilhamento,
+   então, com a pesquisa aberta, o menu é desativado para não
+   ficar por cima do overlay (nem por toque, nem por teclado).
+   ========================================================== */
+
+body:has(.overlay-pesquisa.ativo) .menu {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ==========================================================
+   RESPONSIVO
+   ========================================================== */
+
+/* ---------- Notebooks pequenos (até 1100px) ---------- */
+@media (max-width: 1100px) {
+    .barra-portal { padding: 0 25px; }
+    .pagina-interna { padding: 35px 40px 40px 145px; }
+    .menu { left: 25px; }
+
+    .grid-cards-estatisticas { grid-template-columns: repeat(2, 1fr); }
+    .grid-turmas { grid-template-columns: repeat(2, 1fr); }
+
+    .footer-superior { padding: 50px 45px; }
+    .footer-esquerda { margin-left: 40px; }
+    .footer-direita { left: 0; }
+}
+
+/* ---------- Tablets (até 900px) ---------- */
+@media (max-width: 900px) {
+    .pagina-interna { padding: 30px 35px 40px 130px; }
+    .titulo-linha h1 { font-size: 36px; }
+
+    .box-detalhes-semestre {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 24px;
+    }
+
+    .cabecalho-turma-detalhe { padding: 22px; }
+}
+
+/* ---------- Tablets pequenos / celulares grandes (até 768px) ---------- */
+@media (max-width: 768px) {
+
+    /* ---------- HEADER FIXO ---------- */
+    .cabecalho {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 70px;
+        z-index: 900;
+    }
+
+    .barra-portal {
+        position: relative;
+        height: 70px;
+        padding: 0 14px;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    /* Logo à esquerda, depois do hambúrguer */
+    .logo {
+        position: absolute;
+        left: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+    }
+
+    .logo img { width: 84px; }
+
+    /* Pesquisa vira só o ícone */
+    .caixa-pesquisa {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        margin-left: auto;
+        justify-content: center;
+        border: 1px solid #333;
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .caixa-pesquisa input { display: none; }
+
+    .caixa-pesquisa i {
+        margin: 0;
+        color: #E3AC6C;
+        font-size: 18px;
+    }
+
+    .perfil {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+    }
+
+    /* ---------- MENU MOBILE (hambúrguer) ---------- */
+    .menu {
+        position: fixed;
+        top: 13px;
+        left: 10px;
+        width: 44px;
+        height: 44px;
+        transform: none;
+        overflow: hidden;
+        border-radius: 22px;
+        background-color: transparent;
+        z-index: 1100;
+        transition: width .3s ease, border-radius .3s ease, background-color .3s ease;
+    }
+
+    .menu-cabecalho {
+        height: 44px;
+        padding-left: 0;
+        font-size: 20px;
+    }
+
+    .botao-menu-fechar {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+
+    .menu-cabecalho span { margin-left: 6px; }
+
+    .menu.aberto {
+        width: min(300px, calc(100vw - 20px));
+        height: auto;
+        max-height: calc(100vh - 26px);
+        border-radius: 22px;
+        background-color: #303030;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .55);
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 1200;
+    }
+
+    .menu.aberto .menu-navegacao {
+        opacity: 1;
+        pointer-events: auto;
+        padding: 8px 12px 16px 12px;
+        max-height: calc(100vh - 82px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .menu.aberto .item-menu {
+        font-size: 16px;
+        padding: 12px 14px;
+        gap: 12px;
+    }
+
+    .menu.aberto .item-menu i { font-size: 17px; }
+
+    .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .3s ease, visibility .3s ease;
+        z-index: 1150;
+    }
+
+    .menu-overlay.ativo {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* ---------- CONTEÚDO ---------- */
+    .conteudo { padding-top: 70px; }
+
+    .pagina-interna {
+        min-height: auto;
+        padding: 28px 20px 40px;
+    }
+
+    .categoria-pagina { font-size: 11px; }
+
+    .titulo-linha { gap: 14px; }
+
+    .titulo-linha h1 {
+        font-size: clamp(28px, 8vw, 36px);
+        line-height: 1.15;
+    }
+
+    .cabecalho-pagina p {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* ---------- BOX DE DETALHES DO SEMESTRE ---------- */
+    .box-detalhes-semestre {
+        margin: 24px 0 0;
+        padding: 18px 14px;
+        border-radius: 12px;
+    }
+
+    .cabecalho-box-semestre {
+        flex-wrap: wrap;
+        gap: 10px 12px;
+        margin-bottom: 18px;
+    }
+
+    .titulo-semestre-materia { font-size: 18px; }
+
+    /* ---------- CARDS DE RESUMO ---------- */
+    .grid-cards-estatisticas {
+        gap: 14px;
+        margin-top: 24px;
+    }
+
+    .card-estatistica {
+        padding: 18px 14px;
+        gap: 12px;
+        border-radius: 12px;
+    }
+
+    .valor-estatistica { font-size: 26px; }
+
+    /* ---------- LISTAGEM DE TURMAS ---------- */
+    .grid-turmas {
+        gap: 14px;
+        margin-top: 28px;
+    }
+
+    .card-turma {
+        padding: 18px 16px;
+        border-radius: 12px;
+    }
+
+    .card-turma h3 {
+        font-size: 20px;
+        margin: 8px 0 12px;
+    }
+
+    .detalhes-card-turma {
+        margin-bottom: 14px;
+        overflow-wrap: anywhere;
+    }
+
+    .rodape-card-turma {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* ---------- DETALHE DA TURMA ---------- */
+    .turma-detalhe { margin-top: 24px; }
+
+    .btn-voltar-turmas { margin-bottom: 16px; }
+
+    /* Cabeçalho da turma: título em cima, indicadores embaixo */
+    .cabecalho-turma-detalhe {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+        padding: 18px 16px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+    }
+
+    .cabecalho-turma-detalhe h2 {
+        font-size: 22px;
+        overflow-wrap: anywhere;
+    }
+
+    .stats-rapidas-turma {
+        justify-content: space-around;
+        gap: 16px;
+        padding-top: 16px;
+        border-top: 1px solid #2a2a32;
+    }
+
+    .stats-rapidas-turma strong { font-size: 20px; }
+
+    /* Abas da turma */
+    .container-botoes-turma {
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .btn-opcao {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    .btn-nova-pasta,
+    .btn-adicionar-arquivo {
+        justify-content: center;
+        padding: 10px 14px;
+    }
+
+    /* ---------- PESQUISA EXPANDIDA ---------- */
+    .painel-pesquisa { padding: 18px 14px; }
+    .barra-expandida { padding: 12px 16px; }
+    .barra-expandida input { font-size: 16px; margin: 0 10px; min-width: 0; }
+    .barra-expandida i { font-size: 18px; }
+    #fecharPesquisa { font-size: 20px; }
+    .resultado-pesquisa { margin-top: 20px; }
+    .resultado-pesquisa li { font-size: 14px; }
+
+    /* ---------- RODAPÉ ---------- */
+    footer { margin-top: 70px; }
+
+    .footer-superior {
+        flex-direction: column;
+        gap: 35px;
+        padding: 40px 24px;
+    }
+
+    .footer-esquerda,
+    .footer-direita {
+        margin-left: 0;
+        left: auto;
+        width: 100%;
+    }
+
+    .footer-esquerda img { width: 65px; margin-bottom: 18px; }
+    .titulo-footer { font-size: 1.4rem; margin-bottom: 14px; }
+    .texto-footer { font-size: .9rem; line-height: 1.6; }
+    .footer-inferior { padding: 22px 16px; }
+    .copyright { font-size: .8rem; }
+}
+
+/* ---------- Celulares (até 480px) ---------- */
+@media (max-width: 480px) {
+
+    .barra-portal { padding: 0 12px; gap: 8px; }
+
+    .logo { left: 60px; }
+    .logo img { width: 64px; }
+
+    .caixa-pesquisa { width: 38px; height: 38px; }
+    .caixa-pesquisa i { font-size: 16px; }
+
+    .perfil { width: 38px; height: 38px; font-size: 14px; }
+
+    .pagina-interna { padding: 24px 16px 35px; }
+
+    .titulo-linha { gap: 10px; }
+    .titulo-linha h1 { font-size: 26px; }
+
+    .box-detalhes-semestre { padding: 16px 12px; }
+
+    /* Cards de resumo e turmas em uma coluna */
+    .grid-cards-estatisticas,
+    .grid-turmas { grid-template-columns: 1fr; }
+
+    .cabecalho-turma-detalhe { padding: 16px 14px; }
+    .cabecalho-turma-detalhe h2 { font-size: 20px; }
+
+    .stats-rapidas-turma { gap: 10px; }
+
+    .btn-opcao { padding: 10px 12px; font-size: 12.5px; }
+
+    .footer-superior { padding: 32px 18px; }
+    .titulo-footer { font-size: 1.25rem; }
+}
+
+
+/* ==========================================================
+   AJUSTES RESPONSIVOS PARA O CABEÇALHO DA NEBULA
+   (perfil + botão Sair lado a lado dentro de .acoes-cabecalho)
+   ========================================================== */
+
+@media (max-width: 768px) {
+    .acoes-cabecalho { gap: 8px; margin-left: auto; }
+    .acoes-cabecalho .caixa-pesquisa { margin-left: 0; }
+    .btn-sair {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .acoes-cabecalho { gap: 6px; }
+    .btn-sair {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,1201 @@
+<?php
+include __DIR__ . '/connect_nebula.php';
+include __DIR__ . '/historico_cookie/visitante.php';
+include __DIR__ . '/historico_cookie/consentimento.php';
+
+// O ID de histórico só é criado depois que o visitante aceita os cookies
+if (temConsentimentoCookies()) {
+    garantirVisitanteId();
+}
+
+// Busca todos os cursos únicos (nome + link) para preencher as duas caixas de pesquisa.
+// Como a tabela "cursos" tem 3 linhas por curso (uma para cada turno), usamos DISTINCT
+// para pegar cada curso só uma vez.
+$sql_cursos = "SELECT DISTINCT curso, url FROM cursos ORDER BY curso";
+$resultado_cursos = $mysqli->query($sql_cursos) or die("ERRO ao consultar cursos! " . $mysqli->error);
+
+$listaCursos = [];
+while ($linha = $resultado_cursos->fetch_assoc()) {
+    $listaCursos[] = $linha;
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home</title>
+
+    <!-- Esses dois links fazem o navegador puxar mais rápido a fonte Rye -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- E essa é quem dá a fonte Rye -->
+    <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+
+    <!-- X para o histórico, relógio para histórico e entre outros, como a Font Sora -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="CSS_Home.css?v=<?php echo filemtime(__DIR__ . '/CSS_Home.css'); ?>">
+    <link rel="stylesheet" href="historico.css">
+
+    <!-- Link dos SVG Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon/house.svg">
+    
+</head>
+<body>
+    
+    <header id="cabecalho">
+        <div class="header-top">
+            <div class="logo">
+                <img src="logo-ucen.png" alt="Logo">
+            </div>
+
+            <!-- Botão hambúrguer: só aparece no celular/tablet (CSS). Abre pesquisa + links + login -->
+            <button type="button" class="btn-menu-hamburguer" id="btnMenu"
+                    aria-label="Abrir menu" aria-expanded="false" aria-controls="menuNavegacao">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="user-actions">
+                <div class="caixa-pesquisa" id="caixaPesquisa">
+                    <input type="text" placeholder="Pesquisar" readonly>
+                    <i class="fa-solid fa-magnifying-glass"></i> <!-- Lupa do Font Awesome -->
+                </div>
+
+                <div class="account-links">
+            <!-- <a href="cadastro.html" id="linkCadastroHome">Cadastre-se</a> --> 
+                    <a href="login.html">Login</a>
+                </div>
+            </div> 
+        </div>
+        <nav class="main-navigation" id="menuNavegacao">
+            <ul>
+                <li>
+                    <a href="#graduacoes">Graduações</a>
+                </li>
+
+                <!-- <li><a href="home_bolsas.html">Bolsas</a></li>
+                <li><a href="home_descontos_e_parcelas.html">Desconto e parcelas</a></li> --> 
+                <li><a href="home_contato.html">Contato</a></li>
+                <li><a href="home_ajuda.html">Ajuda</a></li>   
+
+                <li>
+                    <a href="#vestibular">Vestibular</a>
+                </li>
+
+                <li><a href="ingresso_enem.html">Ingresso pelo ENEM</a></li>
+            </ul>
+        </nav>
+    </header>
+
+<!-- Menu de Acessibilidade -->
+
+<script src="https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js" async></script>
+<!-- Fim do Código do Menu de Acessibilidade -->
+
+<!-- Início do Código VLibras -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+<!-- Fim do Código VLibras -->
+
+    <div class="overlay-pesquisa" id="overlayPesquisa">
+
+    <div class="painel-pesquisa">
+
+        <div class="barra-expandida">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="pesquisa-header"
+                placeholder="Pesquisar cursos..."
+                autocomplete="off">
+
+            <button id="fecharPesquisa">
+                <i class="fa-solid fa-xmark"></i> <!-- Basta escrever o que está no "i" pois vem da minha bibiloteca
+                Font Awesome, a mesma da font Sora -->
+            </button>
+
+        </div>
+
+        <div class="resultado-pesquisa">
+
+            <ul id="lista-header">
+                <?php foreach ($listaCursos as $curso): ?>
+                <li data-url="<?php echo htmlspecialchars($curso['url']); ?>"><?php echo htmlspecialchars($curso['curso']); ?></li>
+                <?php endforeach; ?>
+            </ul>
+
+            <!-- Onde o histórico de pesquisa do cabeçalho é desenhado pelo JS -->
+            <div id="historico-header" class="historico-lista" style="display:none;"></div>
+
+            <!-- Lista original fixa (comentada, mantida como backup caso o PHP precise ser desativado)
+            <ul id="lista-header">
+                <li data-url="astronomia_home.html">Astronomia</li>
+                <li data-url="astrofisica_home.html">Astrofísica</li>
+                <li data-url="geofisica_home.html">Geofísica</li>
+                <li data-url="Ciencias_Atmosfericas_home.html">Ciências Atmosféricas</li>
+                <li data-url="engenharia_aeroespacial_home.html">Engenharia Aeroespacial</li>
+                <li data-url="engenharia_eletrica_home.html">Engenharia Elétrica</li>
+                <li data-url="engenharia_de_telecomunicacoes_home.html">Engenharia de Telecomunicações</li>
+                <li data-url="matematica_home.html">Matemática</li>
+                <li data-url="fisica_home.html">Física</li>
+                <li data-url="ciencia_da_computacao_home.html">Ciências da Computação</li>
+            </ul>
+            -->
+
+            <div id="mensagem-header">
+                Nenhum curso encontrado.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <section class="hero-section">
+        <video autoplay loop muted playsinline class="bg-video">
+            <source src="Nebula.mp4" type="video/mp4">
+        </video>
+
+        <!-- Barra de pesquisa grande 
+        <div class="hero-content">
+    <div class="pesquisa-home">
+
+        <div class="caixa-pesquisa-grande">
+
+            <img src="lupa.png" class="lupa-grande" alt="Lupa">
+
+            <input
+                type="text"
+                id="pesquisa-grande"
+                placeholder="Encontre sua graduação."
+                autocomplete="off">
+
+        </div>
+    </div>
+</div> 
+        -->
+<div class="hero-content">
+  <div class="pesquisa-home">
+
+    <!-- Caixa de Pesquisa -->
+    <div class="caixa-pesquisa-grande">
+      <i class="fa-solid fa-magnifying-glass lupa-grande"></i>
+      <input
+        type="text"
+        id="pesquisa-grande"
+        placeholder="Encontre sua graduação."
+        autocomplete="off">
+    </div>
+
+    <!-- Caixa Preta de Graduações -->
+    <div class="dropdown-simples" id="dropdown-graduacoes">
+      <ul id="lista-graduacoes">
+        <?php foreach ($listaCursos as $curso): ?>
+        <li data-url="<?php echo htmlspecialchars($curso['url']); ?>"><?php echo htmlspecialchars($curso['curso']); ?></li>
+        <?php endforeach; ?>
+      </ul>
+
+      <!-- Onde o histórico de pesquisa da barra grande é desenhado pelo JS -->
+      <div id="historico-hero" class="historico-lista" style="display:none;"></div>
+
+      <!-- Lista original fixa (comentada, mantida como backup caso o PHP precise ser desativado)
+      <ul id="lista-graduacoes">
+        <li data-url="astronomia_home.html">Astronomia</li>
+        <li data-url="astrofisica_home.html">Astrofísica</li>
+        <li data-url="geofisica_home.html">Geofísica</li>
+        <li data-url="Ciencias_Atmosfericas_home.html">Ciências Atmosféricas</li>
+        <li data-url="engenharia_aeroespacial_home.html">Engenharia Aeroespacial</li>
+        <li data-url="engenharia_eletrica_home.html">Engenharia Elétrica</li>
+        <li data-url="engenharia_de_telecomunicacoes_home.html">Engenharia de Telecomunicações</li>
+        <li data-url="matematica_home.html">Matemática</li>
+        <li data-url="fisica_home.html">Física</li>
+        <li data-url="ciencia_da_computacao_home.html">Ciências da Computação</li>
+      </ul>
+      -->
+      <div id="mensagem-vazia" class="mensagem-vazia" style="display: none;">Nenhuma graduação encontrada.</div>
+    </div>
+
+  </div>
+</div>
+
+    </section>
+
+    <span class="linha-decorativa2">s</span>
+
+<section class="faixa-nebula">
+
+    
+    <h1>•| Universidade de Ciências Exatas Nebula |• </h1>
+
+    
+
+</section>
+<span class="linha-decorativa3"></span>
+
+    <!-- ============================================
+            SEÇÃO MISSÃO, VISÃO E VALORES
+     ============================================ -->
+
+
+
+<section class="mvv-section">
+    <img src="fundo_teste1.jpg" class="mvv-bg" alt="Fundo MVV">
+
+    <div class="mvv-container">
+        <!-- Cabeçalho -->
+        <div class="mvv-header">
+            <h2 class="mvv-titulo-topo">Nossa</h2>
+            <h2 class="mvv-titulo-destaque">Filosofia</h2>
+            <span class="mvv-linha"></span>
+            <!-- <span class="mvv-linha2"></span> -->
+        </div>
+
+        <!-- Grid dos 3 cards -->
+        <div class="mvv-grid">
+
+            <!-- MISSÃO -->
+            <article class="mvv-card">
+                <div class="">
+                <!-- <i class="fa-solid fa-rocket"></i> -->  
+                </div>
+                <h3 class="mvv-card-titulo">Missão</h3>
+                <p class="mvv-card-texto">
+                    Despertar a curiosidade e transformar perguntas em conhecimento, 
+                    formando profissionais capazes de explorar novas ideias, compreender 
+                    desafios e construir soluções que contribuam para um futuro melhor.
+                </p>
+            </article>
+
+            <!-- VISÃO -->
+            <article class="mvv-card">
+                <div class="">
+                <!-- <i class="fa-solid fa-eye"></i> -->    
+                </div>
+                <h3 class="mvv-card-titulo">Visão</h3>
+                <p class="mvv-card-texto">
+                    Construir um ambiente de ensino e pesquisa onde curiosidade, conhecimento e 
+                    colaboração se encontrem para transformar ideias em descobertas e soluções que 
+                    contribuam para o futuro da sociedade.
+                </p>
+            </article>
+
+            <!-- VALORES -->
+            <article class="mvv-card">
+                <div class="">
+                <!-- <i class="fa-solid fa-star"></i> -->    
+                </div>
+                <h3 class="mvv-card-titulo">Valores</h3>
+                <p class="mvv-card-texto">
+                    Excelência acadêmica, ética, sustentabilidade, inclusão,
+                    pensamento crítico e curiosidade científica. Acreditamos que
+                    aprender é explorar e que o conhecimento transforma o mundo.
+                </p>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+    <section class="universo-section">
+        <img src="fundo-nebula-pequena.jpg" class="universo-bg" alt="Fundo">
+
+        <div class="universo-content">
+            <h2 class="titulo-topo">Descubra o Universo do</h2>
+
+            <div class="universo-corpo-layout">
+                <div class="universo-titulo-container">
+                    <h2 class="titulo-destaque">Saber</h2>
+                </div>
+
+                <div class="universo-texto-container">
+                    <p>O Universo é feito de descobertas.</p>
+                    <p>E toda grande descoberta começa com a curiosidade de buscar respostas.</p>
+                    <p>Na Nebula, cada graduação foi pensada para estimular a curiosidade, desenvolver o pensamento crítico e preparar você para novos desafios. Acreditamos que aprender é descobrir novas possibilidades, ampliar horizontes e transformar interesse em conhecimento.</p>
+                    <p>Aprender é explorar. Questionar é evoluir. Seja qual for o caminho que você escolher, estaremos ao seu lado durante essa jornada, porque todo grande futuro começa com a decisão de dar o primeiro passo. E cada passo dado hoje aproxima você das oportunidades que deseja construir amanhã.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="graduacoes" class="graduacoes-page">
+        <img src="fundo-estelar.jpg" class="graduacoes-bg" alt="Fundo Estelar">
+
+        <div class="graduacoes-container">
+            <h1 class="titulo-principal">Conheça nossas<br>graduações</h1>
+            
+            <div class="info-subtitulo">
+                <span class="linha-decorativa"></span>
+                <span class="texto-subtitulo">Bacharelado • 4 à 5 anos</span>
+            </div>
+
+            <div class="area-bloco espaciais">
+                <div class="area-header header-centro">
+                    <h2 class="area-titulo">Ciências Espaciais</h2>
+                    <div class="container-linha-espacial">
+                       <div class="linha-com-bandeira">
+                        <!-- <img src="bandeira.png" class="icone-bandeira" alt="Bandeira"> --> 
+                        </div>     
+                    </div>
+                </div>
+
+                <div class="constelacao-mapa">
+                    <a href="astronomia_home.html" class="curso-no pos-astronomia">
+                        <h3>Astronomia <span class="seta-curso">→</span></h3>
+                        <p>Observação dos astros;<br>Exploração do Universo;<br>Pesquisa científica.</p>
+                    </a>
+
+                    <a href="astrofisica_home.html" class="curso-no pos-astrofisica">
+                        <h3>Astrofísica <span class="seta-curso">→</span></h3>
+                        <p>Física aplicada ao cosmos;<br>Estudo das estrelas;<br>Modelagem do Universo.</p>
+                    </a>
+
+                    <a href="geofisica_home.html" class="curso-no pos-geofisica">
+                        <h3>Geofísica <span class="seta-curso">→</span></h3>
+                        <p>Estrutura da Terra;<br>Sismologia e geodinâmica;<br>Sensoriamento remoto.</p>
+                    </a>
+
+                    <a href="Ciencias_Atmosfericas_home.html" class="curso-no pos-atmosfericas">
+                        <h3>Ciências Atmosféricas <span class="seta-curso">→</span></h3>
+                        <p>Meteorologia;<br>Climatologia;<br>Modelagem Atmosférica.</p>
+                    </a>
+                    
+                    <!-- <img src="satelite.png" class="icone-decorativo icone-satelite" alt="Satélite"> --> 
+                </div>
+            </div>
+
+            <div class="area-bloco engenharias">
+                <div class="area-header header-esquerda">
+                    <h2 class="area-titulo-engenharias">Engenharias</h2>
+                </div>
+
+                <div class="constelacao-mapa">
+                    <a href="engenharia_aeroespacial_home.html" class="curso-no pos-eng-1">
+                        <span class="linha-vertical"></span>
+                        <h3>Engenharia Aeroespacial <span class="seta-curso">→</span></h3>
+                        <p>Projetos Aeroespaciais;<br>Foguetes e Satélites;<br>Sistemas de voo.</p>
+                    </a>
+
+                    <a href="engenharia_eletrica_home.html" class="curso-no pos-eng-2">
+                        <span class="linha-horizontal-eletrica"></span>
+                        <h3>Engenharia Elétrica <span class="seta-curso">→</span></h3>
+                        <p>Eletônica Aplicada;<br>Automoção;<br>Instrumentação.</p>
+                    </a>
+
+                    <a href="engenharia_de_telecomunicacoes_home.html" class="curso-no pos-eng-3">
+                        <span class="linha-horizontal-telecom"></span>
+                        <h3>Engenharia de Telecomunicações <span class="seta-curso">→</span></h3>
+                        <p>Comunicações digitais;<br>Satélites<br>Redes de transmissão.</p>
+                    </a>
+                    
+                  <!-- <img src="eletrico.png" class="icone-decorativo icone-eletrico" alt="Elétrico"> -->  
+                </div>
+            </div>
+            <div class="area-bloco exatas">
+                <div class="area-header header-centro-direita">
+                    <h2 class="area-titulo-exatas">Ciências Exatas</h2>
+                    <span class="linha-vertical-c"></span>
+                </div>
+
+                <div class="constelacao-mapa">
+
+                    <a href="fisica_home.html" class="curso-no pos-exatas-fisica">
+                        <span class="linha-vertical-fisica"> </span><h3>Física <span class="seta-curso">→</span></h3>
+                        <p>Mecânica;<br>Eletromagnetismo;<br>Pesquisa científica.</p>
+                    </a>
+
+                    <a href="matematica_home.html" class="curso-no pos-exatas-matematica">
+                        <h3>Matemática <span class="seta-curso">→</span></h3>
+                        <p>Cálculo avançado;<br>Álgebra;<br>Modelagem matemática.</p>
+                    </a>
+
+                    <a href="ciencia_da_computacao_home.html" class="curso-no pos-exatas-computacao">
+                        <span class="linha-horizontal-computacao"></span> <h3>Ciências da Computação <span class="seta-curso">→</span></h3>
+                        <p>Programação;<br>Banco de Dados;<br>Desenvolvimento de Software.</p>
+                    </a>
+                    
+                   <!-- <img src="fisica.png" class="icone-decorativo icone-fisica" alt="Física">
+                    <img src="mouse.png" class="icone-decorativo icone-mouse" alt="Mouse"> --> 
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<div class="telescopio-solo"></div>
+
+<!-- Sessão/Página Modalidades -->
+<section id="descontos" class="secao-modalidades">
+  <img src="fundo-estelar.jpg" alt="Fundo Estelar" class="bg-modalidades">
+
+  <div class="container-modalidades">
+    <div class="titulo-modalidades-container">
+      <h2 class="titulo-modalidades">Modalidades</h2>
+      <span class="linha-modalidades"></span>
+    </div>
+    
+    <div class="cards-modalidades">
+      
+      <!-- Card 1 com Wrapper -->
+      <div class="card-reveal-wrapper"> <!-- Container para o JS não interferir no hover dos cards -->
+        <div class="card-modalidade">
+          <div class="card-header">
+            <i class="fa-solid fa-school card-icon-img"></i>
+            <h3 class="card-title">Presencial</h3>
+          </div>
+          <p class="card-text">
+            Na modalidade presencial da UCEN, você vivencia uma formação 
+            completa em um ambiente pensado para colaboração e prática. Tenha contato direto com 
+            professores qualificados, desenvolva projetos em equipe.
+            Cada aula é uma oportunidade para explorar novos horizontes e construir o seu futuro.
+          </p>
+          <a href="..." class="card-link"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 
+
+ Sessão/Página Modalidades 
+<section id="descontos" class="secao-modalidades">
+  <img src="fundo-estelar.jpg" alt="Fundo Estelar" class="bg-modalidades">
+
+  <div class="container-modalidades">
+    <div class="titulo-modalidades-container">
+    <h2 class="titulo-modalidades">Modalidades</h2>
+    <span class="linha-modalidades"></span>
+</div>
+    
+    <div class="cards-modalidades">
+      
+      <div class="card-modalidade">
+        <div class="card-header">
+          <img src="faculdade.png" alt="Faculdade" class="card-icon-img">
+          <h3 class="card-title">Presencial</h3>
+        </div>
+
+        <p class="card-text">
+          Aprenda em nossos laboratórios e salas de aula.
+        </p>
+        <a href="presencial.html" class="card-link">Saiba mais →</a>
+      </div>
+
+      <div class="card-modalidade">
+        <div class="card-header">
+          <img src="funcionario.png" alt="Funcionário" class="card-icon-img">
+          <h3 class="card-title">Semi<br>Presencial</h3>
+        </div>
+
+        <p class="card-text">
+          Combine encontros presenciais com atividades online.
+        </p>
+        <a href="semi_presencial.html" class="card-link">Saiba mais →</a>
+      </div>
+
+      <div class="card-modalidade">
+        <div class="card-header">
+          <img src="ensino-a-distancia.png" alt="Ensino a Distância" class="card-icon-img">
+          <h3 class="card-title">EaD</h3>
+        </div>
+        <p class="card-text">
+          Estude de qualquer lugar com flexibilidade.
+        </p>
+        <a href="EaD.html" class="card-link">Saiba mais →</a>
+      </div>
+
+    </div>
+  </div>
+</section>-->
+
+<!-- Sessão Vestibular -->
+<section id="vestibular" class="secao-vestibular">
+
+    <img src="telescopio-humano.jpg" class="bg-vestibular">
+
+     <div class="titulo-vestibular-container">
+        <h2 class="titulo-vestibular">Vestibular</h2>
+        <span class="linha-vestibular"></span>
+    </div>
+
+    <div class="caixa-vestibular">
+
+    <!-- Texto superior -->
+    <div class="info-vestibular">
+
+        <p class="status-vestibular">
+            Nov 2026 • Inscrições abertas para o vestibular
+        </p>
+
+        <p class="modalidade-vestibular">
+            (Presencial e on-line com instrutor)
+        </p>
+
+    </div>
+
+    <!-- Datas -->
+<div class="datas-vestibular">
+
+    <div class="linha-info">
+
+        <div class="item-info">
+            <h3 class="titulo-data">Inscrições</h3>
+            <p class="texto-data">
+                01/06/2026 à 21/10/2026
+            </p>
+        </div>
+
+        <div class="item-info">
+            <h3 class="titulo-data">Data e Hora da Prova</h3>
+            <p class="texto-data">
+                25/11/2026 - 12H<br>
+                (Horário de Brasília)
+            </p>
+        </div>
+
+    </div>
+    <div class="linha-info">
+
+        <div class="item-info">
+            <h3 class="titulo-data">Início das aulas</h3>
+            <p class="texto-data">
+                Fevereiro de 2027
+            </p>
+        </div>
+
+        <div class="item-info">
+            <h3 class="titulo-data">Tempo / Duração</h3>
+            <p class="texto-data">
+                12H às 15H - 03 horas
+            </p>
+        </div>
+
+    </div>
+
+</div>
+<div class="botao-vestibular">
+    <a href="inscricao.html" class="btn-inscricao">Inscreva-se</a>
+</div>
+
+</div>
+    <!-- <img src="frase-nova.png" class="logo-frase" alt="Logo fraseada da UCEN"> -->  
+
+</section>
+
+<!-- Página Excelência -->
+<div class="banner-mec">
+    <!-- Vídeo de fundo -->
+    <video autoplay loop muted playsinline class="bg-video-sol">
+            <source src="fundo-sol.mp4" type="video/mp4">
+        </video>
+
+    <!-- Conteúdo -->
+    <div class="conteudo-mec">
+
+    <div class="titulo-mec">
+
+    <span class="titulo-nota">Ensino</span>
+    <span class="titulo-maxima">Superior</span>
+    <span class="titulo-mec-texto">Brasileiro</span>
+
+</div>
+
+        <p class="texto-mec">
+            <strong>Prepare-se para os desafios do futuro.</strong><br><br>
+            A Universidade de Ciências Exatas Nebula oferece uma formação voltada para ciência, tecnologia e exatas.
+            Com infraestrutura moderna, professores experientes e um ambiente acadêmico inspirador, 
+            nossos cursos são desenvolvidos para preparar profissionais capazes de transformar ideias em 
+            soluções para o mundo.
+        </p>
+
+    </div>
+</div>
+
+<!-- Página com Keyframe/marquee - Networking -->
+<section class="networking-section">
+
+    <!-- Faixa Marquee -->
+    <div class="marquee-networking">
+        <div class="track-networking">
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+
+            <!-- Repetição para continuidade -->
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+
+            <!-- Repetição para continuidade -->
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+
+            <!-- Repetição para continuidade -->
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="branco">Networking</span>
+            <span class="bolinhaNet">•</span>
+            <span class="cinza">Networking</span>
+            <span class="bolinhaNet">•</span>
+        </div>
+    </div>
+
+    <!-- Áreas de Conteúdo no Estilo FIAP -->
+    <div class="fiap-grid-container">
+
+<!-- Bloco 1: Alinhado à Esquerda -->
+<div class="fiap-block block-left">
+    <div class="fiap-content">
+        <strong>Explore novas fronteiras!</strong>
+        <h3>
+            Uma comunidade formada por estudantes, pesquisadores e profissionais que transformam conhecimento em
+            oportunidades. Compartilhe experiências, amplie sua visão e participe de discussões que impulsionam o
+            aprendizado e o desenvolvimento contínuo.
+        </h3>
+    </div>
+    <img src="globo_fundo_transparente.png" alt="Globo" class="globo-bg">
+</div>
+
+<!-- Bloco 2: Alinhado à Direita -->
+<div class="fiap-block block-right">
+    <div class="fiap-content">
+        <strong>Conecte-se com o futuro!</strong>
+        <h3>
+            Expanda sua rede de contatos ao lado de estudantes, pesquisadores e profissionais de diferentes áreas.
+            Crie conexões valiosas, troque experiências e descubra oportunidades que podem impulsionar sua
+            trajetória acadêmica e profissional.
+        </h3>
+    </div>
+</div>
+
+<!-- Bloco 3: Alinhado ao Centro -->
+<div class="fiap-block block-center">
+    <div class="fiap-content">
+        <strong>Mentoria com Mentes Científicas!</strong>
+        <h3>
+            Na Universidade de Ciências e Exatas Nebula, você aprende diretamente com professores, docentes e especialistas ativos na indústria. 
+            Nossos mestres atuam como mentores práticos, guiando projetos reais, estimulando a autonomia acadêmica e preparando você para os desafios do mercado de tecnologia.
+        </h3>
+    </div>
+    <img src="globo_fundo_transparente.png" alt="Globo" class="globo-bg">
+</div>
+
+<!-- Cards Networking para caso eu queiram reútiliza-los -->
+
+    <!-- 
+    <div class="cards-networking">
+
+        Card 1
+        <div class="card-networking">
+
+            <div class="flip-networking">
+
+                <div class="face-networking frente-networking imagem-primeira"></div>
+
+                <div class="face-networking tras-networking">
+
+                    <strong>Explore novas fronteiras!</strong>
+
+                    <h3>
+                        Uma comunidade formada por estudantes, pesquisadores e profissionais que transformam conhecimento em
+                        oportunidades. Compartilhe experiências, amplie sua visão e participe de discussões que impulsionam o
+                        aprendizado e o desenvolvimento contínuo.
+                    </h3>
+
+                    <a href="https://www.linkedin.com/in/matheus-de-oliveira-60b0aa305/" class="link-rede">
+                        <i class="fa-brands fa-linkedin"></i>
+                        LinkedIn →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+         Card 2 
+        <div class="card-networking">
+
+            <div class="flip-networking">
+
+                <div class="face-networking frente-networking imagem-segunda"></div>
+
+                <div class="face-networking tras-networking">
+
+                    <strong>Conecte-se com o futuro!</strong>
+
+                    <h3>
+                        Expanda sua rede de contatos ao lado de estudantes, pesquisadores e profissionais de diferentes áreas.
+                        Crie conexões valiosas, troque experiências e descubra oportunidades que podem impulsionar sua
+                        trajetória acadêmica e profissional.
+                    </h3>
+
+                    <a href="....." class="link-rede">
+                        <i class="fa-brands fa-instagram"></i>
+                        Instagram →
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div> -->
+</section>
+
+<!-- Seção de Vídeo Institucional 
+
+<section class="video-section">
+    <img src="fundo-nebula-pequena.jpg" class="video-bg" alt="Fundo">
+
+    <div class="video-content">
+        <h2 class="video-titulo">Conheça a Nebula</h2>
+        <p class="video-subtitulo">Um universo de oportunidades esperando por você.</p>
+
+        <div class="video-wrapper">
+            <iframe 
+                src="https://www.youtube.com/embed/a-fkLOCl4mI"
+                title="Vídeo institucional Nebula"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</section>
+
+-->
+
+<!-- Página nas parcerias com marquee -->
+
+<section id="ajuda" class="secao-parcerias">
+
+    <img src="fundo-nebula-pequena.jpg" class="bg-parcerias">
+
+    <div class="container-parcerias">
+
+        <h2 class="titulo-parcerias">
+            Nossas parcerias</h2>
+            <span class="linha-parcerias"></span>
+
+    </div>
+
+    <div class="marquee">
+
+        <div class="marquee-track" id="track">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+            <img src="logo-aeb.png">
+            <img src="aws-logo.png">
+            <img src="logo-IBM.png">
+            <img src="inpe_logo_fundo-branco.jpg">
+
+        </div>
+    </div>
+</section>
+
+<!-- Página final - Rodapé -->
+<footer id="contato">
+
+    <div class="footer-superior">
+
+        <!-- Esquerda -->
+        <div class="footer-esquerda">
+
+            <img src="logo-ucen.png" class="logo-footer"alt="Logo FTAN">
+
+            <h3 class="texto-footer">
+                Campus central: Avenida das Estrelas, nº 372,<br>
+                Jardim Primavera, Cidade Altas Flores/SP - CEP 14797-000
+            </h3>
+
+        </div>
+
+        <!-- Direita -->
+        <div class="footer-direita">
+
+            <h3 class="titulo-footer">
+                Suporte ao aluno
+            </h3>
+
+            <h3 class="texto-footer">
+                E-mail: suporte.ucen@gmail.com<br>
+                Telefone: 4006-8947<br>
+                WhatsApp: (11) 94562-2899<br>
+                Horário: Seg à Sex das 08h às 22:30h
+            </h3>
+
+        </div>
+
+    </div>
+
+    <div class="footer-inferior">
+
+        <h3 class="copyright">
+            © 2026 Universidade de Ciências e Exatas Nebula<br>
+            Todos os direitos reservados.
+        </h3>
+
+    </div>
+
+</footer>
+<!-- Botão da IA Sirius -->
+<div class="sirius-container">
+
+    <button id="abrirSirius" class="sirius-btn">
+
+        <img src="sirius.png" alt="Sirius IA">
+
+    </button>
+    <div id="janelaSirius" class="janela-sirius">
+
+        <!-- Teste layout da Sirius -->
+    <div class="topo-sirius">
+        <div class="perfil-sirius">
+            <div class="rosto-ia">
+                <img src="sirius.png" alt="Sirius">
+            </div>
+            <div class="info-ia">
+                <span class="nome-ia">Sirius</span>
+                <span class="subtitulo-dourado">Assistente Virtual da Nebula</span>
+            </div>
+        </div>
+        
+        <div class="acoes-sirius">
+    <button id="expandirSirius" title="Tela cheia" aria-label="Expandir o chat">
+        <i class="fa-solid fa-expand"></i>
+    </button>
+
+    <button id="fecharSirius">✕</button>
+    </div>
+    </div>
+
+    <div class="mensagens-sirius">
+        <div class="mensagem-ia">
+            Olá! Eu sou o Sirius. Como posso te ajudar hoje?
+        </div>
+    </div>
+
+    <div class="entrada-sirius">
+    <input type="text" id="campoMensagem" placeholder="Digite sua mensagem...">
+
+        <button id="botaoEnviar">
+            Enviar
+        </button>
+
+    </div>
+</div>
+
+</div>
+
+<?php if (!temConsentimentoCookies()): ?>
+<div class="banner-cookies" id="bannerCookies" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+
+    <div class="banner-cookies-titulo">
+        <i class="fa-solid fa-cookie-bite"></i>
+        <h3>A UCEN utiliza cookies</h3>
+    </div>
+
+    <p>
+        Utilizamos cookies para manter o seu histórico de pesquisas
+        e melhorar sua experiência de navegação no portal.
+    </p>
+
+    <div class="banner-cookies-acoes">
+        <button type="button" id="botaoRejeitarCookies" class="botao-rejeitar-cookies">Rejeitar</button>
+        <button type="button" id="botaoAceitarCookies">Aceitar</button>
+    </div>
+
+</div>
+<?php endif; ?>
+
+<!-- Aviso do "Cadastre-se": o cadastro só abre pelo e-mail enviado depois da matrícula -->
+<div class="overlay-aviso-cadastro" id="avisoCadastro" role="dialog" aria-modal="true" aria-labelledby="tituloAvisoCadastro">
+    <div class="caixa-aviso-cadastro">
+        <button type="button" class="fechar-aviso-cadastro" id="fecharAvisoCadastro" aria-label="Fechar">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="icone-aviso-cadastro"><i class="fa-solid fa-user-graduate"></i></div>
+
+        <h3 id="tituloAvisoCadastro">Cadastro disponível só para matriculados</h3>
+
+        <p>
+            Para se cadastrar, você precisa estar <strong>matriculado</strong> na UCEN.
+            Depois que a sua matrícula for concluída, você recebe um e-mail com o botão
+            para criar o seu acesso.
+        </p>
+
+        <div class="acoes-aviso-cadastro">
+            <a href="#vestibular" class="botao-aviso-secundario" id="verVestibularAviso">Ver o vestibular</a>
+            <button type="button" class="botao-aviso-principal" id="entendiAvisoCadastro">Entendi</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Menu hambúrguer (celular/tablet) - independente do JavaScript_Home.js -->
+<script>
+(function () {
+    var cab = document.getElementById('cabecalho');
+    var btn = document.getElementById('btnMenu');
+    if (!cab || !btn) return;
+
+    function definirMenu(aberto) {
+        cab.classList.toggle('menu-aberto', aberto);
+        btn.classList.toggle('ativo', aberto);
+        btn.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+        btn.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+    }
+
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        definirMenu(!cab.classList.contains('menu-aberto'));
+    });
+
+    // Fecha ao clicar em link do menu ou no Login
+    var links = cab.querySelectorAll('nav a, .account-links a');
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function () { definirMenu(false); });
+    }
+
+    // Fecha ao abrir a pesquisa
+    var caixa = document.getElementById('caixaPesquisa');
+    if (caixa) caixa.addEventListener('click', function () { definirMenu(false); });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') definirMenu(false);
+    });
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 992) definirMenu(false);
+    });
+})();
+</script>
+
+<!-- Link da animação do ScrollReavel -->
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="JavaScript_Home.js?v=<?php echo filemtime(__DIR__ . '/JavaScript_Home.js'); ?>"></script>
+
+</body>
+</html>

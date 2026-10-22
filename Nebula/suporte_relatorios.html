@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Relatórios - Portal do Suporte - FTAN</title>
+    <link rel="stylesheet" href="suporte_relatorios.css">
+
+    <link rel="icon" type="image/svg+xml" href="favicon/engrenagem.svg">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="barra-portal">
+        <a class="logo" href="suporte_inicio.html"><img src="logo-ucen.png" alt="Logo"></a>
+
+        <div class="caixa-pesquisa" id="caixaPesquisa">
+            <input type="text" placeholder="Pesquisar..." readonly>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="overlay-pesquisa" id="overlayPesquisa">
+            <div class="painel-pesquisa">
+                <div class="barra-expandida">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+                    <button id="fecharPesquisa" type="button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="resultado-pesquisa">
+                    <ul id="lista-header">
+                        <li data-url="suporte_inicio.html">Início</li>
+                        <li data-url="suporte_academico.html">Acadêmico</li>
+                        <li data-url="suporte_professores.html">Professores</li>
+                        <li data-url="suporte_financeiro.html">Financeiro</li>
+                        <li data-url="suporte_atendimento.html">Central de Atendimento</li>
+                        <!-- <li data-url="suporte_salas.html">Salas & Agenda</li> -->
+                        <li data-url="suporte_relatorios.html">Relatórios</li>
+                        <li data-url="suporte_configuracoes.html">Configurações</li>
+                    </ul>
+                    <div id="mensagem-header">Nenhum resultado encontrado.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="acoes-cabecalho">
+            <a href="suporte_configuracoes.html" class="perfil">S</a>
+            <a href="tela-de-carregamento.html?destino=logout_suporte.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+    </div>
+</header>
+
+<aside class="menu" id="menu">
+    <div class="menu-cabecalho">
+        <button class="botao-menu-fechar" id="botaoMenuFechar" type="button"><i class="fa-solid fa-bars"></i></button>
+        <span>Menu</span>
+    </div>
+    <nav class="menu-navegacao">
+        <a class="item-menu" href="suporte_inicio.html"><i class="fa-solid fa-house"></i> Início</a>
+        <a class="item-menu" href="suporte_academico.html"><i class="fa-solid fa-users"></i> Acadêmico</a>
+        <a class="item-menu" href="suporte_professores.html"><i class="fa-solid fa-briefcase"></i> Professores</a>
+        <a class="item-menu" href="suporte_financeiro.html"><i class="fa-solid fa-wallet"></i> Financeiro</a>
+        <a class="item-menu" href="suporte_atendimento.html"><i class="fa-solid fa-envelope"></i> Central de Atendimento</a>
+        <!-- <a class="item-menu" href="suporte_salas.html"><i class="fa-solid fa-calendar-days"></i> Salas & Agenda</a> --> 
+        <a class="item-menu ativo" href="suporte_relatorios.html"><i class="fa-solid fa-chart-simple"></i> Relatórios</a>
+        <a class="item-menu" href="suporte_configuracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+    </nav>
+</aside>
+
+<main class="conteudo">
+    <div class="area-conteudo">
+        <section class="pagina pagina-interna">
+            <div class="cabecalho-pagina">
+                <span class="categoria-pagina">Indicadores de atendimento</span>
+                <div class="titulo-linha"><h1>Relatórios</h1><span></span></div>
+                <p>Acompanhe os chamados do suporte, o desempenho da equipe técnica e o histórico de relatórios gerados.</p>
+            </div>
+
+            <div class="grid-cards-estatisticas">
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Chamados no mês</span>
+                    <h2 class="valor-estatistica" id="statChamadosMes">0</h2>
+                </div>
+                <div class="card-estatistica card-verde">
+                    <span class="subtitulo-estatistica">Chamados resolvidos</span>
+                    <h2 class="valor-estatistica" id="statResolvidos">0</h2>
+                </div>
+                <div class="card-estatistica card-vermelho">
+                    <span class="subtitulo-estatistica">Em aberto (fila atual)</span>
+                    <h2 class="valor-estatistica" id="statAbertos">0</h2>
+                </div>
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Tempo médio de resposta (equipe)</span>
+                    <h2 class="valor-estatistica" id="statTempoMedio">--</h2>
+                </div>
+            </div>
+
+            <div class="container-botoes-relatorios">
+                <button class="btn-opcao ativo" data-aba-relatorio="desempenho">Desempenho da equipe</button>
+                <button class="btn-opcao" data-aba-relatorio="exportacoes">Relatórios gerados</button>
+            </div>
+
+            <!-- ABA: DESEMPENHO DA EQUIPE -->
+            <div class="conteudo-aba-relatorios ativo" data-conteudo-relatorio="desempenho">
+
+                <div class="resumo-equipe" id="resumoEquipe">
+                    <div class="resumo-topo">
+                        <h3><i class="fa-solid fa-people-group"></i> Resumo da equipe</h3>
+                        <span class="badge" id="resumoNivel">--</span>
+                    </div>
+                    <p class="resumo-texto" id="resumoTexto">Carregando...</p>
+                    <div class="resumo-metricas" id="resumoMetricas"></div>
+                    <div class="resumo-listas" id="resumoListas"></div>
+                </div>
+
+                <div class="filtros-linha">
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input id="buscaTecnicos" type="text" placeholder="Buscar por técnico...">
+                    </div>
+                    <button class="btn-principal" id="btnAdicionarTecnico" type="button"><i class="fa-solid fa-user-plus"></i> Adicionar técnico</button>
+                </div>
+
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead><tr><th>Técnico</th><th>Chamados atendidos</th><th>Resolvidos no prazo</th><th>Tempo médio</th><th>Satisfação</th><th>Situação</th><th>Ação</th></tr></thead>
+                        <tbody id="corpoTecnicos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ABA: RELATÓRIOS GERADOS (PDFs) -->
+            <div class="conteudo-aba-relatorios" data-conteudo-relatorio="exportacoes">
+                <div class="filtros-linha">
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input id="buscaRelatorios" type="text" placeholder="Buscar por título, categoria ou período...">
+                    </div>
+                    <button class="btn-principal" id="btnAdicionarRelatorio" type="button"><i class="fa-solid fa-file-circle-plus"></i> Adicionar relatório</button>
+                </div>
+
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead><tr><th>Relatório</th><th>Categoria</th><th>Período</th><th>Adicionado em</th><th>Tamanho</th><th>Ação</th></tr></thead>
+                        <tbody id="corpoExportacoes"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- MODAL: ADICIONAR RELATÓRIO (PDF) -->
+<div class="modal-overlay" id="modalRelatorio">
+    <div class="modal">
+        <button class="fechar-modal" id="fecharModalRelatorio" type="button">&times;</button>
+        <h2>Adicionar relatório</h2>
+        <p>Envie um relatório em PDF (até 20 MB). Ele aparece na lista e pode ser visualizado aqui mesmo.</p>
+        <form id="formRelatorio">
+            <div class="form-grid">
+                <div class="input-group full">
+                    <label for="tituloRelatorio">Título</label>
+                    <input id="tituloRelatorio" maxlength="150" placeholder="Ex.: Relatório mensal de chamados" required>
+                </div>
+                <div class="input-group">
+                    <label for="categoriaRelatorio">Categoria</label>
+                    <select id="categoriaRelatorio">
+                        <option value="Chamados">Chamados</option>
+                        <option value="Desempenho da equipe">Desempenho da equipe</option>
+                        <option value="Satisfação dos usuários">Satisfação dos usuários</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="periodoRelatorio">Período</label>
+                    <input id="periodoRelatorio" maxlength="60" placeholder="Ex.: Setembro/2026" required>
+                </div>
+                <div class="input-group full">
+                    <label for="arquivoRelatorio">Arquivo PDF</label>
+                    <input id="arquivoRelatorio" type="file" accept="application/pdf,.pdf" required>
+                </div>
+            </div>
+            <p class="msg-form" id="msgRelatorio" role="alert"></p>
+            <div class="form-actions">
+                <button class="btn-secundario" type="button" id="cancelarModalRelatorio">Cancelar</button>
+                <button class="btn-principal" type="submit" id="btnEnviarRelatorio"><i class="fa-solid fa-upload"></i> Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL: ADICIONAR / EDITAR TÉCNICO -->
+<div class="modal-overlay" id="modalTecnico">
+    <div class="modal">
+        <button class="fechar-modal" id="fecharModalTecnico" type="button">&times;</button>
+        <h2 id="tituloModalTecnico">Adicionar técnico</h2>
+        <p>Registre os números de desempenho do técnico. O resumo da equipe é recalculado automaticamente.</p>
+        <form id="formTecnico">
+            <input type="hidden" id="idTecnico">
+            <div class="form-grid">
+                <div class="input-group full">
+                    <label for="nomeTecnico">Nome do técnico</label>
+                    <input id="nomeTecnico" maxlength="120" placeholder="Ex.: Rafael Mendes Torres" required>
+                </div>
+                <div class="input-group">
+                    <label for="atendidosTecnico">Chamados atendidos</label>
+                    <input id="atendidosTecnico" type="number" min="0" step="1" required>
+                </div>
+                <div class="input-group">
+                    <label for="noPrazoTecnico">Resolvidos no prazo</label>
+                    <input id="noPrazoTecnico" type="number" min="0" step="1" required>
+                </div>
+                <div class="input-group">
+                    <label for="horasTecnico">Tempo médio - horas</label>
+                    <input id="horasTecnico" type="number" min="0" step="1" value="0" required>
+                </div>
+                <div class="input-group">
+                    <label for="minutosTecnico">Tempo médio - minutos</label>
+                    <input id="minutosTecnico" type="number" min="0" max="59" step="1" value="0" required>
+                </div>
+                <div class="input-group">
+                    <label for="satisfacaoTecnico">Satisfação (%)</label>
+                    <input id="satisfacaoTecnico" type="number" min="0" max="100" step="1" required>
+                </div>
+                <div class="input-group">
+                    <label for="situacaoTecnico">Situação</label>
+                    <select id="situacaoTecnico">
+                        <option value="disponivel">Disponível</option>
+                        <option value="atendimento">Em atendimento</option>
+                        <option value="ausente">Ausente</option>
+                    </select>
+                </div>
+            </div>
+            <p class="msg-form" id="msgTecnico" role="alert"></p>
+            <div class="form-actions">
+                <button class="btn-secundario" type="button" id="cancelarModalTecnico">Cancelar</button>
+                <button class="btn-principal" type="submit" id="btnSalvarTecnico"><i class="fa-solid fa-check"></i> Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL: VISUALIZAR PDF -->
+<div class="modal-overlay" id="modalVisualizar">
+    <div class="modal modal-pdf">
+        <button class="fechar-modal" id="fecharModalVisualizar" type="button">&times;</button>
+        <h2 id="tituloVisualizar">Relatório</h2>
+        <div class="acoes-visualizar">
+            <a class="btn-secundario" id="linkNovaAba" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-up-right-from-square"></i> Abrir em nova aba</a>
+            <a class="btn-principal" id="linkBaixar" href="#"><i class="fa-solid fa-download"></i> Baixar</a>
+        </div>
+        <iframe id="frameVisualizar" title="Visualização do relatório" src="about:blank"></iframe>
+    </div>
+</div>
+
+<!-- MODAL: CONFIRMAR EXCLUSÃO -->
+<div class="modal-overlay" id="modalConfirmar">
+    <div class="modal modal-confirmar">
+        <button class="fechar-modal" id="fecharModalConfirmar" type="button">&times;</button>
+        <h2>Confirmar exclusão</h2>
+        <p id="textoConfirmar"></p>
+        <div class="form-actions">
+            <button class="btn-secundario" type="button" id="cancelarConfirmar">Cancelar</button>
+            <button class="btn-principal btn-perigo" type="button" id="okConfirmar"><i class="fa-solid fa-trash"></i> Excluir</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    
+    <div class="footer-inferior">
+        <h3 class="copyright">
+            © 2026 Universidade de Ciências e Exatas Nebula<br>
+            Todos os direitos reservados.
+        </h3>
+    </div>
+</footer>
+<script src="suporte_permissoes.js" defer></script>
+<script src="suporte_relatorios.js" defer></script>
+</body>
+</html>

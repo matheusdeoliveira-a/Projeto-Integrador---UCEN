@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon/house.svg">
+
+<style>
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: #050912;
+margin: 0;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tela-cadastro {
+background: transparent;
+position: relative;
+margin: 165px auto 60px;
+padding: 0 20px;
+box-sizing: border-box;
+max-width: 850px;
+justify-content: center;
+border-radius: 0;
+display:flex;
+align-items:center;
+gap:95px;
+color: white;
+}
+
+input{
+width:100%;
+max-width:300px;
+box-sizing:border-box;
+padding:12px;
+background:transparent;
+border:1px solid rgba(255,255,255,.7);
+color:white;
+text-align:center;
+font-size:14px;
+outline:none;
+/* Efeito de luzinha */
+transition: .3s;
+}
+/* Efeito de luzinha parte 2 */
+input:focus{
+    border-color:#E7B6E6;
+    box-shadow:
+        0 0 8px rgba(231,182,230,.35),
+        0 0 18px rgba(197,117,204,.2);
+}
+
+input::placeholder{
+    color:#d6d6d6;
+}
+
+.botao-sair{
+
+    width:110px;
+
+    height:48px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    text-decoration:none;
+
+    border:1px solid rgba(255,255,255,.45);
+
+    border-radius:18px;
+
+    transition:.3s;
+
+}
+
+.botao-sair:hover{
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.botao-cadastro{
+width:100%;
+max-width:300px;
+box-sizing:border-box;
+padding:12px;
+background:transparent;
+color:rgb(150, 97, 146);
+border:1px solid rgb(197, 117, 204);
+transition:all .35s ease;
+}
+
+.botao-cadastro:hover{
+cursor:pointer;
+color:white;
+background:rgba(179, 84, 255, .12);
+border-color:#d57fff;
+box-shadow:
+0 0 8px rgba(197,117,204,.5),
+0 0 20px rgba(197,117,204,.35),
+0 0 35px rgba(197,117,204,.2);
+}
+
+.nebula {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+opacity: 0.20;
+z-index: -1;
+}
+
+.lado-esquerdo{
+    display:flex;
+    align-items:center;
+}
+
+
+.ftan-frase{
+    width: 250px;
+    margin-top: 90px;
+}
+
+.linha-cadastro{
+    width:2px;
+    height:260px;
+    background:#E7B6E6;
+    margin-top: 90px;
+    opacity:.7;
+}
+
+.lado-direito{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+    align-items:center;
+    width:100%;
+}
+
+.logo-cadastro {
+  width: 110px;
+  cursor: pointer;
+  /* Faz a logo dar uma subidinha */
+  transition: .35s;
+}
+/* Faz a logo dar uma subidinha parte 2*/
+.logo-cadastro:hover{
+    transform:scale(1.05);
+}
+
+.titulo-cadastro{
+    color:#E7B6E6;
+    font-size: 45px;
+    font-weight:bold;  
+    font-family: "Sora", sans-serif;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.esqueci-senha{
+
+    text-align:right;
+
+    margin-top:-10px;
+    margin-bottom:8px;
+
+    font-size:13px;
+}
+
+.esqueci-senha a{
+
+    color:#d6d6d6;
+
+    text-decoration:underline;
+
+    text-underline-offset:3px;
+    text-decoration-thickness:1px;
+
+    transition:.3s;
+}
+
+.esqueci-senha a:hover{
+
+    color:#E7B6E6;
+}
+/*
+.separador{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:10px 0;
+}
+
+.linha-ou{
+
+    flex:1;
+
+    height:1px;
+
+    background:#b7b7b7;
+}
+
+.separador span{
+
+    color:white;
+
+    font-size:16px;
+}
+
+.botao-social{
+
+    width:100%;
+    max-width:300px;
+
+    padding:12px;
+
+    background:transparent;
+
+    border:1px solid #c575cc;
+
+    color:#E7B6E6;
+
+    transition:.3s;
+}
+
+.botao-social:hover{
+
+    cursor:pointer;
+
+    background:rgba(197,117,204,.12);
+
+    color:white;
+
+    box-shadow:
+        0 0 10px rgba(197,117,204,.3);
+}
+*/
+.campo-senha{
+    position: relative;
+    width:100%;
+    max-width:300px;
+}
+
+.campo-senha input{
+    width:100%;
+    padding:12px;
+    padding-right:45px;
+    padding-left: 45px;
+    box-sizing:border-box;
+}
+
+.olho{
+    position:absolute;
+    right:7px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#d6d6d6;
+    transition:.3s;
+}
+
+.olho:hover{
+    color:#E7B6E6;
+}
+
+
+
+/* ==========================================================
+   MENSAGENS DE ERRO (inline, dentro da propria pagina)
+   ========================================================== */
+.campo-com-erro {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    gap: 6px;
+}
+
+.campo-com-erro input,
+.campo-com-erro .campo-senha {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mensagem-erro {
+    display: none;
+    color: #ff8fa3;
+    font-size: 12px;
+    line-height: 1.4;
+    padding-left: 2px;
+}
+
+.mensagem-erro.visivel {
+    display: block;
+}
+
+input.campo-invalido {
+    border-color: #ff8fa3;
+}
+
+/* Erro geral do formulario (ex.: "preencha todos os campos") */
+.erro-geral {
+    display: none;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    background: rgba(255, 143, 163, .08);
+    border: 1px solid rgba(255, 143, 163, .45);
+    border-radius: 10px;
+    color: #ff8fa3;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.erro-geral.visivel {
+    display: block;
+}
+
+/* ==========================================================
+   TOAST DE SUCESSO (cantinho da tela)
+   ========================================================== */
+.toast-sucesso {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 16px 20px;
+    max-width: 320px;
+
+    background: #050912;
+    border: 1px solid rgba(231, 182, 230, .45);
+    border-radius: 14px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.55);
+
+    font-family: 'Sora', sans-serif;
+    color: #ECECEC;
+    font-size: 14px;
+    line-height: 1.5;
+
+    z-index: 9999;
+
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity .35s, transform .35s;
+}
+
+.toast-sucesso.visivel {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.toast-sucesso i {
+    color: #E7B6E6;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.botao-cadastro:disabled {
+    opacity: .6;
+    cursor: default;
+}
+
+/* ===== RESPONSIVO ===== */
+
+/* Tablets */
+@media (max-width: 992px) {
+    .tela-cadastro {
+        gap: 50px;
+    }
+    .ftan-frase {
+        width: 180px;
+    }
+    .linha-cadastro {
+        height: 300px;
+    }
+}
+
+/* Empilha tudo (celulares e tablets pequenos), sem remover nenhum elemento */
+@media (max-width: 756px) {
+    header {
+        padding: 15px 20px;
+    }
+    .logo-cadastro {
+        width: 80px;
+    }
+    .botao-sair {
+        width: 90px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .tela-cadastro {
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 110px;
+    }
+
+    .lado-esquerdo {
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .ftan-frase {
+        width: 0px;
+        margin-top: 0;
+    }
+
+    /* Linha vira horizontal quando empilhado */
+    .linha-cadastro {   
+        width: 80%;
+        max-width: 300px;
+        height: 2px;
+        margin-top: 100;
+        margin-bottom: -80px;
+    }
+
+    .lado-direito {
+        width: 100%;
+    }
+
+    .titulo-cadastro {
+        font-size: 32px;
+    }
+
+    input,
+    .campo-senha,
+    .botao-cadastro {
+        max-width: 100%;
+    }
+}
+
+/* Celulares bem pequenos */
+@media (max-width: 380px) {
+    .titulo-cadastro {
+        font-size: 26px;
+    }
+    input {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+</style>
+</head>
+<body>
+    <header>
+        <a href="home.php">
+    <img src="logo-ucen.png" class="logo-cadastro" alt="FTAN">
+    </a>
+     <a href="home.php" class="botao-sair">
+        Sair
+    </a>
+    </header>
+    
+
+    <div class="tela-cadastro">
+    <div class="lado-esquerdo">
+    <img src="ftan-frase-cadastro.png" class="ftan-frase">
+    </div>
+    <div class="linha-cadastro"></div>
+
+    <form class="lado-direito" id="formCadastro" autocomplete="on">
+    <h1 class="titulo-cadastro">Cadastre-se</h1>
+
+    <div class="erro-geral" id="erroGeral"></div>
+
+    <div class="campo-com-erro">
+        <input type="text" id="nome" name="nome" autocomplete="name" placeholder="Nome Completo">
+        <span class="mensagem-erro" id="erroNome"></span>
+    </div>
+
+    <div class="campo-com-erro">
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="E-mail">
+        <span class="mensagem-erro" id="erroEmail"></span>
+    </div>
+
+    <div class="campo-com-erro">
+        <div class="campo-senha">
+        <input type="password" id="senha" name="senha" autocomplete="new-password" placeholder="Senha">
+
+        <span class="olho" id="icone-olho">
+            <i class="fa-regular fa-eye"></i>
+        </span>
+        </div>
+        <span class="mensagem-erro" id="erroSenha"></span>
+    </div>
+
+    <p class="esqueci-senha">
+    <a href="login.html">Já possui uma conta?</a></p>
+
+    <div class="campo-com-erro">
+        <div class="campo-senha">
+        <input type="password" id="confirmar_Senha" name="confirmar_Senha" autocomplete="new-password" placeholder="Confirmar Senha">
+
+        <span class="olho" id="icone-olho2">
+            <i class="fa-regular fa-eye"></i>
+        </span>
+        </div>
+        <span class="mensagem-erro" id="erroConfirmar"></span>
+    </div>
+
+    <button class="botao-cadastro" type="submit" id="botaoCadastro">
+        Criar conta
+    </button>
+
+<!-- <div class="separador">
+    <div class="linha-ou"></div>
+    <span>ou</span>
+    <div class="linha-ou"></div>
+    </div>
+
+    <button class="botao-social" type="button">
+    Receber código por E-mail
+    </button>
+
+    <button class="botao-social" type="button">
+    Continuar com Google
+    </button>
+    --> 
+
+    </form>
+
+    </div>
+
+    <section>
+    
+    <img src="fundo-nebula-pequena.jpg" class="nebula" alt="fundo-estelar">
+
+    </section>
+
+    <div class="toast-sucesso" id="toastSucesso">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastTexto">Cadastro realizado com sucesso!</span>
+    </div>
+
+<script>
+
+// Campo Senha
+const senha = document.getElementById("senha");
+const olho = document.getElementById("icone-olho");
+
+olho.addEventListener("click", function () {
+
+    if (senha.type === "password") {
+        senha.type = "text";
+        olho.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+    } else {
+        senha.type = "password";
+        olho.innerHTML = '<i class="fa-regular fa-eye"></i>';
+    }
+
+});
+
+// Campo Confirmar Senha
+const confirmarSenha = document.getElementById("confirmar_Senha");
+const olho2 = document.getElementById("icone-olho2");
+
+olho2.addEventListener("click", function () {
+
+    if (confirmarSenha.type === "password") {
+        confirmarSenha.type = "text";
+        olho2.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+    } else {
+        confirmarSenha.type = "password";
+        olho2.innerHTML = '<i class="fa-regular fa-eye"></i>';
+    }
+
+});
+
+
+
+// ==========================================================
+// ENVIO DO CADASTRO (fetch, sem sair da pagina em caso de erro)
+// ==========================================================
+
+// Token do link do e-mail (cadastro.html?t=...)
+const tokenCadastro = new URLSearchParams(window.location.search).get("t") || "";
+
+const formCadastro = document.getElementById("formCadastro");
+const botaoCadastro = document.getElementById("botaoCadastro");
+const erroGeral = document.getElementById("erroGeral");
+const toastSucesso = document.getElementById("toastSucesso");
+
+const camposComErro = {
+    nome: document.getElementById("erroNome"),
+    email: document.getElementById("erroEmail"),
+    senha: document.getElementById("erroSenha"),
+    confirmar_Senha: document.getElementById("erroConfirmar")
+};
+
+// Limpa todas as mensagens de erro (chamado a cada nova tentativa de envio)
+function limparErros() {
+
+    erroGeral.textContent = "";
+    erroGeral.classList.remove("visivel");
+
+    Object.entries(camposComErro).forEach(([id, span]) => {
+        span.textContent = "";
+        span.classList.remove("visivel");
+        const input = document.getElementById(id === "confirmar_Senha" ? "confirmar_Senha" : id);
+        if (input) input.classList.remove("campo-invalido");
+    });
+
+}
+
+// Mostra a mensagem perto do campo certo (ou no aviso geral, se o campo não for reconhecido)
+function mostrarErro(mensagem, campo) {
+
+    if (campo && camposComErro[campo]) {
+
+        camposComErro[campo].textContent = mensagem;
+        camposComErro[campo].classList.add("visivel");
+
+        const input = document.getElementById(campo === "confirmar_Senha" ? "confirmar_Senha" : campo);
+        if (input) input.classList.add("campo-invalido");
+
+    } else {
+
+        erroGeral.textContent = mensagem;
+        erroGeral.classList.add("visivel");
+
+    }
+
+}
+
+// Mesmas regras do servidor, só que aqui avisam na hora, sem precisar esperar a resposta
+function validarAntesDeEnviar(nome, email, senha, confirmar) {
+
+    if (nome === "" || email === "" || senha === "" || confirmar === "") {
+        mostrarErro("Preencha todos os campos!", null);
+        return false;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        mostrarErro("E-mail inválido!", "email");
+        return false;
+    }
+
+    if (senha.length < 6) {
+        mostrarErro("A senha precisa ter pelo menos 6 caracteres!", "senha");
+        return false;
+    }
+
+    if (senha !== confirmar) {
+        mostrarErro("As senhas não conferem!", "confirmar_Senha");
+        return false;
+    }
+
+    return true;
+
+}
+
+// Bloqueia o formulário quando o link é inválido/usado e preenche o nome da matrícula
+function bloquearFormulario(mensagem) {
+    mostrarErro(mensagem, null);
+    Array.from(formCadastro.elements).forEach(el => el.disabled = true);
+}
+
+async function conferirLinkCadastro() {
+
+    if (!/^[a-f0-9]{32}$/.test(tokenCadastro)) {
+        bloquearFormulario("O cadastro só é liberado pelo botão do e-mail de matrícula.");
+        return;
+    }
+
+    try {
+        const requisicao = await fetch("cadastro/cadastro-dados-nebula.php?t=" + tokenCadastro);
+        const dados = await requisicao.json();
+
+        if (!dados.sucesso) {
+            bloquearFormulario(dados.erro || "Link de cadastro inválido.");
+            return;
+        }
+
+        document.getElementById("nome").value = dados.nome || "";
+
+    } catch (erro) {
+        console.error("Erro ao conferir o link:", erro);
+        mostrarErro("Não foi possível se conectar ao servidor. Recarregue a página.", null);
+    }
+}
+
+conferirLinkCadastro();
+
+formCadastro.addEventListener("submit", async (evento) => {
+
+    evento.preventDefault();
+    limparErros();
+
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
+    const confirmar = document.getElementById("confirmar_Senha").value;
+
+    if (!validarAntesDeEnviar(nome, email, senha, confirmar)) {
+        return;
+    }
+
+    botaoCadastro.disabled = true;
+    botaoCadastro.textContent = "Enviando...";
+
+    try {
+
+        const corpo = new URLSearchParams({
+            token: tokenCadastro,
+            nome: nome,
+            email: email,
+            senha: senha,
+            confirmar_Senha: confirmar
+        });
+
+        const resposta = await fetch("cadastro/cadastro-acao-nebula.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: corpo
+        });
+
+        const dados = await resposta.json();
+
+        if (dados.sucesso) {
+
+            // Mostra o toast no canto e, pouco depois, segue para a tela de carregamento
+            toastSucesso.classList.add("visivel");
+
+            setTimeout(() => {
+                window.location.href = "tela-de-carregamento.html?destino=login.html";
+            }, 1400);
+
+        } else {
+
+            mostrarErro(dados.erro || "Não foi possível concluir o cadastro.", dados.campo);
+            botaoCadastro.disabled = false;
+            botaoCadastro.textContent = "Criar conta";
+
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao cadastrar:", erro);
+        mostrarErro("Não foi possível se conectar ao servidor. Tente novamente.", null);
+        botaoCadastro.disabled = false;
+        botaoCadastro.textContent = "Criar conta";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

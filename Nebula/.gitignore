@@ -1,0 +1,9 @@
+# Segredos: nunca versionar
+config_email.php
+entrar_google/config_google.php
+sirius_gemini/config_gemini.php
+.env
+
+# Dependências e uploads
+vendor/
+uploads/

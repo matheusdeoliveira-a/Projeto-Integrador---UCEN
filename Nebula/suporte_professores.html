@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Professores - Portal do Suporte - FTAN</title>
+    <link rel="stylesheet" href="suporte_professores.css">
+
+    <link rel="icon" type="image/svg+xml" href="favicon/engrenagem.svg">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="barra-portal">
+        <a class="logo" href="suporte_inicio.html"><img src="logo-ucen.png" alt="Logo"></a>
+
+        <div class="caixa-pesquisa" id="caixaPesquisa">
+            <input type="text" placeholder="Pesquisar..." readonly>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="overlay-pesquisa" id="overlayPesquisa">
+            <div class="painel-pesquisa">
+                <div class="barra-expandida">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+                    <button id="fecharPesquisa" type="button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="resultado-pesquisa">
+                    <ul id="lista-header">
+                        <li data-url="suporte_inicio.html">Início</li>
+                        <li data-url="suporte_academico.html">Acadêmico</li>
+                        <li data-url="suporte_professores.html">Professores</li>
+                        <li data-url="suporte_financeiro.html">Financeiro</li>
+                        <li data-url="suporte_atendimento.html">Central de Atendimento</li>
+                        <!-- <li data-url="suporte_salas.html">Salas & Agenda</li> -->
+                        <li data-url="suporte_relatorios.html">Relatórios</li>
+                        <li data-url="suporte_configuracoes.html">Configurações</li>
+                    </ul>
+                    <div id="mensagem-header">Nenhum resultado encontrado.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="acoes-cabecalho">
+                <a href="suporte_configuracoes.html" class="perfil">S</a>
+                <a href="tela-de-carregamento.html?destino=logout_suporte.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+    </div>
+</header>
+
+<aside class="menu" id="menu">
+    <div class="menu-cabecalho">
+        <button class="botao-menu-fechar" id="botaoMenuFechar" type="button"><i class="fa-solid fa-bars"></i></button>
+        <span>Menu</span>
+    </div>
+    <nav class="menu-navegacao">
+        <a class="item-menu" href="suporte_inicio.html"><i class="fa-solid fa-house"></i> Início</a>
+        <a class="item-menu" href="suporte_academico.html"><i class="fa-solid fa-users"></i> Acadêmico</a>
+        <a class="item-menu ativo" href="suporte_professores.html"><i class="fa-solid fa-briefcase"></i> Professores</a>
+        <a class="item-menu" href="suporte_financeiro.html"><i class="fa-solid fa-wallet"></i> Financeiro</a>
+        <a class="item-menu" href="suporte_atendimento.html"><i class="fa-solid fa-envelope"></i> Central de Atendimento</a>
+        <!-- <a class="item-menu" href="suporte_salas.html"><i class="fa-solid fa-calendar-days"></i> Salas & Agenda</a> --> 
+        <a class="item-menu" href="suporte_relatorios.html"><i class="fa-solid fa-chart-simple"></i> Relatórios</a>
+        <a class="item-menu" href="suporte_configuracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+    </nav>
+</aside>
+
+<main class="conteudo">
+    <div class="area-conteudo">
+        <section class="pagina pagina-interna">
+            <div class="cabecalho-pagina">
+                <span class="categoria-pagina">Gerenciamento do corpo docente</span>
+                <div class="titulo-linha"><h1>Professores</h1><span></span></div>
+                <p>Cadastre, consulte e acompanhe os professores, departamentos e disciplinas da universidade.</p>
+            </div>
+
+            <div class="grid-cards-estatisticas">
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Professores cadastrados</span>
+                    <h2 class="valor-estatistica" id="statProfessores">--</h2>
+                </div>
+                <div class="card-estatistica card-verde">
+                    <span class="subtitulo-estatistica">Docentes ativos</span>
+                    <h2 class="valor-estatistica" id="statAtivos">--</h2>
+                </div>
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Disciplinas</span>
+                    <h2 class="valor-estatistica" id="statDisciplinas">--</h2>
+                </div>
+                <div class="card-estatistica card-vermelho">
+                    <span class="subtitulo-estatistica">Inativos</span>
+                    <h2 class="valor-estatistica" id="statInativos">--</h2>
+                </div>
+            </div>
+
+            <div class="acoes-pagina">
+                <button class="btn-principal" id="btnNovoProfessor"><i class="fa-solid fa-user-plus"></i> Novo professor</button>
+            </div>
+
+            <div class="container-botoes-professores">
+                <button class="btn-opcao ativo" data-aba-professores="docentes">Professores</button>
+                <button class="btn-opcao" data-aba-professores="disciplinas">Disciplinas</button>
+            </div>
+
+            <div class="conteudo-aba-professores ativo" data-conteudo-professores="docentes">
+                <div class="filtros-linha">
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input id="buscaProfessores" type="text" placeholder="Buscar por nome, matrícula ou departamento...">
+                    </div>
+                    <select id="filtroStatus">
+                        <option value="todos">Todos os status</option>
+                        <option value="ativo">Ativos</option>
+                       <!-- <option value="afastado">Afastados</option> --> 
+                        <option value="inativo">Inativos</option>
+                    </select>
+                </div>
+
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead><tr><th>Professor</th><th>Matrícula</th><th>Departamento</th><th>Titulação</th><th>Disciplinas</th><th>Turmas</th><th>Status</th><th>Ação</th></tr></thead>
+                        <tbody id="corpoTabelaProfessores"></tbody>
+                    </table>
+                </div>
+                <!-- ===== PAGINAÇÃO: os botões (Anterior, 1, 2, ..., Próxima) são desenhados aqui pelo JS ===== -->
+                <div class="paginacao" id="paginacaoProfessores"></div>
+                <!-- ===== FIM PAGINAÇÃO ===== -->
+            </div>
+
+            <div class="conteudo-aba-professores" data-conteudo-professores="disciplinas">
+                <div class="barra-busca-aba">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="buscaDisciplinas" type="text" placeholder="Buscar disciplina ou professor...">
+                </div>
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead><tr><th>Disciplina</th><th>Departamento</th><th>Professor responsável</th><th>Status</th><th>Ação</th></tr></thead>
+                        <tbody id="corpoTabelaDisciplinas"></tbody>
+                    </table>
+                </div>
+                <!-- ===== PAGINAÇÃO (Disciplinas): botões desenhados pelo JS ===== -->
+                <div class="paginacao" id="paginacaoDisciplinas"></div>
+                <!-- ===== FIM PAGINAÇÃO (Disciplinas) ===== -->
+            </div>
+        </section>
+    </div>
+</main>
+
+<div class="modal-overlay" id="modalProfessor">
+    <div class="modal">
+        <button class="fechar-modal" id="fecharModal" type="button">&times;</button>
+        <!-- EDITAR (HTML 1/3): título e texto mudam por JS conforme seja "cadastrar" ou "editar" -->
+        <h2 id="tituloModalProfessor">Cadastrar professor</h2>
+        <p id="textoModalProfessor">O professor receberá um e-mail com o acesso ao portal e a orientação para trocar a senha provisória.</p>
+        <form id="formProfessor">
+            <div class="form-grid">
+                <div class="input-group"><label for="nomeProfessor">Nome completo</label><input id="nomeProfessor" required></div>
+                <div class="input-group"><label for="matriculaProfessor">Matrícula</label><input id="matriculaProfessor" placeholder="Ex.: PRF-00428" required></div>
+                <div class="input-group"><label for="departamentoProfessor">Departamento</label><input id="departamentoProfessor" required></div>
+                <div class="input-group"><label for="titulacaoProfessor">Titulação</label><select id="titulacaoProfessor" required><option>Mestre</option><option>Doutor</option><option>Pós-doutor</option><option>Especialista</option></select></div>
+                <div class="input-group full"><label for="emailProfessor">E-mail institucional</label><input id="emailProfessor" type="email" required></div>
+                <!-- ===== DISCIPLINAS: campo com várias disciplinas por professor (chips desenhados pelo JS) ===== -->
+                <div class="input-group full">
+                    <label for="disciplinaProfessor">Disciplinas (opcional — pode adicionar mais de uma)</label>
+                    <div class="disciplina-linha">
+                        <input id="disciplinaProfessor" placeholder="Ex.: Banco de Dados" maxlength="100" autocomplete="off">
+                        <button class="btn-secundario" type="button" id="btnAddDisciplina"><i class="fa-solid fa-plus"></i> Adicionar</button>
+                    </div>
+                    <div class="chips-form" id="chipsDisciplinas"></div>
+                </div>
+                <!-- ===== FIM DISCIPLINAS ===== -->
+                <!-- ===== TURMAS: o suporte define quais salas e turnos o professor leciona (caixas desenhadas pelo JS) ===== -->
+                <div class="input-group full">
+                    <label>Salas e turmas que ele vai lecionar (opcional)</label>
+                    <div class="turmas-form" id="turmasForm"></div>
+                </div>
+                <!-- ===== FIM TURMAS ===== -->
+                <!-- ===== EDITAR (HTML 2/3): campo Status, só aparece ao editar (o JS esconde ao cadastrar) ===== -->
+                <div class="input-group" id="grupoStatusProfessor" style="display:none">
+                    <label for="statusProfessor">Status</label>
+                    <select id="statusProfessor"><option value="ativo">Ativo</option><option value="inativo">Inativo</option></select>
+                </div>
+                <!-- ===== FIM EDITAR (HTML 2/3) ===== -->
+            </div>
+            <div class="form-actions"><button class="btn-secundario" type="button" id="cancelarModal">Cancelar</button><!-- EDITAR (HTML 3/3): o id permite o JS trocar o texto para "Salvar alterações" --><button class="btn-principal" type="submit" id="btnSalvarProfessor"><i class="fa-solid fa-check"></i> Cadastrar</button></div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalExcluir">
+    <div class="modal">
+        <h2>Excluir professor</h2>
+        <p id="textoModalExcluir"></p>
+        <div class="form-actions">
+            <button class="btn-secundario" type="button" id="cancelarExcluir">Cancelar</button>
+            <button class="btn-perigo" type="button" id="confirmarExcluir"><i class="fa-solid fa-trash"></i> Excluir</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+   
+
+    <div class="footer-inferior">
+        <h3 class="copyright">
+            © 2026 Universidade de Ciências e Exatas Nebula<br>
+            Todos os direitos reservados.
+        </h3>
+    </div>
+</footer>
+<div class="toast-area" id="toastArea"></div>
+<script src="suporte_permissoes.js" defer></script>
+<script src="suporte_professores.js" defer></script>
+</body>
+</html>

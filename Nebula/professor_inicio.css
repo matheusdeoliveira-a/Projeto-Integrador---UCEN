@@ -1,0 +1,1219 @@
+/* ==========================================================
+   PORTAL DO PROFESSOR - INÍCIO
+   Estilos base (header, menu, rodapé) + estilos da página Início
+   Mesma arquitetura visual do Portal do Suporte
+   ========================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+}
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.logo img {
+    width: 125px;
+    height: auto;
+    display: block;
+    transition: .35s ease;
+}
+/*
+.logo img:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+*/
+/* ==========================================
+   BARRA DE ROLAGEM
+========================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050912;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #8a2be2;
+    border-radius: 6px;
+    border: 2px solid #050912;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9932cc;
+}
+
+/* ==========================================
+   HEADER
+   Campus + Pesquisa + Perfil
+========================================== */
+
+.cabecalho {
+    width: 100%;
+    height: 90px;
+    background-color: #050505;
+    display: flex;
+    align-items: center;
+    z-index: 900;
+    border-bottom: 1px solid #292929;
+}
+
+.barra-portal {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+/* ==========================================
+   PESQUISA
+========================================== */
+
+.caixa-pesquisa {
+    display: flex;
+    align-items: center;
+    width: min(400px, 90%);
+    padding: 10px 15px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.caixa-pesquisa input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: black;
+    outline: none;
+    font-size: 16px;
+}
+
+.caixa-pesquisa input::placeholder {
+    color: #777;
+}
+
+.caixa-pesquisa i {
+    color: #888;
+    font-size: 15px;
+    margin-left: 6px;
+}
+
+.overlay-pesquisa {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s;
+    z-index: 5000;
+}
+
+.overlay-pesquisa.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.painel-pesquisa {
+    width: 100%;
+    background: #050912;
+    padding: 35px;
+    transform: translateY(-30px);
+    transition: .35s;
+}
+
+.overlay-pesquisa.ativo .painel-pesquisa {
+    transform: translateY(0);
+}
+
+.barra-expandida {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 50px;
+    padding: 15px 25px;
+}
+
+.barra-expandida input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    margin: 0 15px;
+}
+
+#fecharPesquisa {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.resultado-pesquisa {
+    margin-top: 30px;
+    display: none;
+}
+
+.resultado-pesquisa li {
+    list-style: none;
+    color: #e47de4d9;
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    transition: background-color .25s, padding-left .25s;
+}
+
+.resultado-pesquisa li:hover {
+    background: #111d33;
+    padding-left: 20px;
+}
+
+#lista-header li {
+    display: none;
+}
+
+#mensagem-header {
+    display: none;
+    padding: 18px 12px;
+    color: #9b9b9b;
+    font-family: "Sora", sans-serif;
+    font-size: 16px;
+}
+
+.barra-expandida i {
+    font-size: 22px;
+    color: #666;
+}
+
+/* ==========================================
+   PERFIL
+========================================== */
+.perfil {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #fafafa;
+    background-color: #240D31;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.perfil:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 249, 63, 0.25);
+}
+
+/* Perfil + botão Sair lado a lado, no canto direito do cabeçalho */
+.acoes-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.btn-sair {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .25);
+    background: transparent;
+    color: #fafafa;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: .25s;
+}
+
+.btn-sair:hover {
+    background: rgba(255, 90, 90, .15);
+    border-color: #ff5a5a;
+    color: #ff5a5a;
+    transform: scale(1.05);
+}
+
+
+/* ==========================================
+   MENU LATERAL FIXO
+========================================== */
+
+.menu {
+    position: fixed;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 91px;
+    height: 240px;
+    overflow: hidden;
+    border-radius: 45px;
+    background-color: #303030;
+    z-index: 1000;
+    transition: width 0.45s ease, height 0.45s ease, border-radius 0.45s ease;
+}
+
+.menu.aberto {
+    width: 340px;
+    height: auto;
+    max-height: min(640px, 88vh);
+    border-radius: 30px;
+    overflow-y: auto;
+}
+
+.menu-cabecalho {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    color: #E3AC6C;
+    font-family: 'Sora', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.menu-cabecalho span {
+    margin-left: 18px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.menu.aberto .menu-cabecalho span {
+    opacity: 1;
+    transition-delay: 0.25s;
+}
+
+.botao-menu-fechar {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: transparent;
+    color: #E3AC6C;
+    cursor: pointer;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.menu.aberto .botao-menu-fechar {
+    display: flex;
+}
+
+.menu-navegacao {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 25px 48px;
+}
+
+.item-menu {
+    width: 100%;
+    padding: 12px 22px;
+    border: none;
+    background: transparent;
+    color: #c9c9c9;
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-left: 3px solid transparent;
+    transition: .25s;
+}
+
+.item-menu i {
+    width: 22px;
+    text-align: center;
+    font-size: 19px;
+}
+
+.item-menu.ativo {
+    background: rgb(71, 71, 71);
+    color: #E3AC6C;
+    border-left-color: #E3AC6C;
+}
+
+.menu.aberto .item-menu {
+    opacity: 1;
+}
+
+.item-menu:hover {
+    color: #E3AC6C;
+    transform: translateX(4px);
+    background: rgb(71, 71, 71);
+    border-left-color: #E3AC6C;
+}
+
+.menu:not(.aberto) .menu-navegacao {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ==========================================
+   CONTEÚDO PRINCIPAL
+========================================== */
+
+.conteudo {
+    width: 100%;
+    min-height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.area-conteudo {
+    width: 100%;
+}
+
+.pagina {
+    width: 100%;
+    min-height: 100vh;
+    color: white;
+    font-family: 'Sora', sans-serif;
+}
+
+.pagina-interna {
+    display: block;
+    min-height: calc(100vh - 90px);
+    padding: 35px 8% 40px 180px;
+    background-color: transparent;
+}
+
+/* ==========================================
+   CABEÇALHO DA PÁGINA
+========================================== */
+
+.cabecalho-pagina {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+}
+
+.categoria-pagina {
+    width: 100%;
+    font-size: 13px;
+    font-weight: 500;
+    color: #8b8b93;
+    text-align: left;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.titulo-linha {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.titulo-linha h1 {
+    margin: 0;
+    color: #E3AC6C;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+.titulo-linha span {
+    display: inline;
+}
+
+.cabecalho-pagina p {
+    width: 100%;
+    margin-top: 18px;
+    font-size: 22px;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+}
+
+/* =========================================
+   RODAPÉ
+   ========================================= */
+footer {
+    width: 100%;
+    background: #151515;
+    margin-top: 210px;
+}
+
+.footer-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px 70px;
+}
+
+.footer-esquerda {
+    display: flex;
+    flex-direction: column;
+    margin-left: 105px;
+}
+
+.footer-direita {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    left: -65px;
+}
+
+.footer-esquerda img {
+    width: 80px;
+    margin-bottom: 25px;
+}
+
+.titulo-footer {
+    color: #D78EDB;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+.texto-footer {
+    color: white;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: normal;
+}
+
+.footer-inferior {
+    border-top: 1px solid #5d5d5d;
+    background: #101010;
+    text-align: center;
+    padding: 28px 20px;
+}
+
+.copyright {
+    color: #d6d6d6;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+/* ==========================================================
+   INÍCIO DO PROFESSOR (específico desta página)
+   ========================================================== */
+
+.cabecalho-pagina {
+    align-items: flex-start;
+}
+
+.cabecalho-pagina .saudacao-professor {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #cfcfcf;
+    text-align: left;
+}
+
+/* Próxima aula */
+.card-proxima-aula {
+    width: 100%;
+    background-color: #131316;
+    border: 1px solid #26262c;
+    border-radius: 14px;
+    padding: 24px 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    transition: border-color 0.2s ease;
+}
+
+.card-proxima-aula:hover {
+    border-color: #3a3a42;
+}
+
+.rotulo-proxima-aula {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    color: #9b9ba3;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.rotulo-proxima-aula i {
+    font-size: 14px;
+    color: #E3AC6C;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(227, 172, 108, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo-materia {
+    margin: 0 0 8px 0;
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.horario-aula {
+    color: #8b8b93;
+    font-size: 13.5px;
+}
+
+.botao-vestibular {
+    display: flex;
+    align-items: center;
+}
+
+.btn-inscricao {
+    display: inline-block;
+    padding: 11px 26px;
+    border: 1px solid #E3AC6C;
+    border-radius: 10px;
+    background: transparent;
+    color: #E3AC6C;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.btn-inscricao:hover {
+    background: rgba(227, 172, 108, 0.12);
+    color: #f3ca7e;
+}
+
+/* Seções (cabeçalho com título + link) */
+.secao-inicio {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.secao-inicio-cabecalho {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.secao-inicio-cabecalho h2 {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.btn-link-calendario {
+    color: #E3AC6C;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.btn-link-calendario:hover {
+    color: #f3ca7e;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* Próximas avaliações */
+.painel-avaliacoes {
+    position: relative; /* Adicionado para servir de referência de posicionamento */
+    background-color: #131316;
+    border: 1px solid #26262c;
+    border-radius: 14px;
+    padding: 26px 26px 26px 26px; /* Ajuste no padding superior para dar espaço ao link */
+    margin-top: 22px;
+}
+
+/* Adicione/atualize esta regra para posicionar o botão */
+.painel-avaliacoes .btn-link-calendario {
+    position: absolute;
+    top: 20px;
+    right: 26px;
+}
+
+.item-avaliacao {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid #2a2a32;
+}
+
+.item-avaliacao:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.data-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 54px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(227, 172, 108, 0.1);
+}
+
+.data-badge .dia {
+    color: #E3AC6C;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.data-badge .mes {
+    color: #8b8b93;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.info-materia {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-materia h3 {
+    color: white;
+    font-size: 14.5px;
+    font-weight: 600;
+}
+
+.info-materia p {
+    color: #8b8b93;
+    font-size: 12.5px;
+}
+
+/* Resumo das turmas */
+.grid-resumo-turmas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.card-resumo-turma {
+    background-color: #121214;
+    border: 1px solid #292930;
+    border-radius: 14px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-decoration: none;
+    transition: border-color .2s ease, background-color .2s ease;
+}
+
+.card-resumo-turma:hover {
+    border-color: #E3AC6C;
+    background-color: #16161a;
+}
+
+.card-resumo-turma .semestre-tag {
+    color: #8b8b93;
+    font-size: 12.5px;
+}
+
+.card-resumo-turma h3 {
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.mini-stats-turma {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 6px;
+    padding-top: 16px;
+    border-top: 1px solid #2a2a32;
+    color: #8b8b93;
+    font-size: 12.5px;
+}
+
+.mini-stats-turma strong {
+    display: block;
+    margin-bottom: 2px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Avisos importantes (bloco comentado no HTML)
+.painel-avisos {
+    background-color: #131316;
+    border: 1px solid #26262c;
+    border-radius: 14px;
+    padding: 8px 26px;
+    margin-top: 22px;
+}
+
+.item-aviso {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid #2a2a32;
+}
+
+.item-aviso:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.item-aviso i {
+    color: #E3AC6C;
+    font-size: 16px;
+    margin-top: 2px;
+}
+
+.item-aviso.urgente i {
+    color: #FFC800;
+}
+
+.texto-aviso h4 {
+    color: white;
+    font-size: 14.5px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.texto-aviso p {
+    color: #8b8b93;
+    font-size: 12.5px;
+}
+*/
+
+@media (max-width: 1100px) {
+    .grid-resumo-turmas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Aviso do resumo de turmas (carregando / sem turmas) */
+.aviso-resumo-turmas {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 14px 4px;
+    color: #cfcfcf;
+    font-size: 14px;
+}
+
+/* ==========================================================
+   PESQUISA EXPANDIDA x MENU
+   O cabeçalho fixo cria um contexto próprio de empilhamento,
+   então, com a pesquisa aberta, o menu é desativado para não
+   ficar por cima do overlay (nem por toque, nem por teclado).
+   ========================================================== */
+
+body:has(.overlay-pesquisa.ativo) .menu {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ==========================================================
+   RESPONSIVO
+   ========================================================== */
+
+/* ---------- Notebooks pequenos (até 1100px) ---------- */
+@media (max-width: 1100px) {
+    .barra-portal { padding: 0 25px; }
+    .pagina-interna { padding: 35px 40px 40px 145px; }
+    .menu { left: 25px; }
+
+    .grid-resumo-turmas { grid-template-columns: repeat(2, 1fr); }
+
+    .footer-superior { padding: 50px 45px; }
+    .footer-esquerda { margin-left: 40px; }
+    .footer-direita { left: 0; }
+}
+
+/* ---------- Tablets (até 900px) ---------- */
+@media (max-width: 900px) {
+    .pagina-interna { padding: 30px 35px 40px 130px; }
+    .titulo-linha h1 { font-size: 36px; }
+
+    .card-proxima-aula { padding: 22px; }
+    .painel-avaliacoes { padding: 22px; }
+}
+
+/* ---------- Tablets pequenos / celulares grandes (até 768px) ---------- */
+@media (max-width: 768px) {
+
+    /* ---------- HEADER FIXO ---------- */
+    .cabecalho {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 70px;
+        z-index: 900;
+    }
+
+    .barra-portal {
+        position: relative;
+        height: 70px;
+        padding: 0 14px;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    /* Logo à esquerda, depois do hambúrguer */
+    .logo {
+        position: absolute;
+        left: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+    }
+
+    .logo img { width: 84px; }
+
+    /* Pesquisa vira só o ícone */
+    .caixa-pesquisa {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        margin-left: auto;
+        justify-content: center;
+        border: 1px solid #333;
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .caixa-pesquisa input { display: none; }
+
+    .caixa-pesquisa i {
+        margin: 0;
+        color: #E3AC6C;
+        font-size: 18px;
+    }
+
+    .perfil {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+    }
+
+    /* ---------- MENU MOBILE (hambúrguer) ---------- */
+    .menu {
+        position: fixed;
+        top: 13px;
+        left: 10px;
+        width: 44px;
+        height: 44px;
+        transform: none;
+        overflow: hidden;
+        border-radius: 22px;
+        background-color: transparent;
+        z-index: 1100;
+        transition: width .3s ease, border-radius .3s ease, background-color .3s ease;
+    }
+
+    .menu-cabecalho {
+        height: 44px;
+        padding-left: 0;
+        font-size: 20px;
+    }
+
+    .botao-menu-fechar {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+
+    .menu-cabecalho span { margin-left: 6px; }
+
+    .menu.aberto {
+        width: min(300px, calc(100vw - 20px));
+        height: auto;
+        max-height: calc(100vh - 26px);
+        border-radius: 22px;
+        background-color: #303030;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .55);
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 1200;
+    }
+
+    .menu.aberto .menu-navegacao {
+        opacity: 1;
+        pointer-events: auto;
+        padding: 8px 12px 16px 12px;
+        max-height: calc(100vh - 82px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .menu.aberto .item-menu {
+        font-size: 16px;
+        padding: 12px 14px;
+        gap: 12px;
+    }
+
+    .menu.aberto .item-menu i { font-size: 17px; }
+
+    .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .3s ease, visibility .3s ease;
+        z-index: 1150;
+    }
+
+    .menu-overlay.ativo {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* ---------- CONTEÚDO ---------- */
+    .conteudo { padding-top: 70px; }
+
+    .pagina-interna {
+        min-height: auto;
+        padding: 28px 20px 40px;
+    }
+
+    .categoria-pagina { font-size: 11px; }
+
+    .titulo-linha h1 {
+        font-size: clamp(28px, 8vw, 36px);
+        white-space: normal;
+        line-height: 1.15;
+    }
+
+    .cabecalho-pagina p {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* Saudação (precisa do seletor composto para vencer a regra da página) */
+    .cabecalho-pagina .saudacao-professor {
+        margin-top: 12px;
+        margin-bottom: 22px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* ---------- PRÓXIMA AULA ---------- */
+    .card-proxima-aula {
+        padding: 18px 16px;
+        border-radius: 12px;
+        gap: 16px;
+    }
+
+    .rotulo-proxima-aula { margin-bottom: 12px; }
+
+    .titulo-materia {
+        font-size: 22px;
+        overflow-wrap: anywhere;
+    }
+
+    .horario-aula { font-size: 13px; }
+
+    /* Botão ocupa a largura toda */
+    .botao-vestibular { width: 100%; }
+
+    .btn-inscricao {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        text-align: center;
+    }
+
+    /* ---------- SEÇÕES ---------- */
+    .secao-inicio { margin-top: 36px; }
+
+    .secao-inicio-cabecalho {
+        flex-wrap: wrap;
+        gap: 6px 12px;
+        margin-bottom: 16px;
+    }
+
+    .secao-inicio-cabecalho h2 { font-size: 20px; }
+
+    /* ---------- PRÓXIMAS AVALIAÇÕES ----------
+       O link "calendário" é absoluto no canto do painel: reservamos uma
+       faixa no topo para ele não ficar por cima do primeiro item. */
+    .painel-avaliacoes {
+        margin-top: 16px;
+        padding: 48px 16px 18px;
+        border-radius: 12px;
+    }
+
+    .painel-avaliacoes .btn-link-calendario {
+        top: 16px;
+        right: 16px;
+        font-size: 13px;
+    }
+
+    .item-avaliacao {
+        gap: 12px;
+        padding: 12px 0;
+    }
+
+    .data-badge {
+        min-width: 48px;
+        padding: 6px 8px;
+    }
+
+    .data-badge .dia { font-size: 16px; }
+
+    .info-materia { min-width: 0; }
+
+    .info-materia h3,
+    .info-materia p { overflow-wrap: anywhere; }
+
+    /* ---------- RESUMO DAS TURMAS ---------- */
+    .grid-resumo-turmas { gap: 14px; }
+
+    .card-resumo-turma {
+        padding: 18px 16px;
+        border-radius: 12px;
+        gap: 10px;
+    }
+
+    .card-resumo-turma h3 { font-size: 15px; }
+
+    .mini-stats-turma {
+        flex-wrap: wrap;
+        gap: 10px 12px;
+        padding-top: 14px;
+    }
+
+    .mini-stats-turma strong { font-size: 18px; }
+
+    /* ---------- PESQUISA EXPANDIDA ---------- */
+    .painel-pesquisa { padding: 18px 14px; }
+    .barra-expandida { padding: 12px 16px; }
+    .barra-expandida input { font-size: 16px; margin: 0 10px; min-width: 0; }
+    .barra-expandida i { font-size: 18px; }
+    #fecharPesquisa { font-size: 20px; }
+    .resultado-pesquisa { margin-top: 20px; }
+    .resultado-pesquisa li { font-size: 14px; }
+
+    /* ---------- RODAPÉ ---------- */
+    footer { margin-top: 70px; }
+
+    .footer-superior {
+        flex-direction: column;
+        gap: 35px;
+        padding: 40px 24px;
+    }
+
+    .footer-esquerda,
+    .footer-direita {
+        margin-left: 0;
+        left: auto;
+        width: 100%;
+    }
+
+    .footer-esquerda img { width: 65px; margin-bottom: 18px; }
+    .titulo-footer { font-size: 1.4rem; margin-bottom: 14px; }
+    .texto-footer { font-size: .9rem; line-height: 1.6; }
+    .footer-inferior { padding: 22px 16px; }
+    .copyright { font-size: .8rem; }
+}
+
+/* ---------- Celulares (até 480px) ---------- */
+@media (max-width: 480px) {
+
+    .barra-portal { padding: 0 12px; gap: 8px; }
+
+    .logo { left: 60px; }
+    .logo img { width: 64px; }
+
+    .caixa-pesquisa { width: 38px; height: 38px; }
+    .caixa-pesquisa i { font-size: 16px; }
+
+    .perfil { width: 38px; height: 38px; font-size: 14px; }
+
+    .pagina-interna { padding: 24px 16px 35px; }
+
+    .titulo-linha h1 { font-size: 26px; }
+
+    .card-proxima-aula { padding: 16px 14px; }
+    .titulo-materia { font-size: 20px; }
+
+    .secao-inicio-cabecalho h2 { font-size: 18px; }
+
+    .painel-avaliacoes { padding: 46px 12px 16px; }
+
+    .painel-avaliacoes .btn-link-calendario {
+        top: 14px;
+        right: 12px;
+    }
+
+    /* Turmas em uma coluna */
+    .grid-resumo-turmas { grid-template-columns: 1fr; }
+
+    .footer-superior { padding: 32px 18px; }
+    .titulo-footer { font-size: 1.25rem; }
+}
+
+
+/* ==========================================================
+   AJUSTES RESPONSIVOS PARA O CABEÇALHO DA NEBULA
+   (perfil + botão Sair lado a lado dentro de .acoes-cabecalho)
+   ========================================================== */
+
+@media (max-width: 768px) {
+    .acoes-cabecalho { gap: 8px; margin-left: auto; }
+    .acoes-cabecalho .caixa-pesquisa { margin-left: 0; }
+    .btn-sair {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .acoes-cabecalho { gap: 6px; }
+    .btn-sair {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Central de Atendimento - Portal do Suporte - FTAN</title>
+    <link rel="stylesheet" href="suporte_atendimento.css">
+
+    <link rel="icon" type="image/svg+xml" href="favicon/engrenagem.svg">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="barra-portal">
+        <a class="logo" href="suporte_inicio.html"><img src="logo-ucen.png" alt="Logo"></a>
+        <div class="caixa-pesquisa" id="caixaPesquisa">
+            <input type="text" placeholder="Pesquisar..." readonly>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div class="overlay-pesquisa" id="overlayPesquisa">
+            <div class="painel-pesquisa">
+                <div class="barra-expandida">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+                    <button id="fecharPesquisa" type="button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="resultado-pesquisa">
+                    <ul id="lista-header">
+                        <li data-url="suporte_inicio.html">Início</li>
+                        <li data-url="suporte_academico.html">Acadêmico</li>
+                        <li data-url="suporte_professores.html">Professores</li>
+                        <li data-url="suporte_financeiro.html">Financeiro</li>
+                        <li data-url="suporte_atendimento.html">Central de Atendimento</li>
+                        <!-- <li data-url="suporte_salas.html">Salas & Agenda</li> -->
+                        <li data-url="suporte_relatorios.html">Relatórios</li>
+                        <li data-url="suporte_configuracoes.html">Configurações</li>
+                    </ul>
+                    <div id="mensagem-header">Nenhum resultado encontrado.</div>
+                </div>
+            </div>
+        </div>
+        <div class="acoes-cabecalho">
+            <a href="suporte_configuracoes.html" class="perfil">S</a>
+            <a href="tela-de-carregamento.html?destino=logout_suporte.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+    </div>
+</header>
+
+<aside class="menu" id="menu">
+    <div class="menu-cabecalho">
+        <button class="botao-menu-fechar" id="botaoMenuFechar" type="button"><i class="fa-solid fa-bars"></i></button>
+        <span>Menu</span>
+    </div>
+    <nav class="menu-navegacao">
+        <a class="item-menu" href="suporte_inicio.html"><i class="fa-solid fa-house"></i> Início</a>
+        <a class="item-menu" href="suporte_academico.html"><i class="fa-solid fa-users"></i> Acadêmico</a>
+        <a class="item-menu" href="suporte_professores.html"><i class="fa-solid fa-briefcase"></i> Professores</a>
+        <a class="item-menu" href="suporte_financeiro.html"><i class="fa-solid fa-wallet"></i> Financeiro</a>
+        <a class="item-menu ativo" href="suporte_atendimento.html"><i class="fa-solid fa-envelope"></i> Central de Atendimento</a>
+        <!-- <a class="item-menu" href="suporte_salas.html"><i class="fa-solid fa-calendar-days"></i> Salas & Agenda</a> -->
+        <a class="item-menu" href="suporte_relatorios.html"><i class="fa-solid fa-chart-simple"></i> Relatórios</a>
+        <a class="item-menu" href="suporte_configuracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+    </nav>
+</aside>
+
+<main class="conteudo">
+    <div class="area-conteudo">
+        <section class="pagina pagina-interna">
+            <div class="cabecalho-pagina">
+                <span class="categoria-pagina">Atendimento e requisições</span>
+                <div class="titulo-linha"><h1>Central de Atendimento</h1><span></span></div>
+                <p>Gerencie chamados, solicitações dos alunos e comunicações enviadas pela instituição.</p>
+            </div>
+
+            <div class="grid-cards-estatisticas">
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Chamados abertos</span>
+                    <h2 class="valor-estatistica" id="statAbertos">--</h2>
+                </div>
+                <div class="card-estatistica card-amarelo">
+                    <span class="subtitulo-estatistica">Em andamento</span>
+                    <h2 class="valor-estatistica" id="statAndamento">--</h2>
+                </div>
+                <div class="card-estatistica card-verde">
+                    <span class="subtitulo-estatistica">Resolvidos</span>
+                    <h2 class="valor-estatistica" id="statResolvidos">--</h2>
+                </div>
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">E-mails enviados</span>
+                    <h2 class="valor-estatistica" id="statEmails">--</h2>
+                </div>
+            </div>
+
+            <div class="acoes-pagina">
+                <button class="btn-secundario" id="novoEmail"><i class="fa-solid fa-paper-plane"></i> Enviar e-mail</button>
+            </div>
+
+            <div class="container-botoes-atendimento">
+                <button class="btn-opcao ativo" data-aba-atendimento="chamados">Chamados</button>
+                <button class="btn-opcao" data-aba-atendimento="emails">E-mails enviados</button>
+            </div>
+
+            <div class="conteudo-aba-atendimento ativo" data-conteudo-atendimento="chamados">
+                <div class="filtros-linha">
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input id="buscaChamado" placeholder="Buscar por chamado, aluno ou assunto...">
+                    </div>
+                    <select id="filtroStatus">
+                        <option value="">Todos os status</option>
+                        <option value="Pendente">Pendente</option>
+                        <option value="Em andamento">Em andamento</option>
+                        <option value="Respondido">Respondido</option>
+                    </select>
+                    <select id="filtroCategoria">
+                        <option value="">Todas as categorias</option>
+                        <option value="Financeiro">Financeiro</option>
+                        <option value="Acadêmico">Acadêmico</option>
+                        <option value="Acesso">Acesso</option>
+                        <option value="Documentação">Documentação</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead>
+                            <tr>
+                                <th>Chamado</th>
+                                <th>Aluno</th>
+                                <th>Categoria</th>
+                                <th>Data</th>
+                                <th>Responsável</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaChamados"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="conteudo-aba-atendimento" data-conteudo-atendimento="emails">
+                <div class="barra-busca-aba">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="buscaEmail" placeholder="Buscar destinatário ou assunto...">
+                </div>
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead>
+                            <tr>
+                                <th>Destinatário</th>
+                                <th>Assunto</th>
+                                <th>Data</th>
+                                <th>Responsável</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaEmails"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<div class="modal-overlay" id="modalVerChamado">
+    <div class="modal modal-grande">
+        <button class="fechar-modal" data-close="modalVerChamado" type="button">&times;</button>
+        <h2 id="verChamadoId">Chamado</h2>
+        <p id="verChamadoAssunto"></p>
+
+        <div class="detalhe-meta">
+            <div><span>Nome</span><strong id="verNome"></strong></div>
+            <div><span>E-mail</span><strong id="verEmail"></strong></div>
+            <div><span>Categoria</span><strong id="verCategoria"></strong></div>
+            <div><span>Origem</span><strong id="verOrigem"></strong></div>
+            <div><span>Data</span><strong id="verData"></strong></div>
+            <div><span>Responsável</span><strong id="verResponsavel"></strong></div>
+            <div class="input-group">
+                <label for="statusChamado">Status</label>
+                <select id="statusChamado">
+                    <option value="Pendente">Pendente</option>
+                    <option value="Em andamento">Em andamento</option>
+                    <option value="Respondido">Respondido</option>
+                </select>
+            </div>
+        </div>
+
+        <h3 class="titulo-secao-modal">Mensagem</h3>
+        <div class="detalhe-descricao" id="verChamadoMensagem"></div>
+
+        <h3 class="titulo-secao-modal">Respostas enviadas</h3>
+        <div id="verRespostas"></div>
+
+        <form id="formResposta">
+            <div class="form-grid">
+                <div class="input-group full">
+                    <label for="mensagemResposta">Responder por e-mail</label>
+                    <textarea id="mensagemResposta" rows="5" maxlength="5000" placeholder="Escreva a resposta que será enviada ao e-mail do chamado..." required></textarea>
+                </div>
+                <div class="input-group full">
+                    <label for="anexosResposta">Anexos (opcional)</label>
+                    <input id="anexosResposta" type="file" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.png,.jpg,.jpeg,.zip">
+                    <small class="dica-anexo">Até 5 arquivos, 10 MB cada (máx. 15 MB no total).</small>
+                </div>
+                <div class="input-group">
+                    <label for="statusApos">Depois de enviar, marcar como</label>
+                    <select id="statusApos">
+                        <option value="Respondido">Respondido</option>
+                        <option value="Em andamento">Em andamento</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn-secundario" type="button" data-close="modalVerChamado">Fechar</button>
+                <button class="btn-principal" type="submit" id="btnEnviarResposta"><i class="fa-solid fa-paper-plane"></i> Enviar resposta</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalEmail">
+    <div class="modal">
+        <button class="fechar-modal" data-close="modalEmail" type="button">&times;</button>
+        <h2>Enviar e-mail</h2>
+        <p>O e-mail é enviado na hora e fica registrado na aba "E-mails enviados".</p>
+        <form id="formEmail">
+            <div class="form-grid">
+                <div class="input-group full">
+                    <label>Destinatário</label>
+                    <input id="destinatarioEmail" type="email" required>
+                </div>
+                <div class="input-group full">
+                    <label>Assunto</label>
+                    <input id="assuntoEmail" required>
+                </div>
+                <div class="input-group full">
+                    <label>Mensagem</label>
+                    <textarea id="mensagemEmail" rows="4" required></textarea>
+                </div>
+                <div class="input-group full">
+                    <label for="anexosEmail">Anexos (opcional)</label>
+                    <input id="anexosEmail" type="file" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.csv,.png,.jpg,.jpeg,.zip">
+                    <small class="dica-anexo">Até 5 arquivos, 10 MB cada (máx. 15 MB no total).</small>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn-secundario" type="button" data-close="modalEmail">Cancelar</button>
+                <button class="btn-principal" type="submit" id="btnEnviarEmail"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <!-- <div class="footer-superior">
+        <div class="footer-esquerda">
+            <img src="logo-ucen.png" alt="Logo">
+            <h3 class="texto-footer">
+                Campus central: Avenida das Estrelas, nº 372,<br>
+                Jardim Primavera, Cidade Altas Flores/SP - CEP 14797-000
+            </h3>
+        </div>
+    </div> -->
+    <div class="footer-inferior">
+        <h3 class="copyright">© 2026 Universidade de Ciências e Exatas Nebula<br>Todos os direitos reservados.</h3>
+    </div>
+</footer>
+<script src="suporte_permissoes.js" defer></script>
+<script src="suporte_atendimento.js" defer></script>
+</body>
+</html>

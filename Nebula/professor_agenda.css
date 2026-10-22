@@ -1,0 +1,1436 @@
+/* ==========================================================
+   PORTAL DO PROFESSOR - AGENDA
+   Estilos base (header, menu, rodapé) + estilos da página Agenda
+   Mesma arquitetura visual do Portal do Suporte
+   ========================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+}
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.logo img {
+    width: 125px;
+    height: auto;
+    display: block;
+    transition: .35s ease;
+}
+.logo img:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+/* ==========================================
+   BARRA DE ROLAGEM
+========================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050912;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #8a2be2;
+    border-radius: 6px;
+    border: 2px solid #050912;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9932cc;
+}
+
+/* ==========================================
+   HEADER
+   Campus + Pesquisa + Perfil
+========================================== */
+
+.cabecalho {
+    width: 100%;
+    height: 90px;
+    background-color: #050505;
+    display: flex;
+    align-items: center;
+    z-index: 900;
+    border-bottom: 1px solid #292929;
+}
+
+.barra-portal {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+/* ==========================================
+   PESQUISA
+========================================== */
+
+.caixa-pesquisa {
+    display: flex;
+    align-items: center;
+    width: min(400px, 90%);
+    padding: 10px 15px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.caixa-pesquisa input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: black;
+    outline: none;
+    font-size: 16px;
+}
+
+.caixa-pesquisa input::placeholder {
+    color: #777;
+}
+
+.caixa-pesquisa i {
+    color: #888;
+    font-size: 15px;
+    margin-left: 6px;
+}
+
+.overlay-pesquisa {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    opacity: 0;
+    visibility: hidden;
+    transition: .35s;
+    z-index: 5000;
+}
+
+.overlay-pesquisa.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.painel-pesquisa {
+    width: 100%;
+    background: #050912;
+    padding: 35px;
+    transform: translateY(-30px);
+    transition: .35s;
+}
+
+.overlay-pesquisa.ativo .painel-pesquisa {
+    transform: translateY(0);
+}
+
+.barra-expandida {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 50px;
+    padding: 15px 25px;
+}
+
+.barra-expandida input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    margin: 0 15px;
+}
+
+#fecharPesquisa {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.resultado-pesquisa {
+    margin-top: 30px;
+    display: none;
+}
+
+.resultado-pesquisa li {
+    list-style: none;
+    color: #e47de4d9;
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    transition: background-color .25s, padding-left .25s;
+}
+
+.resultado-pesquisa li:hover {
+    background: #111d33;
+    padding-left: 20px;
+}
+
+#lista-header li {
+    display: none;
+}
+
+#mensagem-header {
+    display: none;
+    padding: 18px 12px;
+    color: #9b9b9b;
+    font-family: "Sora", sans-serif;
+    font-size: 16px;
+}
+
+.barra-expandida i {
+    font-size: 22px;
+    color: #666;
+}
+
+/* ==========================================
+   PERFIL
+========================================== */
+.perfil {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid #fafafa;
+    background-color: #240D31;
+    color: white;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+
+.perfil:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 249, 63, 0.25);
+}
+
+/* Perfil + botão Sair lado a lado, no canto direito do cabeçalho */
+.acoes-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.btn-sair {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .25);
+    background: transparent;
+    color: #fafafa;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: .25s;
+}
+
+.btn-sair:hover {
+    background: rgba(255, 90, 90, .15);
+    border-color: #ff5a5a;
+    color: #ff5a5a;
+    transform: scale(1.05);
+}
+
+
+/* ==========================================
+   MENU LATERAL FIXO
+========================================== */
+
+.menu {
+    position: fixed;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 91px;
+    height: 240px;
+    overflow: hidden;
+    border-radius: 45px;
+    background-color: #303030;
+    z-index: 1000;
+    transition: width 0.45s ease, height 0.45s ease, border-radius 0.45s ease;
+}
+
+.menu.aberto {
+    width: 340px;
+    height: auto;
+    max-height: min(640px, 88vh);
+    border-radius: 30px;
+    overflow-y: auto;
+}
+
+.menu-cabecalho {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    color: #E3AC6C;
+    font-family: 'Sora', sans-serif;
+    font-size: 26px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.menu-cabecalho span {
+    margin-left: 18px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.menu.aberto .menu-cabecalho span {
+    opacity: 1;
+    transition-delay: 0.25s;
+}
+
+.botao-menu-fechar {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: transparent;
+    color: #E3AC6C;
+    cursor: pointer;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.menu.aberto .botao-menu-fechar {
+    display: flex;
+}
+
+.menu-navegacao {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 25px 48px;
+}
+
+.item-menu {
+    width: 100%;
+    padding: 12px 22px;
+    border: none;
+    background: transparent;
+    color: #c9c9c9;
+    font-family: 'Sora', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-left: 3px solid transparent;
+    transition: .25s;
+}
+
+.item-menu i {
+    width: 22px;
+    text-align: center;
+    font-size: 19px;
+}
+
+.item-menu.ativo {
+    background: rgb(71, 71, 71);
+    color: #E3AC6C;
+    border-left-color: #E3AC6C;
+}
+
+.menu.aberto .item-menu {
+    opacity: 1;
+}
+
+.item-menu:hover {
+    color: #E3AC6C;
+    transform: translateX(4px);
+    background: rgb(71, 71, 71);
+    border-left-color: #E3AC6C;
+}
+
+.menu:not(.aberto) .menu-navegacao {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ==========================================
+   CONTEÚDO PRINCIPAL
+========================================== */
+
+.conteudo {
+    width: 100%;
+    min-height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.area-conteudo {
+    width: 100%;
+}
+
+.pagina {
+    width: 100%;
+    min-height: 100vh;
+    color: white;
+    font-family: 'Sora', sans-serif;
+}
+
+.pagina-interna {
+    display: block;
+    min-height: calc(100vh - 90px);
+    padding: 35px 8% 40px 180px;
+    background-color: transparent;
+}
+
+/* ==========================================
+   CABEÇALHO DA PÁGINA
+========================================== */
+
+.cabecalho-pagina {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0;
+}
+
+.categoria-pagina {
+    width: 100%;
+    font-size: 13px;
+    font-weight: 500;
+    color: #8b8b93;
+    text-align: left;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.titulo-linha {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.titulo-linha h1 {
+    margin: 0;
+    color: #E3AC6C;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+.titulo-linha span {
+    display: none;
+}
+
+.cabecalho-pagina p {
+    width: 100%;
+    margin-top: 18px;
+    font-size: 22px;
+    font-weight: 400;
+    color: white;
+    text-align: center;
+}
+
+/* =========================================
+   RODAPÉ
+   ========================================= */
+footer {
+    width: 100%;
+    background: #151515;
+    margin-top: 210px;
+}
+
+.footer-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px 70px;
+}
+
+.footer-esquerda {
+    display: flex;
+    flex-direction: column;
+    margin-left: 105px;
+}
+
+.footer-direita {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    left: -65px;
+}
+
+.footer-esquerda img {
+    width: 80px;
+    margin-bottom: 25px;
+}
+
+.titulo-footer {
+    color: #D78EDB;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+.texto-footer {
+    color: white;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: normal;
+}
+
+.footer-inferior {
+    border-top: 1px solid #5d5d5d;
+    background: #101010;
+    text-align: center;
+    padding: 28px 20px;
+}
+
+.copyright {
+    color: #d6d6d6;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+/* ==========================================================
+   AGENDA (específico desta página)
+   A geometria da grade (alturas das linhas e posições dos slots/aulas)
+   é a mesma de antes: só as cores e o acabamento foram trocados.
+   ========================================================== */
+
+.cabecalho-pagina {
+    align-items: flex-start;
+}
+
+.cabecalho-pagina .saudacao-professor {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #cfcfcf;
+    text-align: left;
+}
+
+.semana-agenda {
+    width: fit-content;
+    padding: 9px 22px;
+    margin: 0 0 18px 0;
+    border: 1px solid #292930;
+    border-radius: 999px;
+    background-color: #121214;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.agenda-semanal {
+    display: grid;
+    grid-template-columns: 90px repeat(5, 1fr);
+    border: 1px solid #26262c;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #131316;
+    position: relative;
+}
+
+/* Coluna dos horários */
+
+.coluna-horas {
+    display: grid;
+    grid-template-rows: 100px repeat(4, 114px);
+    border-right: 1px solid #2a2a32;
+}
+
+.topo-vazio {
+    border-bottom: 1px solid #2a2a32;
+}
+
+.hora {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #E3AC6C;
+    font-size: 16px;
+    font-weight: 600;
+    background: rgba(227, 172, 108, 0.1);
+    width: 54px;
+    height: 42px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+/* Dias */
+
+.dia-agenda {
+    position: relative;
+    display: grid;
+    grid-template-rows: 100px repeat(4, 112px);
+    border-right: 1px solid #2a2a32;
+}
+
+.dia-agenda:last-child {
+    border-right: none;
+}
+
+/* Cabeçalho dos dias */
+
+.cabecalho-dia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #2a2a32;
+    padding: 12px 0;
+}
+
+.badge-dia {
+    width: 82px;
+    background: rgba(227, 172, 108, 0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.badge-dia span {
+    width: 100%;
+    text-align: center;
+    color: #9b9ba3;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 0 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.badge-dia strong {
+    width: 100%;
+    text-align: center;
+    color: #E3AC6C;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 4px 0 8px;
+}
+
+/* Espaços clicáveis vazios, para adicionar um novo compromisso */
+.slot-vazio {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    height: 96px;
+    border: 1px dashed #33333b;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color .2s ease, background-color .2s ease;
+}
+
+.slot-vazio:hover {
+    border-color: #E3AC6C;
+    background: rgba(227, 172, 108, 0.08);
+}
+
+.slot19 { top: 108px; }
+.slot20 { top: 220px; }
+.slot21 { top: 332px; }
+.slot22 { top: 443px; }
+
+/* Cards das aulas/compromissos */
+
+.aula {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    height: 70px;
+    background: #1a1a1f;
+    border-radius: 12px;
+    padding: 8px 12px;
+    border: 1px solid #2a2a32;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .35);
+    box-sizing: border-box;
+}
+
+.aula h4 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 2px 0;
+    padding-right: 20px;
+}
+
+.aula p {
+    color: #8b8b93;
+    font-size: 12px;
+    margin: 0 0 2px 0;
+}
+
+.aula span.local-aula {
+    color: #9b9ba3;
+    font-size: 11px;
+}
+
+/* Botão de excluir compromisso (ícone de lixeira, canto superior direito do card, perto da barra de cor) */
+.btn-excluir-aula {
+    position: absolute;
+    top: 7px;
+    right: 13px;
+    width: 16px;
+    height: 16px;
+    border: none;
+    background: transparent;
+    color: #8b8b93;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: color .2s ease, background-color .2s ease;
+    z-index: 2;
+}
+
+.btn-excluir-aula:hover {
+    color: #ff5a5a;
+    background: rgba(255, 90, 90, 0.12);
+}
+
+/* Barra lateral do card */
+
+.cor-aula {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 4px;
+    height: calc(100% - 16px);
+    border-radius: 20px;
+}
+
+/* Cores dos tipos de compromisso (mesma paleta dos badges do suporte) */
+
+.vermelho { background: #ff5a5a; }
+.verde { background: #94FF69; }
+.azul { background: #5EC8FF; }
+.branco { background: #e6e6ea; }
+
+/* Posições exatas para cada linha da agenda */
+
+.linha19 { top: 120px; }
+.linha20 { top: 232px; }
+.linha21 { top: 344px; }
+.linha22 { top: 432px; }
+
+.dica-agenda {
+    color: #8b8b93;
+    font-size: 12.5px;
+    margin-top: 14px;
+}
+
+.dica-agenda i {
+    color: #E3AC6C;
+    margin-right: 4px;
+}
+
+/* ==========================================
+   LEGENDA DE COMPROMISSOS
+========================================== */
+
+.legenda-agenda {
+    margin-top: 50px;
+    color: #fff;
+}
+
+.legenda-agenda h3 {
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.grid-legenda {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.item-legenda {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #121214;
+    border: 1px solid #292930;
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.cabecalho-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.cabecalho-item strong {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.item-legenda p {
+    color: #9b9b9b;
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Indicadores de Cor (Quadradinhos) */
+
+.quadradinho {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.azul-legenda { background: #5EC8FF; }
+.vermelho-legenda { background: #ff5a5a; }
+.verde-legenda { background: #94FF69; }
+.branco-legenda { background: #e6e6ea; }
+
+/* ==========================================
+   MODAL: NOVO COMPROMISSO
+========================================== */
+
+.modal-generico-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: 6000;
+}
+
+.modal-generico-overlay.ativo {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-generico-conteudo {
+    background: #131316;
+    border: 1px solid #26262c;
+    border-radius: 14px;
+    padding: 28px;
+    width: min(420px, 90%);
+    position: relative;
+    color-scheme: dark;
+}
+
+.modal-generico-conteudo h2 {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.info-modal-compromisso {
+    color: #8b8b93;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.btn-fechar-modal {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #8b8b93;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.btn-fechar-modal:hover {
+    color: #ffffff;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    font-size: 12.5px;
+    font-family: 'Sora', sans-serif;
+    color: #9b9ba3;
+    font-weight: 500;
+}
+
+.input-group input,
+.input-group select {
+    background: #121214;
+    border: 1px solid #292930;
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Sora', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #E3AC6C;
+}
+
+.opcoes-cor-compromisso {
+    display: flex;
+    gap: 12px;
+}
+
+.opcao-cor {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.opcao-cor.azul { background: #5EC8FF; }
+.opcao-cor.vermelho { background: #ff5a5a; }
+.opcao-cor.verde { background: #94FF69; }
+.opcao-cor.branco { background: #e6e6ea; }
+
+.opcao-cor.ativo,
+.opcao-cor:hover {
+    border-color: #E3AC6C;
+    transform: scale(1.1);
+}
+
+.form-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-principal {
+    background: #E3AC6C;
+    color: #1a1206;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color .2s ease;
+}
+
+.btn-principal:hover {
+    background: #f3ca7e;
+}
+
+/* ==========================================
+   TOAST DE CONFIRMAÇÃO
+========================================== */
+
+.toast-agenda {
+    position: fixed;
+    left: 50%;
+    bottom: 40px;
+    transform: translateX(-50%) translateY(12px);
+    background: #131316;
+    color: #ffffff;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(227, 172, 108, 0.5);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease, transform .3s ease;
+    z-index: 10000;
+    white-space: nowrap;
+}
+
+.toast-agenda.ativo {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+/* ===== Seletor de turma da agenda ===== */
+.seletor-turma-agenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.seletor-turma-agenda .chip-turma {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.04);
+    color: inherit;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+.seletor-turma-agenda .chip-turma:hover { background: rgba(255, 255, 255, 0.1); }
+.seletor-turma-agenda .chip-turma.ativo {
+    background: #e8a96a;
+    border-color: #e8a96a;
+    color: #1a1208;
+    font-weight: 600;
+}
+.seletor-turma-agenda .aviso-sem-turma { opacity: 0.8; font-size: 14px; }
+
+/* ==========================================================
+   PESQUISA EXPANDIDA x MENU
+   O cabeçalho fixo cria um contexto próprio de empilhamento,
+   então, com a pesquisa aberta, o menu é desativado para não
+   ficar por cima do overlay (nem por toque, nem por teclado).
+   ========================================================== */
+
+body:has(.overlay-pesquisa.ativo) .menu {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+/* ==========================================================
+   RESPONSIVO
+   ========================================================== */
+
+/* ---------- Notebooks pequenos (até 1100px) ---------- */
+@media (max-width: 1100px) {
+    .barra-portal { padding: 0 25px; }
+    .pagina-interna { padding: 35px 40px 40px 145px; }
+    .menu { left: 25px; }
+
+    .grid-legenda { grid-template-columns: repeat(2, 1fr); }
+
+    .footer-superior { padding: 50px 45px; }
+    .footer-esquerda { margin-left: 40px; }
+    .footer-direita { left: 0; }
+}
+
+/* ---------- Tablets (até 900px) ---------- */
+@media (max-width: 900px) {
+    .pagina-interna { padding: 30px 35px 40px 130px; }
+    .titulo-linha h1 { font-size: 36px; }
+
+    /* Agenda semanal: a grade tem alturas e posições fixas (slots e aulas
+       são absolutos), então ela não é recalculada: cada dia ganha uma
+       largura mínima e a grade rola para o lado, com a coluna de horas fixa. */
+    .agenda-semanal {
+        grid-template-columns: 70px repeat(5, minmax(140px, 1fr));
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+    }
+
+    .coluna-horas {
+        position: sticky;
+        left: 0;
+        z-index: 3;
+        background: #131316;
+        box-shadow: 6px 0 10px rgba(0, 0, 0, .35);
+    }
+
+    .hora {
+        width: 48px;
+        font-size: 14px;
+    }
+
+    .slot-vazio,
+    .aula {
+        left: 10px;
+        right: 10px;
+    }
+
+    /* Título e textos do card em uma linha só, para não estourar a altura fixa */
+    .aula h4,
+    .aula p,
+    .aula span.local-aula {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+/* ---------- Tablets pequenos / celulares grandes (até 768px) ---------- */
+@media (max-width: 768px) {
+
+    /* ---------- HEADER FIXO ---------- */
+    .cabecalho {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 70px;
+        z-index: 900;
+    }
+
+    .barra-portal {
+        position: relative;
+        height: 70px;
+        padding: 0 14px;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    /* Logo à esquerda, depois do hambúrguer */
+    .logo {
+        position: absolute;
+        left: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+    }
+
+    .logo img { width: 84px; }
+
+    /* Pesquisa vira só o ícone */
+    .caixa-pesquisa {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        margin-left: auto;
+        justify-content: center;
+        border: 1px solid #333;
+        border-radius: 50%;
+        background: transparent;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .caixa-pesquisa input { display: none; }
+
+    .caixa-pesquisa i {
+        margin: 0;
+        color: #E3AC6C;
+        font-size: 18px;
+    }
+
+    .perfil {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+    }
+
+    /* ---------- MENU MOBILE (hambúrguer) ---------- */
+    .menu {
+        position: fixed;
+        top: 13px;
+        left: 10px;
+        width: 44px;
+        height: 44px;
+        transform: none;
+        overflow: hidden;
+        border-radius: 22px;
+        background-color: transparent;
+        z-index: 1100;
+        transition: width .3s ease, border-radius .3s ease, background-color .3s ease;
+    }
+
+    .menu-cabecalho {
+        height: 44px;
+        padding-left: 0;
+        font-size: 20px;
+    }
+
+    .botao-menu-fechar {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+    }
+
+    .menu-cabecalho span { margin-left: 6px; }
+
+    .menu.aberto {
+        width: min(300px, calc(100vw - 20px));
+        height: auto;
+        max-height: calc(100vh - 26px);
+        border-radius: 22px;
+        background-color: #303030;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .55);
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 1200;
+    }
+
+    .menu.aberto .menu-navegacao {
+        opacity: 1;
+        pointer-events: auto;
+        padding: 8px 12px 16px 12px;
+        max-height: calc(100vh - 82px);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .menu.aberto .item-menu {
+        font-size: 16px;
+        padding: 12px 14px;
+        gap: 12px;
+    }
+
+    .menu.aberto .item-menu i { font-size: 17px; }
+
+    .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .3s ease, visibility .3s ease;
+        z-index: 1150;
+    }
+
+    .menu-overlay.ativo {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* ---------- CONTEÚDO ---------- */
+    .conteudo { padding-top: 70px; }
+
+    .pagina-interna {
+        min-height: auto;
+        padding: 28px 20px 40px;
+    }
+
+    .categoria-pagina { font-size: 11px; }
+
+    .titulo-linha h1 {
+        font-size: clamp(28px, 8vw, 36px);
+        white-space: normal;
+        line-height: 1.15;
+    }
+
+    .cabecalho-pagina p {
+        margin-top: 12px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* Saudação (precisa do seletor composto para vencer a regra da página) */
+    .cabecalho-pagina .saudacao-professor {
+        margin-top: 12px;
+        margin-bottom: 22px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    /* ---------- AGENDA SEMANAL ---------- */
+    .semana-agenda {
+        max-width: 100%;
+        padding: 8px 18px;
+        margin-bottom: 14px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .agenda-semanal {
+        grid-template-columns: 64px repeat(5, minmax(140px, 1fr));
+        border-radius: 12px;
+    }
+
+    .hora {
+        width: 44px;
+        height: 38px;
+        font-size: 13px;
+    }
+
+    .dica-agenda {
+        margin-top: 12px;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    /* ---------- LEGENDA ---------- */
+    .legenda-agenda { margin-top: 36px; }
+
+    .legenda-agenda h3 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    .grid-legenda { gap: 14px; }
+
+    .item-legenda {
+        padding: 18px 16px;
+        gap: 10px;
+        border-radius: 12px;
+    }
+
+    .cabecalho-item strong { font-size: 15px; }
+
+    /* ---------- MODAL: NOVO COMPROMISSO ---------- */
+    .modal-generico-conteudo {
+        width: min(420px, calc(100% - 28px));
+        max-height: calc(100vh - 28px);
+        overflow-y: auto;
+        padding: 24px 20px;
+        border-radius: 12px;
+    }
+
+    .modal-generico-conteudo h2 {
+        font-size: 18px;
+        padding-right: 28px;
+    }
+
+    .info-modal-compromisso { margin-bottom: 16px; }
+
+    .btn-fechar-modal {
+        top: 14px;
+        right: 16px;
+    }
+
+    .opcoes-cor-compromisso { flex-wrap: wrap; }
+
+    .form-actions { flex-wrap: wrap; }
+
+    /* ---------- AVISO (TOAST) ---------- */
+    .toast-agenda {
+        bottom: 20px;
+        width: max-content;
+        max-width: calc(100vw - 32px);
+        padding: 12px 18px;
+        font-size: 13px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    /* ---------- PESQUISA EXPANDIDA ---------- */
+    .painel-pesquisa { padding: 18px 14px; }
+    .barra-expandida { padding: 12px 16px; }
+    .barra-expandida input { font-size: 16px; margin: 0 10px; min-width: 0; }
+    .barra-expandida i { font-size: 18px; }
+    #fecharPesquisa { font-size: 20px; }
+    .resultado-pesquisa { margin-top: 20px; }
+    .resultado-pesquisa li { font-size: 14px; }
+
+    /* ---------- RODAPÉ ---------- */
+    footer { margin-top: 70px; }
+
+    .footer-superior {
+        flex-direction: column;
+        gap: 35px;
+        padding: 40px 24px;
+    }
+
+    .footer-esquerda,
+    .footer-direita {
+        margin-left: 0;
+        left: auto;
+        width: 100%;
+    }
+
+    .footer-esquerda img { width: 65px; margin-bottom: 18px; }
+    .titulo-footer { font-size: 1.4rem; margin-bottom: 14px; }
+    .texto-footer { font-size: .9rem; line-height: 1.6; }
+    .footer-inferior { padding: 22px 16px; }
+    .copyright { font-size: .8rem; }
+}
+
+/* ---------- Celulares (até 480px) ---------- */
+@media (max-width: 480px) {
+
+    .barra-portal { padding: 0 12px; gap: 8px; }
+
+    .logo { left: 60px; }
+    .logo img { width: 64px; }
+
+    .caixa-pesquisa { width: 38px; height: 38px; }
+    .caixa-pesquisa i { font-size: 16px; }
+
+    .perfil { width: 38px; height: 38px; font-size: 14px; }
+
+    .pagina-interna { padding: 24px 16px 35px; }
+
+    .titulo-linha h1 { font-size: 26px; }
+
+    /* Legenda em uma coluna */
+    .grid-legenda { grid-template-columns: 1fr; }
+
+    .modal-generico-conteudo { padding: 22px 16px; }
+
+    /* Botões do modal em largura total */
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .form-actions > button {
+        width: 100%;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .footer-superior { padding: 32px 18px; }
+    .titulo-footer { font-size: 1.25rem; }
+}
+
+
+/* ==========================================================
+   AJUSTES RESPONSIVOS PARA O CABEÇALHO DA NEBULA
+   (perfil + botão Sair lado a lado dentro de .acoes-cabecalho)
+   ========================================================== */
+
+@media (max-width: 768px) {
+    .acoes-cabecalho { gap: 8px; margin-left: auto; }
+    .acoes-cabecalho .caixa-pesquisa { margin-left: 0; }
+    .btn-sair {
+        width: 44px;
+        height: 44px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .acoes-cabecalho { gap: 6px; }
+    .btn-sair {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar senha - FTAN</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon/house.svg">
+
+<style>
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: #050912;
+overflow: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.botao-sair {
+  width: 110px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 18px;
+  transition: .3s;
+}
+
+.botao-sair:hover {
+  background: rgba(255, 255, 255, .08);
+}
+
+.tela-login {
+background: transparent;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+padding: 0;
+border-radius: 0;
+display:flex;
+align-items:center;
+gap:95px;
+color: white;
+}
+
+input{
+width:280px;
+font-size:12px;
+padding:12px;
+background:transparent;
+border:1px solid rgba(255,255,255,.7);
+color:white;
+text-align:center;
+outline:none;
+/* Efeito de luzinha */
+transition: .3s;
+}
+/* Efeito de luzinha parte 2 */
+input:focus{
+    border-color:#E7B6E6;
+    box-shadow:
+        0 0 8px rgba(231,182,230,.35),
+        0 0 18px rgba(197,117,204,.2);
+}
+
+input::placeholder{
+    color:#d6d6d6;
+}
+
+.botao-logar{
+width:305px;
+padding:12px;
+background:transparent;
+color:rgb(150, 97, 146);
+border:1px solid rgb(197, 117, 204);
+transition:all .35s ease;
+}
+
+.botao-logar:hover{
+cursor:pointer;
+color:white;
+background:rgba(179, 84, 255, .12);
+border-color:#d57fff;
+box-shadow:
+0 0 8px rgba(197,117,204,.5),
+0 0 20px rgba(197,117,204,.35),
+0 0 35px rgba(197,117,204,.2);
+}
+
+.nebula {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+opacity: 0.20;
+z-index: -1;
+}
+
+.lado-esquerdo{
+    display:flex;
+    align-items:center;
+}
+
+
+.ftan-frase{
+    width:250px;
+    margin-top: 90px;
+}
+
+.linha-login{
+    width:2px;
+    height:240px;
+    background:#E7B6E6;
+    margin-top: 90px;
+    opacity:.7;
+}
+
+.lado-direito{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.logo-login{
+    width:110px;
+    cursor:pointer;
+    /* Faz a logo dar uma subidinha */
+    transition:.35s;
+}
+
+/* Faz a logo dar uma subidinha parte 2*/
+.logo-login:hover{
+    transform:scale(1.05);
+}
+.titulo-login{
+    color:#E7B6E6;
+    font-size:45px;
+    font-weight:bold;  
+    font-family: "Sora", sans-serif;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.campo-senha{
+    position: relative;
+    width:305px;
+}
+
+.campo-senha input{
+    width:100%;
+    padding:12px;
+    padding-right:45px;
+    padding-left:45px;
+    box-sizing:border-box;
+}
+.esqueci-senha{
+    width:305px;
+    text-align:right;
+
+    margin-top:-18px;
+    margin-bottom:-12px;
+
+    font-size:14px;
+}
+.esqueci-senha a{
+    color:#d6d6d6;
+    text-decoration:underline;
+    text-underline-offset:3px;
+    text-decoration-thickness:1px;
+    transition:.3s;
+}
+
+.esqueci-senha a:hover{
+    color:#E7B6E6;
+}
+
+.olho{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#d6d6d6;
+    transition:.3s;
+}
+
+.olho:hover{
+    color:#E7B6E6;
+}
+
+.separador{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:10px 0;
+}
+
+.linha-ou{
+
+    flex:1;
+
+    height:1px;
+
+    background:#b7b7b7;
+}
+
+.separador span{
+
+    color:white;
+
+    font-size:16px;
+}
+
+.botao-social{
+    width: 305px;
+    height: 40px;  
+    padding: 12px;
+    box-sizing: border-box;   /* ADICIONE ISSO */
+
+    display: flex;            /* ADICIONE */
+    justify-content: center;  /* ADICIONE */
+    align-items: center;      /* ADICIONE */
+
+    background: transparent;
+    border: 1px solid #c575cc;
+    color: #E7B6E6;
+    text-decoration: none;    /* ADICIONE */
+    transition: .3s;
+}
+
+.botao-social:hover{
+
+    cursor:pointer;
+
+    background:rgba(197,117,204,.12);
+
+    color:white;
+
+    box-shadow:
+        0 0 10px rgba(197,117,204,.3);
+}
+
+
+
+
+/* ==========================================================
+   MENSAGENS DE ERRO (inline, dentro da propria pagina)
+   ========================================================== */
+.campo-com-erro {
+    display: flex;
+    flex-direction: column;
+    width: 305px;
+    gap: 6px;
+}
+
+.campo-com-erro input,
+.campo-com-erro .campo-senha {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mensagem-erro {
+    display: none;
+    color: #ff8fa3;
+    font-size: 12px;
+    line-height: 1.4;
+    padding-left: 2px;
+}
+
+.mensagem-erro.visivel {
+    display: block;
+}
+
+input.campo-invalido {
+    border-color: #ff8fa3;
+}
+
+.erro-geral {
+    display: none;
+    width: 305px;
+    padding: 10px 14px;
+    background: rgba(255, 143, 163, .08);
+    border: 1px solid rgba(255, 143, 163, .45);
+    border-radius: 10px;
+    color: #ff8fa3;
+    font-size: 13px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.erro-geral.visivel {
+    display: block;
+}
+
+.aviso-codigo {
+    display: none;
+    width: 305px;
+    padding: 10px 14px;
+    background: rgba(231, 182, 230, .08);
+    border: 1px solid rgba(231, 182, 230, .45);
+    border-radius: 10px;
+    color: #E7B6E6;
+    font-size: 13px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.aviso-codigo.visivel {
+    display: block;
+}
+
+/* ==========================================================
+   PAINEL "LOGIN POR CODIGO"
+   ========================================================== */
+#painelCodigo {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#painelSenha {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+#painelCodigo.visivel {
+    display: flex;
+}
+
+#painelSenha.escondido {
+    display: none;
+}
+
+.campo-codigo input {
+    width: 305px;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 10px;
+    box-sizing: border-box;
+}
+
+.link-reenviar {
+    text-align: center;
+    font-size: 13px;
+    color: #d6d6d6;
+}
+
+.link-reenviar a,
+.link-reenviar span.ativo {
+    color: #E7B6E6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.link-reenviar span.contando {
+    color: #888;
+    cursor: default;
+    text-decoration: none;
+}
+
+.link-voltar {
+    text-align: center;
+    font-size: 13px;
+}
+
+.link-voltar a {
+    color: #d6d6d6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.link-voltar a:hover {
+    color: #E7B6E6;
+}
+
+.botao-logar:disabled,
+.botao-social:disabled {
+    opacity: .55;
+    cursor: default;
+}
+
+/* ==========================================================
+   TOAST DE SUCESSO (cantinho da tela)
+   ========================================================== */
+.toast-sucesso {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 16px 20px;
+    max-width: 320px;
+
+    background: #050912;
+    border: 1px solid rgba(231, 182, 230, .45);
+    border-radius: 14px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.55);
+
+    font-family: 'Sora', sans-serif;
+    color: #ECECEC;
+    font-size: 14px;
+    line-height: 1.5;
+
+    z-index: 9999;
+
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity .35s, transform .35s;
+}
+
+.toast-sucesso.visivel {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.toast-sucesso i {
+    color: #E7B6E6;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* ==========================================================
+   RECUPERAR SENHA (so o que o login.html ainda nao tinha)
+   ========================================================== */
+.subtitulo-recuperar {
+    width: 305px;
+    margin: -10px 0 0;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #d6d6d6;
+}
+#etapaEmail, #etapaCodigo {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+#etapaCodigo { display: none; }
+#etapaCodigo.visivel { display: flex; }
+#etapaEmail.escondido { display: none; }
+.campo-codigo input {
+    width: 100%;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 10px;
+    box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+    <header>
+    <a href="home.php">
+        <img src="logo-ucen.png" class="logo-login" alt="FTAN">
+    </a>
+    <a href="login.html" class="botao-sair">
+        Voltar
+    </a>
+    </header>
+
+    <div class="tela-login">
+    <div class="lado-esquerdo">
+    <img src="ftan-frase-logar.png" class="ftan-frase" alt="">
+    </div>
+    <div class="linha-login"></div>
+
+    <form class="lado-direito" id="formRecuperar" autocomplete="off" novalidate>
+    <h1 class="titulo-login" style="font-size:36px;">Recuperar senha</h1>
+
+    <div class="erro-geral" id="erroGeral"></div>
+    <div class="aviso-codigo" id="avisoCodigo"></div>
+
+    <!-- ETAPA 1: informar o e-mail -->
+    <div id="etapaEmail">
+
+        <p class="subtitulo-recuperar">Informe o e-mail da conta. Enviaremos um código para você criar uma nova senha.</p>
+
+        <div class="campo-com-erro">
+            <input type="email" id="email" name="email" autocomplete="username" placeholder="E-mail">
+            <span class="mensagem-erro" id="erroEmail"></span>
+        </div>
+
+        <button class="botao-logar" type="button" id="botaoEnviarCodigo">Enviar código</button>
+
+        <p class="link-voltar"><a href="login.html">Voltar para o login</a></p>
+
+    </div>
+
+    <!-- ETAPA 2: código + nova senha -->
+    <div id="etapaCodigo">
+
+        <div class="campo-com-erro campo-codigo">
+            <input type="text" id="codigo" name="codigo" inputmode="numeric" maxlength="6"
+                   autocomplete="one-time-code" placeholder="000000">
+            <span class="mensagem-erro" id="erroCodigo"></span>
+        </div>
+
+        <div class="campo-com-erro">
+            <div class="campo-senha">
+                <input type="password" id="senha" name="senha" autocomplete="new-password" placeholder="Nova senha">
+                <span class="olho" data-alvo="senha"><i class="fa-regular fa-eye"></i></span>
+            </div>
+            <span class="mensagem-erro" id="erroSenha"></span>
+        </div>
+
+        <div class="campo-com-erro">
+            <div class="campo-senha">
+                <input type="password" id="confirmar" name="confirmar" autocomplete="new-password" placeholder="Confirmar nova senha">
+                <span class="olho" data-alvo="confirmar"><i class="fa-regular fa-eye"></i></span>
+            </div>
+            <span class="mensagem-erro" id="erroConfirmar"></span>
+        </div>
+
+        <button class="botao-logar" type="submit" id="botaoRedefinir">Redefinir senha</button>
+
+        <p class="link-reenviar">
+            Não recebeu? <span class="ativo" id="botaoReenviar">Reenviar código</span>
+        </p>
+
+        <p class="link-voltar"><a href="#" id="linkOutroEmail">Usar outro e-mail</a></p>
+
+    </div>
+
+    </form>
+    </div>
+
+    <section>
+    <img src="fundo-nebula-pequena.jpg" class="nebula" alt="fundo-estelar">
+    </section>
+
+    <div class="toast-sucesso" id="toastSucesso">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastTexto">Senha alterada! Redirecionando para o login...</span>
+    </div>
+
+<script>
+
+const formRecuperar = document.getElementById("formRecuperar");
+const campoEmail    = document.getElementById("email");
+const campoCodigo   = document.getElementById("codigo");
+const campoSenha    = document.getElementById("senha");
+const campoConfirma = document.getElementById("confirmar");
+
+const etapaEmail  = document.getElementById("etapaEmail");
+const etapaCodigo = document.getElementById("etapaCodigo");
+
+const botaoEnviarCodigo = document.getElementById("botaoEnviarCodigo");
+const botaoRedefinir    = document.getElementById("botaoRedefinir");
+const botaoReenviar     = document.getElementById("botaoReenviar");
+const linkOutroEmail    = document.getElementById("linkOutroEmail");
+
+const erroGeral   = document.getElementById("erroGeral");
+const avisoCodigo = document.getElementById("avisoCodigo");
+const toastSucesso = document.getElementById("toastSucesso");
+
+// O "campo" que o PHP devolve tem o mesmo nome do id do input
+const camposComErro = {
+    email:     document.getElementById("erroEmail"),
+    codigo:    document.getElementById("erroCodigo"),
+    senha:     document.getElementById("erroSenha"),
+    confirmar: document.getElementById("erroConfirmar")
+};
+
+// E-mail vindo da URL (?email=...), caso queira pre-preencher a partir do login
+(function () {
+    const e = new URLSearchParams(window.location.search).get("email");
+    if (e) campoEmail.value = e;
+})();
+
+// ----- olhinhos (um para cada campo de senha) -----
+document.querySelectorAll(".olho").forEach((olho) => {
+    olho.addEventListener("click", () => {
+        const input = document.getElementById(olho.dataset.alvo);
+        const mostrar = input.type === "password";
+        input.type = mostrar ? "text" : "password";
+        olho.innerHTML = mostrar
+            ? '<i class="fa-regular fa-eye-slash"></i>'
+            : '<i class="fa-regular fa-eye"></i>';
+    });
+});
+
+// ----- mensagens -----
+function limparErros() {
+    erroGeral.textContent = "";
+    erroGeral.classList.remove("visivel");
+    avisoCodigo.classList.remove("visivel");
+
+    Object.values(camposComErro).forEach((span) => {
+        span.textContent = "";
+        span.classList.remove("visivel");
+    });
+
+    [campoEmail, campoCodigo, campoSenha, campoConfirma].forEach((i) => i.classList.remove("campo-invalido"));
+}
+
+function mostrarErro(mensagem, campo) {
+    if (campo && camposComErro[campo]) {
+        camposComErro[campo].textContent = mensagem;
+        camposComErro[campo].classList.add("visivel");
+        const input = document.getElementById(campo);
+        if (input) input.classList.add("campo-invalido");
+    } else {
+        erroGeral.textContent = mensagem;
+        erroGeral.classList.add("visivel");
+    }
+}
+
+// ----- contagem do "Reenviar código" -----
+let segundos = 0;
+let temporizador = null;
+
+function pararContagem() {
+    clearInterval(temporizador);
+    segundos = 0;
+    botaoReenviar.textContent = "Reenviar código";
+    botaoReenviar.className = "ativo";
+}
+
+function iniciarContagem() {
+    clearInterval(temporizador);
+    segundos = 60;
+    botaoReenviar.textContent = "Aguarde " + segundos + "s";
+    botaoReenviar.className = "contando";
+
+    temporizador = setInterval(() => {
+        segundos--;
+        if (segundos <= 0) {
+            pararContagem();
+        } else {
+            botaoReenviar.textContent = "Aguarde " + segundos + "s";
+        }
+    }, 1000);
+}
+
+// ----- etapa 1: pedir o código -----
+async function pedirCodigo() {
+
+    limparErros();
+
+    const email = campoEmail.value.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        mostrarErro("Digite um e-mail válido.", "email");
+        return;
+    }
+
+    botaoEnviarCodigo.disabled = true;
+
+    try {
+
+        const resposta = await fetch("recuperar_senha/solicitar_recuperacao.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ email: email })
+        });
+
+        const dados = await resposta.json();
+
+        if (dados.sucesso) {
+
+            etapaEmail.classList.add("escondido");
+            etapaCodigo.classList.add("visivel");
+            avisoCodigo.textContent = dados.mensagem || "Enviamos um código para o seu e-mail.";
+            avisoCodigo.classList.add("visivel");
+            campoCodigo.value = "";
+            campoCodigo.focus();
+            iniciarContagem();
+
+        } else {
+
+            mostrarErro(dados.erro || "Não foi possível enviar o código.", dados.campo);
+
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao pedir código:", erro);
+        mostrarErro("Não foi possível se conectar ao servidor. Tente novamente.", null);
+
+    } finally {
+
+        botaoEnviarCodigo.disabled = false;
+
+    }
+
+}
+
+botaoEnviarCodigo.addEventListener("click", pedirCodigo);
+
+botaoReenviar.addEventListener("click", () => {
+    if (segundos <= 0) pedirCodigo();
+});
+
+linkOutroEmail.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    limparErros();
+    pararContagem();
+    etapaCodigo.classList.remove("visivel");
+    etapaEmail.classList.remove("escondido");
+    campoEmail.focus();
+});
+
+// Enter na etapa 1 pede o código (em vez de enviar o formulário)
+campoEmail.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); pedirCodigo(); }
+});
+
+// ----- etapa 2: trocar a senha -----
+formRecuperar.addEventListener("submit", async (evento) => {
+
+    evento.preventDefault();
+
+    if (!etapaCodigo.classList.contains("visivel")) {
+        pedirCodigo();
+        return;
+    }
+
+    limparErros();
+
+    const email     = campoEmail.value.trim();
+    const codigo    = campoCodigo.value.trim();
+    const senha     = campoSenha.value;
+    const confirmar = campoConfirma.value;
+
+    if (codigo === "") { mostrarErro("Digite o código recebido por e-mail.", "codigo"); return; }
+    if (senha.length < 6) { mostrarErro("A senha precisa ter pelo menos 6 caracteres.", "senha"); return; }
+    if (senha !== confirmar) { mostrarErro("As senhas não conferem.", "confirmar"); return; }
+
+    botaoRedefinir.disabled = true;
+    botaoRedefinir.textContent = "Salvando...";
+
+    try {
+
+        const resposta = await fetch("recuperar_senha/redefinir_senha.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({ email: email, codigo: codigo, senha: senha, confirmar: confirmar })
+        });
+
+        const dados = await resposta.json();
+
+        if (dados.sucesso) {
+
+            toastSucesso.classList.add("visivel");
+            setTimeout(() => { window.location.href = "login.html"; }, 2200);
+
+        } else {
+
+            mostrarErro(dados.erro || "Não foi possível redefinir a senha.", dados.campo);
+            botaoRedefinir.disabled = false;
+            botaoRedefinir.textContent = "Redefinir senha";
+
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao redefinir senha:", erro);
+        mostrarErro("Não foi possível se conectar ao servidor. Tente novamente.", null);
+        botaoRedefinir.disabled = false;
+        botaoRedefinir.textContent = "Redefinir senha";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

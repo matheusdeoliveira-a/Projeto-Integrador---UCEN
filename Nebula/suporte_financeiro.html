@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Financeiro - Portal do Suporte - FTAN</title>
+    <link rel="stylesheet" href="suporte_financeiro.css">
+
+    <link rel="icon" type="image/svg+xml" href="favicon/engrenagem.svg">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="barra-portal">
+        <a class="logo" href="suporte_inicio.html"><img src="logo-ucen.png" alt="Logo"></a>
+
+        <div class="caixa-pesquisa" id="caixaPesquisa">
+            <input type="text" placeholder="Pesquisar..." readonly>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="overlay-pesquisa" id="overlayPesquisa">
+            <div class="painel-pesquisa">
+                <div class="barra-expandida">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+                    <button id="fecharPesquisa" type="button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="resultado-pesquisa">
+                    <ul id="lista-header">
+                        <li data-url="suporte_inicio.html">Início</li>
+                        <li data-url="suporte_academico.html">Acadêmico</li>
+                        <li data-url="suporte_professores.html">Professores</li>
+                        <li data-url="suporte_financeiro.html">Financeiro</li>
+                        <li data-url="suporte_atendimento.html">Central de Atendimento</li>
+                        <!-- <li data-url="suporte_salas.html">Salas & Agenda</li> -->
+                        <li data-url="suporte_relatorios.html">Relatórios</li>
+                        <li data-url="suporte_configuracoes.html">Configurações</li>
+                    </ul>
+                    <div id="mensagem-header">Nenhum resultado encontrado.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="acoes-cabecalho">
+            <a href="suporte_configuracoes.html" class="perfil">S</a>
+            <a href="tela-de-carregamento.html?destino=logout_suporte.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+    </div>
+</header>
+
+<aside class="menu" id="menu">
+    <div class="menu-cabecalho">
+        <button class="botao-menu-fechar" id="botaoMenuFechar" type="button"><i class="fa-solid fa-bars"></i></button>
+        <span>Menu</span>
+    </div>
+    <nav class="menu-navegacao">
+        <a class="item-menu" href="suporte_inicio.html"><i class="fa-solid fa-house"></i> Início</a>
+        <a class="item-menu" href="suporte_academico.html"><i class="fa-solid fa-users"></i> Acadêmico</a>
+        <a class="item-menu" href="suporte_professores.html"><i class="fa-solid fa-briefcase"></i> Professores</a>
+        <a class="item-menu ativo" href="suporte_financeiro.html"><i class="fa-solid fa-wallet"></i> Financeiro</a>
+        <a class="item-menu" href="suporte_atendimento.html"><i class="fa-solid fa-envelope"></i> Central de Atendimento</a>
+        <!-- <a class="item-menu" href="suporte_salas.html"><i class="fa-solid fa-calendar-days"></i> Salas & Agenda</a> --> 
+        <a class="item-menu" href="suporte_relatorios.html"><i class="fa-solid fa-chart-simple"></i> Relatórios</a>
+        <a class="item-menu" href="suporte_configuracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+    </nav>
+</aside>
+
+<main class="conteudo">
+    <div class="area-conteudo">
+        <section class="pagina pagina-interna">
+            <div class="cabecalho-pagina">
+                <span class="categoria-pagina">Gestão financeira</span>
+                <div class="titulo-linha"><h1>Financeiro</h1><span></span></div>
+                <p>Acompanhe mensalidades, pagamentos, inadimplência e movimentações financeiras dos alunos.</p>
+            </div>
+
+            <div class="grid-cards-estatisticas">
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Receita do mês</span>
+                    <h2 class="valor-estatistica" id="statReceita">R$ 0</h2>
+                </div>
+                <div class="card-estatistica card-verde">
+                    <span class="subtitulo-estatistica">Pagamentos recebidos</span>
+                    <h2 class="valor-estatistica" id="statPagamentos">--</h2>
+                </div>
+                <div class="card-estatistica card-vermelho">
+                    <span class="subtitulo-estatistica">Em atraso</span>
+                    <h2 class="valor-estatistica" id="statAtrasados">--</h2>
+                </div>
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Valor em aberto</span>
+                    <h2 class="valor-estatistica" id="statAberto">R$ 0</h2>
+                </div>
+            </div>
+
+            <div class="acoes-pagina">
+                <button class="btn-principal" id="btnNovoLancamento"><i class="fa-solid fa-plus"></i> Novo lançamento</button>
+            </div>
+
+            <div class="container-botoes-financeiro">
+                <button class="btn-opcao ativo" data-aba-financeiro="mensalidades">Mensalidades</button>
+                <button class="btn-opcao" data-aba-financeiro="pagamentos">Pagamentos</button>
+                <button class="btn-opcao" data-aba-financeiro="inadimplencia">Inadimplência</button>
+            </div>
+
+            <div class="conteudo-aba-financeiro ativo" data-conteudo-financeiro="mensalidades">
+                <div class="filtros-linha">
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input id="buscaMensalidades" type="text" placeholder="Buscar por aluno ou matrícula...">
+                    </div>
+                    <select id="filtroMensalidade">
+                        <option value="todos">Todos os status</option>
+                        <option value="pago">Pagas</option>
+                        <option value="pendente">Pendentes</option>
+                        <option value="atrasado">Atrasadas</option>
+                    </select>
+                </div>
+
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead><tr><th>Aluno</th><th>Matrícula</th><th>Competência</th><th>Vencimento</th><th>Valor</th><th>Status</th><th>Ação</th></tr></thead>
+                        <tbody id="corpoMensalidades"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="conteudo-aba-financeiro" data-conteudo-financeiro="pagamentos">
+                <div class="barra-busca-aba">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="buscaPagamentos" type="text" placeholder="Buscar por aluno ou forma de pagamento...">
+                </div>
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead><tr><th>Aluno</th><th>Data</th><th>Competência</th><th>Forma de pagamento</th><th>Valor</th><th>Comprovante</th><th>Ação</th></tr></thead>
+                        <tbody id="corpoPagamentos"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="conteudo-aba-financeiro" data-conteudo-financeiro="inadimplencia">
+                <div class="barra-busca-aba">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="buscaInadimplencia" type="text" placeholder="Buscar por aluno ou matrícula...">
+                </div>
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead><tr><th>Aluno</th><th>Matrícula</th><th>Parcelas</th><th>Dias em atraso</th><th>Valor devido</th><th>Situação</th><th>Ação</th></tr></thead>
+                        <tbody id="corpoInadimplencia"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<div class="modal-overlay" id="modalLancamento">
+    <div class="modal">
+        <button class="fechar-modal" id="fecharModal" type="button">&times;</button>
+        <h2>Novo lançamento</h2>
+        <p>Formulário demonstrativo!</p>
+        <form id="formLancamento">
+            <div class="form-grid">
+                <div class="input-group"><label for="nomeAluno">Aluno</label><input id="nomeAluno" required></div>
+                <div class="input-group"><label for="matriculaAluno">Matrícula</label><input id="matriculaAluno" required></div>
+                <div class="input-group"><label for="competencia">Competência</label><input id="competencia" placeholder="Ex.: Setembro/2026" required></div>
+                <div class="input-group"><label for="valorLancamento">Valor</label><input id="valorLancamento" type="number" step="0.01" min="0" required></div>
+                <div class="input-group"><label for="vencimento">Vencimento</label><input id="vencimento" type="date" required></div>
+                <div class="input-group"><label for="statusLancamento">Status</label><select id="statusLancamento"><option value="pendente">Pendente</option><option value="pago">Pago</option><option value="atrasado">Atrasado</option></select></div>
+            </div>
+            <div class="form-actions"><button class="btn-secundario" type="button" id="cancelarModal">Cancelar</button><button class="btn-principal" type="submit"><i class="fa-solid fa-check"></i> Registrar</button></div>
+        </form>
+    </div>
+</div>
+
+<footer>
+
+    <div class="footer-inferior">
+        <h3 class="copyright">
+            © 2026 Universidade de Ciências e Exatas Nebula<br>
+            Todos os direitos reservados.
+        </h3>
+    </div>
+
+</footer>
+<script src="suporte_permissoes.js" defer></script>
+<script src="suporte_financeiro.js" defer></script>
+</body>
+</html>

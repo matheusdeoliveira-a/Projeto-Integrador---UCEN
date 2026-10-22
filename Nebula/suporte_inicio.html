@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <title>Início - Portal do Suporte - FTAN</title>
+    <link rel="stylesheet" href="suporte_inicio.css">
+    <link rel="icon" type="image/svg+xml" href="favicon/engrenagem.svg">
+
+</head>
+<body>
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="cabecalho">
+
+        <div class="barra-portal">
+            <a class="logo" href="#">
+                <img src="logo-ucen.png" alt="Logo">
+            </a>
+
+            <!-- PESQUISA -->
+
+            <div class="caixa-pesquisa" id="caixaPesquisa">
+
+                <input type="text" placeholder="Pesquisar..." readonly>
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+            <div class="overlay-pesquisa" id="overlayPesquisa">
+
+                <div class="painel-pesquisa">
+
+                    <div class="barra-expandida">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+
+                        <button id="fecharPesquisa">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="resultado-pesquisa">
+
+                        <ul id="lista-header">
+                            <li data-url="suporte_inicio.html">Início</li>
+                            <li data-url="suporte_academico.html">Acadêmico</li>
+                            <li data-url="suporte_professores.html">Professores</li>
+                            <li data-url="suporte_financeiro.html">Financeiro</li>
+                            <li data-url="suporte_atendimento.html">Central de Atendimento</li>
+                            <!-- <li data-url="suporte_salas.html">Salas & Agenda</li> -->
+                            <li data-url="suporte_relatorios.html">Relatórios</li>
+                            <li data-url="suporte_configuracoes.html">Configurações</li>
+                        </ul>
+
+                        <div id="mensagem-header">
+                            Nenhum resultado encontrado.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- PERFIL -->
+
+            <div class="acoes-cabecalho">
+                <a href="suporte_configuracoes.html" class="perfil">
+                    S
+                </a>
+                <a href="tela-de-carregamento.html?destino=logout_suporte.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ==========================================
+         MENU LATERAL
+    ========================================== -->
+
+    <aside class="menu" id="menu">
+
+        <div class="menu-cabecalho">
+
+            <button class="botao-menu-fechar" id="botaoMenuFechar" type="button">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <span>Menu</span>
+
+        </div>
+
+        <nav class="menu-navegacao">
+
+            <a class="item-menu ativo" href="suporte_inicio.html">
+                <i class="fa-solid fa-house"></i> Início
+            </a>
+
+            <a class="item-menu" href="suporte_academico.html">
+                <i class="fa-solid fa-users"></i> Acadêmico
+            </a>
+
+            <a class="item-menu" href="suporte_professores.html">
+                <i class="fa-solid fa-briefcase"></i> Professores
+            </a>
+
+            <a class="item-menu" href="suporte_financeiro.html">
+                <i class="fa-solid fa-wallet"></i> Financeiro
+            </a>
+
+            <a class="item-menu" href="suporte_atendimento.html">
+                <i class="fa-solid fa-envelope"></i> Central de Atendimento
+            </a>
+
+            <!-- <a class="item-menu" href="suporte_salas.html"><i class="fa-solid fa-calendar-days"></i> Salas & Agenda</a> --> 
+
+            <a class="item-menu" href="suporte_relatorios.html">
+                <i class="fa-solid fa-chart-simple"></i> Relatórios
+            </a>
+
+            <a class="item-menu" href="suporte_configuracoes.html">
+                <i class="fa-solid fa-gear"></i> Configurações
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL - INÍCIO
+    ========================================== -->
+
+    <main class="conteudo">
+
+        <div class="area-conteudo" id="areaConteudo">
+
+            <section class="pagina pagina-interna" data-conteudo="inicio">
+
+                <div class="cabecalho-pagina" style="align-items: flex-start;">
+                    <span class="categoria-pagina">Painel</span>
+                    <div class="titulo-linha">
+                        <h1>Início</h1>
+                        <span></span>
+                    </div>
+                    <p class="saudacao-suporte" style="text-align:left; font-size:16px; margin-top:16px;">
+                        Visão geral do sistema: alunos, professores, chamados e mensalidades em um único lugar.
+                    </p>
+                </div>
+
+                <!-- CARDS DE ESTATÍSTICA -->
+                <div class="grid-cards-estatisticas">
+
+                    <div class="card-estatistica card-roxo">
+                        <div class="cabecalho-card-estatistica">
+                            <span>Alunos</span>
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <h2 class="valor-estatistica" id="statAlunos">—</h2>
+                        <span class="legenda-estatistica">matriculados</span>
+                    </div>
+
+                    <div class="card-estatistica card-verde">
+                        <div class="cabecalho-card-estatistica">
+                            <span>Professores</span>
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                        </div>
+                        <h2 class="valor-estatistica" id="statProfessores">—</h2>
+                        <span class="legenda-estatistica">ativos</span>
+                    </div>
+
+                    <div class="card-estatistica card-amarelo">
+                        <div class="cabecalho-card-estatistica">
+                            <span>Chamados</span>
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                        </div>
+                        <h2 class="valor-estatistica" id="statChamados">—</h2>
+                        <span class="legenda-estatistica">pendentes</span>
+                    </div>
+
+                    <div class="card-estatistica card-azul">
+                        <div class="cabecalho-card-estatistica">
+                            <span>Mensalidades</span>
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+                        <h2 class="valor-estatistica">R$ 84 mil</h2>
+                        <span class="legenda-estatistica">recebidos este mês</span>
+                    </div>
+
+                </div>
+
+                <!-- ACESSO RÁPIDO -->
+                <div class="secao-inicio">
+
+                    <div class="secao-inicio-cabecalho">
+                        <h2>Acesso rápido</h2>
+                    </div>
+
+                    <div class="grid-acesso-rapido">
+
+                        <a class="card-acesso-rapido" href="suporte_academico.html">
+                            <i class="fa-solid fa-users"></i>
+                            <strong>Acadêmico</strong>
+                            <span>Alunos, matrículas, frequência e notas.</span>
+                        </a>
+
+                        <a class="card-acesso-rapido" href="suporte_professores.html">
+                            <i class="fa-solid fa-briefcase"></i>
+                            <strong>Professores</strong>
+                            <span>Cadastro, disciplinas e turmas atribuídas.</span>
+                        </a>
+
+                        <a class="card-acesso-rapido" href="suporte_financeiro.html">
+                            <i class="fa-solid fa-wallet"></i>
+                            <strong>Financeiro</strong>
+                            <span>Mensalidades, folha de pagamento e extratos.</span>
+                        </a>
+
+                        <a class="card-acesso-rapido" href="suporte_atendimento.html">
+                            <i class="fa-solid fa-envelope"></i>
+                            <strong>Central de Atendimento</strong>
+                            <span>Requisições dos alunos e envio de e-mails.</span>
+                        </a>
+
+                      <!-- <a class="card-acesso-rapido" href="suporte_salas.html">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <strong>Salas & Agenda</strong>
+                            <span>Reserva de salas, horários e agenda das turmas.</span>
+                        </a> -->  
+
+                        <a class="card-acesso-rapido" href="suporte_relatorios.html">
+                            <i class="fa-solid fa-chart-simple"></i>
+                            <strong>Relatórios</strong>
+                            <span>Indicadores acadêmicos, financeiros e de atendimento.</span>
+                        </a>
+
+                        <a class="card-acesso-rapido" href="suporte_configuracoes.html">
+                            <i class="fa-solid fa-gear"></i>
+                            <strong>Configurações</strong>
+                            <span>Perfil, preferências e ajustes do sistema.</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- CHAMADOS RECENTES -->
+                <div class="secao-inicio" id="secaoChamadosRecentes">
+
+                    <div class="secao-inicio-cabecalho">
+                        <h2>Chamados recentes</h2>
+                    </div>
+
+                    <div class="painel-chamados" id="listaChamadosRecentes">
+                        <div class="linha-chamado">
+                            <div class="info-chamado">
+                                <span>Carregando chamados...</span>
+                            </div>
+                        </div>
+                    
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Rodapé do Portal -->
+    <footer id="contato">
+
+    <!--<div class="footer-superior">
+            <div class="footer-esquerda">
+                <img src="logo-ucen.png" alt="Logo">
+                <h3 class="texto-footer">
+                    Campus central: Avenida das Estrelas, nº 372,<br>
+                    Jardim Primavera, Cidade Altas Flores/SP - CEP 14797-000
+                </h3>
+            </div>
+
+            
+        </div> -->
+
+        <div class="footer-inferior">
+            <h3 class="copyright">
+                © 2026 Universidade de Ciências e Exatas Nebula<br>
+                Todos os direitos reservados.
+            </h3>
+        </div>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="suporte_permissoes.js" defer></script>
+    <script src="suporte_inicio.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FTAN</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="icon" type="image/svg+xml" href="favicon/house.svg">
+
+<style>
+
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: #050912;
+margin: 0;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.botao-sair {
+  width: 110px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 18px;
+  transition: .3s;
+}
+
+.botao-sair:hover {
+  background: rgba(255, 255, 255, .08);
+}
+
+.tela-login {
+background: transparent;
+position: relative;
+margin: 120px auto 60px;
+padding: 0 20px;
+box-sizing: border-box;
+max-width: 850px;
+justify-content: center;
+border-radius: 0;
+display:flex;
+align-items:center;
+gap:95px;
+color: white;
+}
+
+input{
+width:100%;
+max-width:305px;
+box-sizing:border-box;
+font-size:12px;
+padding:12px;
+background:transparent;
+border:1px solid rgba(255,255,255,.7);
+color:white;
+text-align:center;
+outline:none;
+/* Efeito de luzinha */
+transition: .3s;
+}
+/* Efeito de luzinha parte 2 */
+input:focus{
+    border-color:#E7B6E6;
+    box-shadow:
+        0 0 8px rgba(231,182,230,.35),
+        0 0 18px rgba(197,117,204,.2);
+}
+
+input::placeholder{
+    color:#d6d6d6;
+}
+
+.botao-logar{
+width:100%;
+max-width:305px;
+box-sizing:border-box;
+padding:12px;
+background:transparent;
+color:rgb(150, 97, 146);
+border:1px solid rgb(197, 117, 204);
+transition:all .35s ease;
+}
+
+.botao-logar:hover{
+cursor:pointer;
+color:white;
+background:rgba(179, 84, 255, .12);
+border-color:#d57fff;
+box-shadow:
+0 0 8px rgba(197,117,204,.5),
+0 0 20px rgba(197,117,204,.35),
+0 0 35px rgba(197,117,204,.2);
+}
+
+.nebula {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+opacity: 0.20;
+z-index: -1;
+}
+
+.lado-esquerdo{
+    display:flex;
+    align-items:center;
+}
+
+
+.ftan-frase{
+    width:250px;
+    margin-top: 90px;
+}
+
+.linha-login{
+    width:2px;
+    height:260px;
+    background:#E7B6E6;
+    margin-top: 100px;
+    opacity:.7;
+}
+
+.lado-direito{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    gap:25px;
+}
+
+.logo-login{
+    width:110px;
+    cursor:pointer;
+    /* Faz a logo dar uma subidinha */
+    transition:.35s;
+}
+
+/* Faz a logo dar uma subidinha parte 2*/
+.logo-login:hover{
+    transform:scale(1.05);
+}
+.titulo-login{
+    color:#E7B6E6;
+    font-size:45px;
+    font-weight:bold;  
+    font-family: "Sora", sans-serif;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.campo-senha{
+    position: relative;
+    width:100%;
+    max-width:305px;
+}
+
+.campo-senha input{
+    width:100%;
+    padding:12px;
+    padding-right:45px;
+    padding-left:45px;
+    box-sizing:border-box;
+}
+.esqueci-senha{
+    width:100%;
+    max-width:305px;
+    text-align:right;
+
+    margin-top:-18px;
+    margin-bottom:-12px;
+
+    font-size:14px;
+}
+.esqueci-senha a{
+    color:#d6d6d6;
+    text-decoration:underline;
+    text-underline-offset:3px;
+    text-decoration-thickness:1px;
+    transition:.3s;
+}
+
+.esqueci-senha a:hover{
+    color:#E7B6E6;
+}
+
+.olho{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    color:#d6d6d6;
+    transition:.3s;
+}
+
+.olho:hover{
+    color:#E7B6E6;
+}
+
+.separador{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:10px 0;
+}
+
+.linha-ou{
+
+    flex:1;
+
+    height:1px;
+
+    background:#b7b7b7;
+}
+
+.separador span{
+
+    color:white;
+
+    font-size:16px;
+}
+
+.botao-social{
+    width: 100%;
+    max-width: 305px;
+    height: 40px;  
+    padding: 12px;
+    box-sizing: border-box;   /* ADICIONE ISSO */
+
+    display: flex;            /* ADICIONE */
+    justify-content: center;  /* ADICIONE */
+    align-items: center;      /* ADICIONE */
+
+    background: transparent;
+    border: 1px solid #c575cc;
+    color: #E7B6E6;
+    text-decoration: none;    /* ADICIONE */
+    transition: .3s;
+}
+
+.botao-social:hover{
+
+    cursor:pointer;
+
+    background:rgba(197,117,204,.12);
+
+    color:white;
+
+    box-shadow:
+        0 0 10px rgba(197,117,204,.3);
+}
+
+
+
+
+/* ==========================================================
+   MENSAGENS DE ERRO (inline, dentro da propria pagina)
+   ========================================================== */
+.campo-com-erro {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 305px;
+    gap: 6px;
+}
+
+.campo-com-erro input,
+.campo-com-erro .campo-senha {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mensagem-erro {
+    display: none;
+    color: #ff8fa3;
+    font-size: 12px;
+    line-height: 1.4;
+    padding-left: 2px;
+}
+
+.mensagem-erro.visivel {
+    display: block;
+}
+
+input.campo-invalido {
+    border-color: #ff8fa3;
+}
+
+.erro-geral {
+    display: none;
+    width: 100%;
+    max-width: 305px;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    background: rgba(255, 143, 163, .08);
+    border: 1px solid rgba(255, 143, 163, .45);
+    border-radius: 10px;
+    color: #ff8fa3;
+    font-size: 13px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.erro-geral.visivel {
+    display: block;
+}
+
+.aviso-codigo {
+    display: none;
+    width: 100%;
+    max-width: 305px;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    background: rgba(231, 182, 230, .08);
+    border: 1px solid rgba(231, 182, 230, .45);
+    border-radius: 10px;
+    color: #E7B6E6;
+    font-size: 13px;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+
+.aviso-codigo.visivel {
+    display: block;
+}
+
+/* ==========================================================
+   PAINEL "LOGIN POR CODIGO"
+   ========================================================== */
+#painelCodigo {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 305px;
+}
+
+#painelSenha {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+    max-width: 305px;
+}
+
+#painelCodigo.visivel {
+    display: flex;
+}
+
+#painelSenha.escondido {
+    display: none;
+}
+
+.campo-codigo input {
+    width: 100%;
+    max-width: 305px;
+    text-align: center;
+    font-size: 22px;
+    letter-spacing: 10px;
+    box-sizing: border-box;
+}
+
+.link-reenviar {
+    text-align: center;
+    font-size: 13px;
+    color: #d6d6d6;
+}
+
+.link-reenviar a,
+.link-reenviar span.ativo {
+    color: #E7B6E6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.link-reenviar span.contando {
+    color: #888;
+    cursor: default;
+    text-decoration: none;
+}
+
+.link-voltar {
+    text-align: center;
+    font-size: 13px;
+}
+
+.link-voltar a {
+    color: #d6d6d6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.link-voltar a:hover {
+    color: #E7B6E6;
+}
+
+.botao-logar:disabled,
+.botao-social:disabled {
+    opacity: .55;
+    cursor: default;
+}
+
+/* ==========================================================
+   TOAST DE SUCESSO (cantinho da tela)
+   ========================================================== */
+.toast-sucesso {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 16px 20px;
+    max-width: 320px;
+
+    background: #050912;
+    border: 1px solid rgba(231, 182, 230, .45);
+    border-radius: 14px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.55);
+
+    font-family: 'Sora', sans-serif;
+    color: #ECECEC;
+    font-size: 14px;
+    line-height: 1.5;
+
+    z-index: 9999;
+
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity .35s, transform .35s;
+}
+
+.toast-sucesso.visivel {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.toast-sucesso i {
+    color: #E7B6E6;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* ===== RESPONSIVO ===== */
+
+/* Tablets (mouse/notebook com janela estreita) */
+@media (max-width: 992px) {
+    .tela-login {
+        gap: 50px;
+    }
+    .ftan-frase {
+        width: 180px;
+    }
+    .linha-login {
+        height: 220px;
+    }
+}
+
+/* ------------------------------------------------------------------
+   CELULAR / TABLET DE TOQUE: tudo centralizado, só as boxes.
+   Vale só para janelas até 756px ou para aparelhos cuja TELA física tem
+   até 900px (max-device-width), o que cobre também o "Site para computador"
+   do Chrome do celular. Monitores e notebooks não são afetados.
+   A frase e a linha somem; logo, formulário e botão Sair ficam
+   alinhados no centro.
+   ------------------------------------------------------------------ */
+@media (max-width: 756px), (max-device-width: 900px) {
+
+    html, body {
+        overflow-x: hidden;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        min-height: 100svh;
+    }
+
+    /* Cabeçalho entra no fluxo (antes ficava solto por cima) e centraliza */
+    header {
+        position: static;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+        padding: 22px 20px 0;
+    }
+
+    .logo-login {
+        width: 90px;
+        display: block;
+    }
+
+    .botao-sair {
+        width: 140px;
+        height: 44px;
+        font-size: 15px;
+    }
+
+    /* Frase e linha saem do responsivo */
+    .lado-esquerdo,
+    .ftan-frase,
+    .linha-login {
+        display: none;
+    }
+
+    /* Área do formulário: centralizada na horizontal e na vertical */
+    .tela-login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 420px;
+        margin: auto;
+        padding: 24px 20px 40px;
+        gap: 0;
+    }
+
+    .lado-direito {
+        width: 100%;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .titulo-login {
+        font-size: 32px;
+        margin-bottom: 6px;
+    }
+
+    /* Tudo com a mesma largura, centralizado */
+    .campo-com-erro,
+    .campo-senha,
+    .erro-geral,
+    .aviso-codigo,
+    .esqueci-senha,
+    .separador,
+    .botao-logar,
+    .botao-social,
+    #painelSenha,
+    #painelCodigo,
+    input {
+        width: 100%;
+        max-width: 360px;
+    }
+
+    #painelSenha {
+        gap: 22px;
+    }
+
+    /* 16px evita o zoom automático do iPhone ao tocar no campo */
+    input {
+        font-size: 16px;
+        padding: 14px 12px;
+    }
+
+    .campo-senha input {
+        padding: 14px 45px;
+    }
+
+    .campo-codigo input {
+        font-size: 22px;
+        letter-spacing: 8px;
+    }
+
+    .botao-social {
+        height: 48px;
+        font-size: 15px;
+    }
+
+    .esqueci-senha {
+        font-size: 14px;
+    }
+
+    .olho {
+        padding: 10px;
+        right: 5px;
+    }
+
+    .toast-sucesso {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: none;
+    }
+}
+
+/* Celulares bem pequenos */
+@media (max-width: 380px) {
+    header {
+        padding: 18px 14px 0;
+    }
+    .tela-login {
+        padding: 20px 14px 32px;
+    }
+    .titulo-login {
+        font-size: 26px;
+    }
+    .campo-codigo input {
+        font-size: 20px;
+        letter-spacing: 6px;
+    }
+}
+
+</style>
+</head>
+<body>
+    <header>
+    <a href="home.php">
+        <img src="logo-ucen.png" class="logo-login" alt="FTAN">
+    </a>
+    <a href="home.php" class="botao-sair">
+        Sair
+    </a>
+    </header>
+
+    <div class="tela-login">
+    <div class="lado-esquerdo">
+    <img src="ftan-frase-logar.png" class="ftan-frase">
+    </div>
+    <div class="linha-login"></div>
+
+    <!-- Isso (form) diz para o navegador que é um formulario, visualmente nada muda, mas assim fica mais 
+    facil no futuro para JS e PHP -->
+    <form class="lado-direito" id="formLogin" autocomplete="on">
+    <h1 class="titulo-login">Login</h1>
+
+    <div class="erro-geral" id="erroGeral"></div>
+    <div class="aviso-codigo" id="avisoCodigo"></div>
+
+    <div class="campo-com-erro">
+        <input type="email" id="usuario" name="usuario" autocomplete="username" placeholder="E-mail">
+        <span class="mensagem-erro" id="erroUsuario"></span>
+    </div>
+
+    <div id="painelSenha">
+
+        <div class="campo-com-erro">
+            <div class="campo-senha">
+            <input type="password" autocomplete="current-password" id="senha" name="senha" placeholder="Senha">
+
+            <span class="olho" id="icone-olho">
+                <i class="fa-regular fa-eye"></i>
+            </span>
+            </div>
+            <span class="mensagem-erro" id="erroSenha"></span>
+        </div>
+
+        <p class="esqueci-senha">
+        <a href="esqueci_senha.html">Esqueceu sua senha?</a></p>
+
+        <input class="botao-logar" type="submit" value="Logar" id="botaoLogar">
+
+        <div class="separador">
+        <div class="linha-ou"></div>
+        <span>ou</span>
+        <div class="linha-ou"></div>
+        </div>
+
+        <button class="botao-social" type="button" id="botaoReceberCodigo">
+        Receber código por E-mail
+        </button>
+
+     <!-- <a class="botao-social" href="entrar_google/iniciar_login_google.php">
+        Continuar com Google
+        </a> -->   
+
+    </div>
+
+    <div id="painelCodigo">
+
+        <div class="campo-com-erro campo-codigo">
+            <input type="text" id="codigo" name="codigo" inputmode="numeric" maxlength="6"
+                   autocomplete="one-time-code" placeholder="000000">
+            <span class="mensagem-erro" id="erroCodigo"></span>
+        </div>
+
+        <button class="botao-logar" type="button" id="botaoVerificarCodigo">
+        Verificar código
+        </button>
+
+        <p class="link-reenviar" id="linkReenviar">
+            Não recebeu? <span class="ativo" id="botaoReenviar">Reenviar código</span>
+        </p>
+
+        <p class="link-voltar">
+            <a href="#" id="linkVoltarSenha">Entrar com senha</a>
+        </p>
+
+    </div>
+
+    </form>
+
+    </div>
+
+    <section>
+    
+    <img src="fundo-nebula-pequena.jpg" class="nebula" alt="fundo-estelar">
+
+    </section>
+
+    <div class="toast-sucesso" id="toastSucesso">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastTexto">Login realizado! Redirecionando...</span>
+    </div>
+
+<script>
+
+// Código de olho
+const senha = document.getElementById("senha");
+const olho = document.getElementById("icone-olho");
+
+olho.addEventListener("click", function(){
+
+    if(senha.type === "password"){
+
+        senha.type = "text";
+
+        olho.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+
+    }else{
+
+        senha.type = "password";
+
+        olho.innerHTML = '<i class="fa-regular fa-eye"></i>';
+    }
+
+});
+
+
+
+// ==========================================================
+// LOGIN (com senha ou por código), tudo via fetch, sem sair da pagina
+// em caso de erro
+// ==========================================================
+
+const formLogin = document.getElementById("formLogin");
+const campoUsuario = document.getElementById("usuario");
+const campoSenha = document.getElementById("senha");
+const campoCodigo = document.getElementById("codigo");
+
+const painelSenha = document.getElementById("painelSenha");
+const painelCodigo = document.getElementById("painelCodigo");
+
+const botaoLogar = document.getElementById("botaoLogar");
+const botaoReceberCodigo = document.getElementById("botaoReceberCodigo");
+const botaoVerificarCodigo = document.getElementById("botaoVerificarCodigo");
+const botaoReenviar = document.getElementById("botaoReenviar");
+const linkReenviar = document.getElementById("linkReenviar");
+const linkVoltarSenha = document.getElementById("linkVoltarSenha");
+
+const erroGeral = document.getElementById("erroGeral");
+const avisoCodigo = document.getElementById("avisoCodigo");
+const toastSucesso = document.getElementById("toastSucesso");
+const toastTexto = document.getElementById("toastTexto");
+
+const camposComErro = {
+    usuario: document.getElementById("erroUsuario"),
+    senha: document.getElementById("erroSenha"),
+    codigo: document.getElementById("erroCodigo")
+};
+
+// ==========================================================
+// NOVO: destino depois do login.
+// Antes era a URL fixa "http://localhost/Matheus/aaaaaaaaaaaaa/Nebula/portal_aluno.php"
+// (URL_PORTAL_ALUNO), que quebraria na EC2. Agora é um caminho relativo,
+// que funciona no XAMPP e no servidor. Quem recebe esse valor é a
+// tela de carregamento (parâmetro ?destino=).
+// ==========================================================
+const DESTINO_PORTAL_ALUNO = "aluno_inicio.html"; // NOVO: página inicial do aluno (antes: portal_aluno.php). Serve de reserva se o PHP não mandar destino.
+
+let segundosParaReenviar = 0;
+let temporizadorReenvio = null;
+
+function limparErros() {
+
+    erroGeral.textContent = "";
+    erroGeral.classList.remove("visivel");
+    avisoCodigo.classList.remove("visivel");
+
+    Object.values(camposComErro).forEach((span) => {
+        span.textContent = "";
+        span.classList.remove("visivel");
+    });
+
+    [campoUsuario, campoSenha, campoCodigo].forEach((input) => {
+        if (input) input.classList.remove("campo-invalido");
+    });
+
+}
+
+function mostrarErro(mensagem, campo) {
+
+    if (campo && camposComErro[campo]) {
+
+        camposComErro[campo].textContent = mensagem;
+        camposComErro[campo].classList.add("visivel");
+
+        const input = document.getElementById(campo);
+        if (input) input.classList.add("campo-invalido");
+
+    } else {
+
+        erroGeral.textContent = mensagem;
+        erroGeral.classList.add("visivel");
+
+    }
+
+}
+
+// NOVO: recebe o destino que o PHP devolveu (aluno, professor ou suporte).
+// Se não vier nada (ex.: login por código de e-mail, só de alunos), usa o do aluno.
+function mostrarToastERedirecionar(destino) {
+
+    destino = destino || DESTINO_PORTAL_ALUNO;
+
+    toastSucesso.classList.add("visivel");
+
+    // NOVO: em vez de ir direto ao portal, passa pela mesma tela de carregamento
+    // usada no cadastro. O encodeURIComponent protege o valor dentro da URL.
+    setTimeout(() => {
+        window.location.href = "tela-de-carregamento.html?destino=" + encodeURIComponent(destino);
+    }, 1400);
+
+}
+
+// ----- Alternar entre os dois painéis (senha / código) -----
+
+function abrirPainelCodigo() {
+
+    limparErros();
+    painelSenha.classList.add("escondido");
+    painelCodigo.classList.add("visivel");
+    campoCodigo.value = "";
+    campoCodigo.focus();
+
+}
+
+function abrirPainelSenha() {
+
+    limparErros();
+    painelCodigo.classList.remove("visivel");
+    painelSenha.classList.remove("escondido");
+    pararContagemReenvio();
+
+}
+
+linkVoltarSenha.addEventListener("click", (evento) => {
+    evento.preventDefault();
+    abrirPainelSenha();
+});
+
+// ----- Contagem regressiva do "Reenviar código" -----
+
+function iniciarContagemReenvio() {
+
+    segundosParaReenviar = 60;
+    atualizarBotaoReenviar();
+
+    temporizadorReenvio = setInterval(() => {
+
+        segundosParaReenviar--;
+
+        if (segundosParaReenviar <= 0) {
+            pararContagemReenvio();
+        } else {
+            atualizarBotaoReenviar();
+        }
+
+    }, 1000);
+
+}
+
+function pararContagemReenvio() {
+
+    clearInterval(temporizadorReenvio);
+    segundosParaReenviar = 0;
+
+    botaoReenviar.textContent = "Reenviar código";
+    botaoReenviar.className = "ativo";
+
+}
+
+function atualizarBotaoReenviar() {
+
+    botaoReenviar.textContent = "Aguarde " + segundosParaReenviar + "s";
+    botaoReenviar.className = "contando";
+
+}
+
+// ----- Pedir o código -----
+
+async function pedirCodigo() {
+
+    limparErros();
+
+    const email = campoUsuario.value.trim();
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        mostrarErro("Digite seu e-mail no campo acima primeiro.", "usuario");
+        return;
+    }
+
+    botaoReceberCodigo.disabled = true;
+
+    try {
+
+        const corpo = new URLSearchParams({ email: email });
+
+        const resposta = await fetch("login/solicitar_codigo.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: corpo
+        });
+
+        const dados = await resposta.json();
+
+        if (dados.sucesso) {
+
+            abrirPainelCodigo();
+            avisoCodigo.textContent = dados.mensagem || "Enviamos um código para o seu e-mail.";
+            avisoCodigo.classList.add("visivel");
+            iniciarContagemReenvio();
+
+        } else {
+
+            mostrarErro(dados.erro || "Não foi possível enviar o código.", dados.campo);
+
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao pedir código:", erro);
+        mostrarErro("Não foi possível se conectar ao servidor. Tente novamente.", null);
+
+    } finally {
+
+        botaoReceberCodigo.disabled = false;
+
+    }
+
+}
+
+botaoReceberCodigo.addEventListener("click", pedirCodigo);
+
+botaoReenviar.addEventListener("click", () => {
+    if (segundosParaReenviar <= 0) pedirCodigo();
+});
+
+// ----- Verificar o código -----
+
+async function verificarCodigo() {
+
+    limparErros();
+
+    const email = campoUsuario.value.trim();
+    const codigo = campoCodigo.value.trim();
+
+    if (codigo === '') {
+        mostrarErro("Digite o código recebido por e-mail.", "codigo");
+        return;
+    }
+
+    botaoVerificarCodigo.disabled = true;
+    botaoVerificarCodigo.textContent = "Verificando...";
+
+    try {
+
+        const corpo = new URLSearchParams({ email: email, codigo: codigo });
+
+        const resposta = await fetch("login/verificar_codigo.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: corpo
+        });
+
+        const dados = await resposta.json();
+
+        if (dados.sucesso) {
+
+            toastTexto.textContent = "Login realizado! Redirecionando...";
+            mostrarToastERedirecionar();
+
+        } else {
+
+            mostrarErro(dados.erro || "Código incorreto.", dados.campo);
+            botaoVerificarCodigo.disabled = false;
+            botaoVerificarCodigo.textContent = "Verificar código";
+
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao verificar código:", erro);
+        mostrarErro("Não foi possível se conectar ao servidor. Tente novamente.", null);
+        botaoVerificarCodigo.disabled = false;
+        botaoVerificarCodigo.textContent = "Verificar código";
+
+    }
+
+}
+
+botaoVerificarCodigo.addEventListener("click", verificarCodigo);
+
+// ----- Login normal (e-mail + senha) -----
+
+formLogin.addEventListener("submit", async (evento) => {
+
+    evento.preventDefault();
+
+    // Se o painel de código estiver aberto, o Enter não deve tentar logar com senha
+    if (painelCodigo.classList.contains("visivel")) {
+        verificarCodigo();
+        return;
+    }
+
+    limparErros();
+
+    const email = campoUsuario.value.trim();
+    const senha = campoSenha.value;
+
+    if (email === '' || senha === '') {
+        mostrarErro("Preencha e-mail e senha.", null);
+        return;
+    }
+
+    botaoLogar.disabled = true;
+    botaoLogar.value = "Entrando...";
+
+    try {
+
+        const corpo = new URLSearchParams({ usuario: email, senha: senha });
+
+        const resposta = await fetch("login/login-acao-nebula.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: corpo
+        });
+
+        const dados = await resposta.json();
+
+        if (dados.sucesso) {
+
+            toastTexto.textContent = "Login realizado! Redirecionando...";
+            mostrarToastERedirecionar(dados.destino); // NOVO: destino vindo do PHP (aluno/professor/suporte)
+
+        } else {
+
+            mostrarErro(dados.erro || "Usuário ou senha incorretos.", dados.campo);
+            botaoLogar.disabled = false;
+            botaoLogar.value = "Logar";
+
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao entrar:", erro);
+        mostrarErro("Não foi possível se conectar ao servidor. Tente novamente.", null);
+        botaoLogar.disabled = false;
+        botaoLogar.value = "Logar";
+
+    }
+
+});
+
+// ----- Voltou do Google com erro? (cancelou, ou algo falhou no servidor) -----
+(function checarErroGoogle() {
+
+    const parametros = new URLSearchParams(window.location.search);
+
+    if (parametros.get("erro") === "google") {
+        mostrarErro("Não foi possível entrar com o Google. Tente novamente.", null);
+        // Limpa o ?erro=google da URL, pra não reaparecer se a pessoa der F5
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+})();
+
+</script>
+
+</body>
+</html>

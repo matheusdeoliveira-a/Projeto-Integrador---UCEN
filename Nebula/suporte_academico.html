@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <title>Acadêmico - Portal do Suporte - UCEM</title>
+    <link rel="stylesheet" href="suporte_academico.css">
+
+    <link rel="icon" type="image/svg+xml" href="favicon/engrenagem.svg">
+
+</head>
+<body>
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="cabecalho">
+
+        <div class="barra-portal">
+            <a class="logo" href="suporte_inicio.html">
+                <img src="logo-ucen.png" alt="Logo">
+            </a>
+
+            <!-- PESQUISA -->
+
+            <div class="caixa-pesquisa" id="caixaPesquisa">
+
+                <input type="text" placeholder="Pesquisar..." readonly>
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+            <div class="overlay-pesquisa" id="overlayPesquisa">
+
+                <div class="painel-pesquisa">
+
+                    <div class="barra-expandida">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+
+                        <button id="fecharPesquisa">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="resultado-pesquisa">
+
+                        <ul id="lista-header">
+                            <li data-url="suporte_inicio.html">Início</li>
+                            <li data-url="suporte_academico.html">Acadêmico</li>
+                            <li data-url="suporte_professores.html">Professores</li>
+                            <li data-url="suporte_financeiro.html">Financeiro</li>
+                            <li data-url="suporte_atendimento.html">Central de Atendimento</li>
+                            <!-- <li data-url="suporte_salas.html">Salas & Agenda</li> -->
+                            <li data-url="suporte_relatorios.html">Relatórios</li>
+                            <li data-url="suporte_configuracoes.html">Configurações</li>
+                        </ul>
+
+                        <div id="mensagem-header">
+                            Nenhum resultado encontrado.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- PERFIL -->
+
+            <div class="acoes-cabecalho">
+                <a href="suporte_configuracoes.html" class="perfil">
+                    S
+                </a>
+                <a href="tela-de-carregamento.html?destino=logout_suporte.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ==========================================
+         MENU LATERAL
+    ========================================== -->
+
+    <aside class="menu" id="menu">
+
+        <div class="menu-cabecalho">
+
+            <button class="botao-menu-fechar" id="botaoMenuFechar" type="button">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <span>Menu</span>
+
+        </div>
+
+        <nav class="menu-navegacao">
+
+            <a class="item-menu" href="suporte_inicio.html">
+                <i class="fa-solid fa-house"></i> Início
+            </a>
+
+            <a class="item-menu ativo" href="suporte_academico.html">
+                <i class="fa-solid fa-users"></i> Acadêmico
+            </a>
+
+            <a class="item-menu" href="suporte_professores.html">
+                <i class="fa-solid fa-briefcase"></i> Professores
+            </a>
+
+            <a class="item-menu" href="suporte_financeiro.html">
+                <i class="fa-solid fa-wallet"></i> Financeiro
+            </a>
+
+            <a class="item-menu" href="suporte_atendimento.html">
+                <i class="fa-solid fa-envelope"></i> Central de Atendimento
+            </a>
+
+            <!-- <a class="item-menu" href="suporte_salas.html"><i class="fa-solid fa-calendar-days"></i> Salas & Agenda</a> --> 
+
+            <a class="item-menu" href="suporte_relatorios.html">
+                <i class="fa-solid fa-chart-simple"></i> Relatórios
+            </a>
+
+            <a class="item-menu" href="suporte_configuracoes.html">
+                <i class="fa-solid fa-gear"></i> Configurações
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL - ACADÊMICO
+    ========================================== -->
+
+    <main class="conteudo">
+
+        <div class="area-conteudo" id="areaConteudo">
+
+            <section class="pagina pagina-interna" data-conteudo="academico">
+
+                <div class="cabecalho-pagina">
+                    <span class="categoria-pagina">Gerenciamento dos alunos</span>
+                    <div class="titulo-linha">
+                        <h1>Acadêmico</h1>
+                        <span></span>
+                    </div>
+                    <p>Alunos cadastrados, matrículas, frequência e histórico de notas.</p>
+                </div>
+
+                <!-- CARDS DE ESTATÍSTICA -->
+                <div class="grid-cards-estatisticas" style="margin-top:30px;">
+                    <div class="card-estatistica card-roxo">
+                        <span class="subtitulo-estatistica">Alunos cadastrados</span>
+                        <h2 class="valor-estatistica" id="statTotalAlunos">248</h2>
+                    </div>
+                    <div class="card-estatistica card-verde">
+                        <span class="subtitulo-estatistica">Matrículas ativas</span>
+                        <h2 class="valor-estatistica" id="statMatriculasAtivas">--</h2>
+                    </div>
+                    <div class="card-estatistica card-roxo">
+                        <span class="subtitulo-estatistica">Frequência média</span>
+                        <h2 class="valor-estatistica" id="statFrequenciaMedia">--</h2>
+                    </div>
+                    <div class="card-estatistica card-vermelho">
+                        <span class="subtitulo-estatistica">Abaixo da frequência mínima</span>
+                        <h2 class="valor-estatistica" style="color:#ff5a5a;" id="statAbaixoMinimo">--</h2>
+                    </div>
+                </div>
+
+                <!-- ABAS -->
+                <div class="container-botoes-turma">
+                    <button type="button" class="btn-opcao ativo" data-aba-academico="alunos">Alunos cadastrados</button>
+                    <button type="button" class="btn-opcao" data-aba-academico="vestibular">Vestibular & ENEM</button>
+                    <button type="button" class="btn-opcao" data-aba-academico="matriculas">Matrículas</button>
+                    <button type="button" class="btn-opcao" data-aba-academico="frequencia">Frequência</button>
+                    <!-- <button type="button" class="btn-opcao" data-aba-academico="notas">Histórico de notas</button> --> 
+                    <button type="button" class="btn-opcao" data-aba-academico="documentos">Documentos</button>
+                </div>
+
+                <!-- ABA Alunos cadastrados -->
+                <div class="conteudo-aba-academico ativo" data-conteudo-academico="alunos">
+
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="buscaAlunos" placeholder="Buscar aluno por nome ou curso...">
+                    </div>
+
+                    <div class="tabela-academico-container">
+                        <table class="tabela-academico">
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Matrícula</th>
+                                    <th>Curso</th>
+                                    <th>Semestre</th>
+                                    <th>Contato</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaAlunos"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- ABA MATRÍCULAS -->
+                <div class="conteudo-aba-academico" data-conteudo-academico="matriculas">
+
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="buscaMatriculas" placeholder="Buscar por aluno ou curso...">
+                    </div>
+
+                    <div class="tabela-academico-container">
+                        <table class="tabela-academico">
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Curso</th>
+                                    <th>Data da matrícula</th>
+                                    <th>Forma de ingresso</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaMatriculas"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- ABA FREQUÊNCIA -->
+                <div class="conteudo-aba-academico" data-conteudo-academico="frequencia">
+
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="buscaFrequencia" placeholder="Buscar por aluno ou turma...">
+                    </div>
+
+                    <div class="tabela-academico-container">
+                        <table class="tabela-academico">
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Turma</th>
+                                    <th>Aulas dadas</th>
+                                    <th>Faltas</th>
+                                    <th>Frequência</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaFrequencia"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- ABA HISTÓRICO DE NOTAS -->
+                <div class="conteudo-aba-academico" data-conteudo-academico="notas">
+
+                    <div class="barra-busca-aba">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="buscaNotas" placeholder="Buscar por aluno ou disciplina...">
+                    </div>
+
+                    <div class="tabela-academico-container">
+                        <table class="tabela-academico">
+                            <thead>
+                                <tr>
+                                    <th>Aluno</th>
+                                    <th>Disciplina</th>
+                                    <th>Período</th>
+                                    <th>Nota final</th>
+                                    <th>Situação</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaNotas"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- ABA DOCUMENTOS -->
+                <div class="conteudo-aba-academico" data-conteudo-academico="documentos">
+
+                    <div class="filtros-linha">
+                        <div class="barra-busca-aba">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="buscaDocumentos" placeholder="Buscar por candidato ou documento...">
+                        </div>
+
+                        <select id="filtroProcessoDocumentos" aria-label="Filtrar por processo">
+                            <option value="">Todos os processos</option>
+                            <option value="Matrícula">Matrícula</option>
+                            <option value="Isenção">Isenção</option>
+                        </select>
+
+                        <select id="filtroStatusDocumentos" aria-label="Filtrar por status">
+                            <option value="">Todos os status</option>
+                            <option value="Em análise">Em análise</option>
+                            <option value="Pendente">Pendente</option>
+                            <option value="Aprovado">Aprovado</option>
+                            <option value="Recusado">Recusado</option>
+                        </select>
+                    </div>
+
+                    <div class="tabela-academico-container">
+                        <table class="tabela-academico">
+                            <thead>
+                                <tr>
+                                    <th>Candidato / Aluno</th>
+                                    <th>Tipo de documento</th>
+                                    <th>Processo</th>
+                                    <th>Enviado em</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaDocumentos"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- ABA VESTIBULAR & ENEM (análise das isenções de taxa) -->
+                <div class="conteudo-aba-academico" data-conteudo-academico="vestibular">
+
+                    <!-- Sub-abas: isenções e notas do vestibular -->
+                    <div class="container-botoes-turma sub-abas-vestibular">
+                        <button type="button" class="btn-opcao ativo" data-sub-vestibular="isencoes">Isenções</button>
+                        <button type="button" class="btn-opcao" data-sub-vestibular="notas">Notas do vestibular</button>
+                    </div>
+
+                    <!-- SUB-ABA ISENÇÕES -->
+                    <div class="sub-conteudo-vestibular ativo" data-sub-vestibular-conteudo="isencoes">
+
+                    <div class="filtros-linha">
+                        <div class="barra-busca-aba">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="buscaIsencao" placeholder="Buscar por candidato, CPF ou curso...">
+                        </div>
+
+                        <select id="filtroStatusIsencao" aria-label="Filtrar por status">
+                            <option value="">Todos os status</option>
+                            <option value="em_analise">Em análise</option>
+                            <option value="aprovada">Aprovada</option>
+                            <option value="recusada">Recusada</option>
+                        </select>
+                    </div>
+
+                    <div class="tabela-academico-container">
+                        <table class="tabela-academico">
+                            <thead>
+                                <tr>
+                                    <th>Candidato</th>
+                                    <th>Curso (1ª opção)</th>
+                                    <th>Processo</th>
+                                    <th>Tentativa</th>
+                                    <th>Enviado em</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="corpoTabelaIsencao"></tbody>
+                        </table>
+                    </div>
+
+                    </div>
+
+                    <!-- SUB-ABA NOTAS DO VESTIBULAR (nota gerada quando a isenção é aprovada) -->
+                    <div class="sub-conteudo-vestibular" data-sub-vestibular-conteudo="notas">
+
+                        <div class="filtros-linha">
+                            <div class="barra-busca-aba">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" id="buscaNota" placeholder="Buscar por candidato, CPF ou curso...">
+                            </div>
+
+                            <select id="filtroStatusNota" aria-label="Filtrar por status">
+                                <option value="">Todos os status</option>
+                                <option value="pendente">Pendente</option>
+                                <option value="aprovado">Aprovado</option>
+                                <option value="reprovado">Reprovado</option>
+                            </select>
+                        </div>
+
+                        <div class="tabela-academico-container">
+                            <table class="tabela-academico">
+                                <thead>
+                                    <tr>
+                                        <th>Candidato</th>
+                                        <th>Curso (1ª opção)</th>
+                                        <th>Ingresso</th>
+                                        <th>Nota</th>
+                                        <th>Isenção aprovada em</th>
+                                        <th>Status</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="corpoTabelaNota"></tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ==========================================
+         MODAL - VISUALIZAR DOCUMENTO
+    ========================================== -->
+
+    <div class="modal-overlay" id="modalDocumento">
+        <div class="modal modal-documento" role="dialog" aria-modal="true" aria-labelledby="tituloModalDocumento">
+
+            <button class="fechar-modal" id="fecharModalDocumento" type="button" aria-label="Fechar">&times;</button>
+
+            <h2 id="tituloModalDocumento">Documento</h2>
+            <p>Confira as informações e a pré-visualização antes de decidir.</p>
+
+            <div class="info-documento">
+                <div class="info-item">
+                    <span>Candidato / Aluno</span>
+                    <strong id="docCandidato"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Tipo</span>
+                    <strong id="docTipo"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Processo</span>
+                    <strong id="docProcesso"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Data de envio</span>
+                    <strong id="docEnviado"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Status</span>
+                    <div id="docStatus"></div>
+                </div>
+            </div>
+
+            <!-- Área que simula a pré-visualização do documento -->
+            <div class="visualizador-documento">
+                <i class="fa-solid fa-file-lines"></i>
+                <p>Visualização do documento</p>
+                <span id="docArquivo"></span>
+
+                <!-- Ações do arquivo (apenas visuais por enquanto) -->
+                <div class="acoes-visualizador">
+                    <button type="button" class="btn-secundario btn-pequeno" id="btnVisualizarDocumento"><i class="fa-solid fa-eye"></i> Visualizar</button>
+                    <button type="button" class="btn-secundario btn-pequeno" id="btnBaixarDocumento"><i class="fa-solid fa-download"></i> Baixar</button>
+                </div>
+            </div>
+
+            <!-- Observação já registrada (recusa ou pedido de correção) -->
+            <div class="observacao-registrada" id="observacaoRegistrada">
+                <span>Observação</span>
+                <p id="textoObservacaoRegistrada"></p>
+            </div>
+
+            <!-- Campo para informar o motivo da recusa / a correção solicitada -->
+            <div class="area-observacao" id="areaObservacao">
+                <div class="input-group">
+                    <label for="campoObservacao">Observação</label>
+                    <textarea id="campoObservacao" rows="3"></textarea>
+                    <span class="erro-observacao" id="erroObservacao">Escreva uma observação para continuar.</span>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarObservacao">Cancelar</button>
+                    <button type="button" class="btn-principal" id="btnConfirmarObservacao">Confirmar</button>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-principal" id="btnAprovarDocumento"><i class="fa-solid fa-check"></i> Aprovar</button>
+                <button type="button" class="btn-secundario btn-recusar" id="btnRecusarDocumento"><i class="fa-solid fa-xmark"></i> Recusar</button>
+                <button type="button" class="btn-secundario" id="btnCorrigirDocumento"><i class="fa-solid fa-pen"></i> Solicitar correção</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL - ISENÇÃO DE TAXA (Vestibular & ENEM)
+    ========================================== -->
+
+    <div class="modal-overlay" id="modalIsencao">
+        <div class="modal modal-documento" role="dialog" aria-modal="true" aria-labelledby="tituloModalIsencao">
+
+            <button class="fechar-modal" id="fecharModalIsencao" type="button" aria-label="Fechar">&times;</button>
+
+            <h2 id="tituloModalIsencao">Pedido de isenção</h2>
+            <p>Confira os documentos antes de decidir.</p>
+
+            <div class="info-documento">
+                <div class="info-item">
+                    <span>Candidato</span>
+                    <strong id="isoCandidato"></strong>
+                </div>
+                <div class="info-item">
+                    <span>CPF</span>
+                    <strong id="isoCpf"></strong>
+                </div>
+                <div class="info-item">
+                    <span>E-mail</span>
+                    <strong id="isoEmail"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Curso (1ª opção)</span>
+                    <strong id="isoCurso"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Tentativa</span>
+                    <strong id="isoTentativa"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Status</span>
+                    <div id="isoStatus"></div>
+                </div>
+            </div>
+
+            <!-- Os 4 documentos enviados (visualizar / baixar) -->
+            <div class="lista-docs-isencao" id="isoDocumentos"></div>
+
+            <!-- Motivo da recusa já registrado (quando a isenção foi recusada) -->
+            <div class="observacao-registrada" id="isoObservacaoRegistrada">
+                <span>Motivo da recusa</span>
+                <p id="isoTextoObservacao"></p>
+            </div>
+
+            <!-- Campo para escrever o motivo da recusa -->
+            <div class="area-observacao" id="isoAreaObservacao">
+                <div class="input-group">
+                    <label for="isoCampoMotivo">Motivo da recusa (o candidato receberá por e-mail)</label>
+                    <textarea id="isoCampoMotivo" rows="3" maxlength="500" placeholder="Comprovante de renda desatualizado. Envie um documento dos últimos 90 dias."></textarea>
+                    <span class="erro-observacao" id="isoErroMotivo">Escreva o motivo da recusa (mínimo de 5 caracteres).</span>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secundario" id="isoCancelarRecusa">Cancelar</button>
+                    <button type="button" class="btn-secundario btn-recusar" id="isoConfirmarRecusa">Confirmar recusa</button>
+                </div>
+            </div>
+
+            <span class="erro-observacao" id="isoMensagem"></span>
+
+            <div class="form-actions" id="isoAcoes">
+                <button type="button" class="btn-principal" id="isoAprovar"><i class="fa-solid fa-check"></i> Aprovar</button>
+                <button type="button" class="btn-secundario btn-recusar" id="isoRecusar"><i class="fa-solid fa-xmark"></i> Recusar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL - NOTA DO VESTIBULAR (Vestibular & ENEM)
+    ========================================== -->
+
+    <div class="modal-overlay" id="modalNota">
+        <div class="modal modal-documento" role="dialog" aria-modal="true" aria-labelledby="tituloModalNota">
+
+            <button class="fechar-modal" id="fecharModalNota" type="button" aria-label="Fechar">&times;</button>
+
+            <h2 id="tituloModalNota">Nota do vestibular / ENEM</h2>
+            <p id="ntDescricao">Confira a nota antes de decidir. O candidato receberá a nota e o resultado por e-mail.</p>
+
+            <div class="info-documento">
+                <div class="info-item">
+                    <span>Candidato</span>
+                    <strong id="ntCandidato"></strong>
+                </div>
+                <div class="info-item">
+                    <span>CPF</span>
+                    <strong id="ntCpf"></strong>
+                </div>
+                <div class="info-item">
+                    <span>E-mail</span>
+                    <strong id="ntEmail"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Curso (1ª opção)</span>
+                    <strong id="ntCurso"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Ingresso</span>
+                    <strong id="ntIngresso"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Nota</span>
+                    <strong id="ntNota" class="nota-destaque"></strong>
+                </div>
+                <div class="info-item">
+                    <span>Status</span>
+                    <div id="ntStatus"></div>
+                </div>
+            </div>
+
+            <!-- PDFs do ENEM (boletim e laudo): só aparece para inscrições do ENEM -->
+            <div class="lista-docs-isencao" id="ntDocumentos" style="display:none;"></div>
+
+            <!-- Motivo da recusa já registrado -->
+            <div class="observacao-registrada" id="ntObservacaoRegistrada">
+                <span>Motivo da recusa</span>
+                <p id="ntTextoObservacao"></p>
+            </div>
+
+            <!-- Campo para escrever o motivo da recusa -->
+            <div class="area-observacao" id="ntAreaObservacao">
+                <div class="input-group">
+                    <label for="ntCampoMotivo">Motivo da recusa (o candidato receberá por e-mail)</label>
+                    <textarea id="ntCampoMotivo" rows="3" maxlength="500" placeholder="Nota abaixo do mínimo exigido para o curso."></textarea>
+                    <span class="erro-observacao" id="ntErroMotivo">Escreva o motivo da recusa (mínimo de 5 caracteres).</span>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secundario" id="ntCancelarRecusa">Cancelar</button>
+                    <button type="button" class="btn-secundario btn-recusar" id="ntConfirmarRecusa">Confirmar recusa</button>
+                </div>
+            </div>
+
+            <span class="erro-observacao" id="ntMensagem"></span>
+
+            <div class="form-actions" id="ntAcoes">
+                <button type="button" class="btn-principal" id="ntAprovar"><i class="fa-solid fa-check"></i> Aprovar</button>
+                <button type="button" class="btn-secundario btn-recusar" id="ntRecusar"><i class="fa-solid fa-xmark"></i> Recusar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL - DETALHES (alunos, matrículas, frequência, notas)
+    ========================================== -->
+
+    <div class="modal-overlay" id="modalDetalhe">
+        <div class="modal modal-documento" role="dialog" aria-modal="true" aria-labelledby="tituloModalDetalhe">
+
+            <button class="fechar-modal" id="fecharModalDetalhe" type="button" aria-label="Fechar">&times;</button>
+
+            <h2 id="tituloModalDetalhe"></h2>
+            <p id="subtituloModalDetalhe"></p>
+
+            <div class="info-documento" id="corpoModalDetalhe"></div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-secundario" id="btnFecharDetalhe">Fechar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL - EDITAR ALUNO
+    ========================================== -->
+
+    <div class="modal-overlay" id="modalEditarAluno">
+        <div class="modal modal-documento" role="dialog" aria-modal="true" aria-labelledby="tituloModalEditarAluno">
+
+            <button class="fechar-modal" id="fecharModalEditarAluno" type="button" aria-label="Fechar">&times;</button>
+
+            <h2 id="tituloModalEditarAluno">Editar aluno</h2>
+            <p>Altere os dados cadastrais e salve.</p>
+
+            <div class="form-grid">
+                <div class="input-group campo-largo">
+                    <label for="editNome">Nome</label>
+                    <input type="text" id="editNome" maxlength="120" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="editMatricula">Matrícula</label>
+                    <input type="text" id="editMatricula" maxlength="20" inputmode="numeric" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="editSemestre">Semestre</label>
+                    <input type="text" id="editSemestre" maxlength="10" placeholder="Ex.: 3º" autocomplete="off">
+                </div>
+                <div class="input-group campo-largo">
+                    <label for="editCurso">Curso</label>
+                    <input type="text" id="editCurso" maxlength="100" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="editContato">Contato (e-mail)</label>
+                    <input type="email" id="editContato" maxlength="120" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="editStatus">Status</label>
+                    <select id="editStatus">
+                        <option value="ativo">Ativo</option>
+                        <option value="trancado">Trancado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+            </div>
+
+            <span class="erro-observacao" id="erroEditarAluno"></span>
+
+            <div class="form-actions">
+                <button type="button" class="btn-secundario" id="btnCancelarEdicao">Cancelar</button>
+                <button type="button" class="btn-principal" id="btnSalvarEdicao">Salvar alterações</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL - CONFIRMAR EXCLUSÃO DE ALUNO
+    ========================================== -->
+
+    <div class="modal-overlay" id="modalExcluirAluno">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tituloModalExcluirAluno">
+
+            <button class="fechar-modal" id="fecharModalExcluirAluno" type="button" aria-label="Fechar">&times;</button>
+
+            <h2 id="tituloModalExcluirAluno">Excluir aluno</h2>
+            <p id="textoExcluirAluno"></p>
+
+            <span class="erro-observacao" id="erroExcluirAluno"></span>
+
+            <div class="form-actions">
+                <button type="button" class="btn-secundario" id="btnCancelarExclusao">Cancelar</button>
+                <button type="button" class="btn-secundario btn-recusar" id="btnConfirmarExclusao"><i class="fa-solid fa-trash"></i> Excluir</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Rodapé do Portal -->
+    <footer id="contato">
+
+        <div class="footer-superior">
+            <div class="footer-esquerda">
+                <img src="logo-ucen.png" alt="Logo">
+                <h3 class="texto-footer">
+                    Campus central: Avenida das Estrelas, nº 372,<br>
+                    Jardim Primavera, Cidade Altas Flores/SP - CEP 14797-000
+                </h3>
+            </div>
+
+            <div class="footer-direita">
+                <h3 class="titulo-footer">
+                    Suporte técnico do sistema
+                </h3>
+                <h3 class="texto-footer">
+                    E-mail: ti.ftan@gmail.com<br>
+                    Telefone: 4006-8940<br>
+                    WhatsApp: (11) 94562-2810<br>
+                    Horário: Seg à Sex das 08h às 22:30h
+                </h3>
+            </div>
+        </div>
+
+        <div class="footer-inferior">
+            <h3 class="copyright">
+                © 2026 Universidade de Ciências e Exatas Nebula<br>
+                Todos os direitos reservados.
+            </h3>
+        </div>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="suporte_permissoes.js" defer></script>
+    <script src="suporte_academico.js" defer></script>
+</body>
+</html>

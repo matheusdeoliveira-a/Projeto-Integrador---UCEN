@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuda - UCEN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+
+    <!-- Link do outfit -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+
+     <link rel="icon" type="image/svg+xml" href="favicon/ajuda.svg">
+
+<style>
+    /* NÃO TOCAR NA BARRA DE ROLAGEM POR NADA */
+            ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050912;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #8a2be2;
+            border-radius: 6px;
+            border: 2px solid #050912;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #9932cc;
+        }
+    /* =====================================
+   1. CABEÇALHO DA PÁGINA DE BOLSAS
+      ===================================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body{
+    margin:0;
+    background:#050912;
+}
+
+.header-bolsas{
+
+    background:#050912;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 28px;
+
+    border-bottom:1px solid rgba(255,255,255,.25);
+
+}
+.conteudo-bolsas{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    background:#050912;
+}
+
+.bg-bolsas{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:.15;
+    z-index:1;
+    pointer-events:none;
+}
+
+.bolsas-container{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+    flex:1 0 auto;
+}
+
+.logo-bolsas img{
+
+    width:90px;
+
+    transition:.35s;
+
+}
+
+.logo-bolsas img:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.titulo-header{
+
+    font-family:'Sora', sans-serif;
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:normal;
+
+}
+
+.botao-sair{
+
+    width:110px;
+
+    height:48px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    text-decoration:none;
+
+    border:1px solid rgba(255,255,255,.45);
+
+    border-radius:18px;
+
+    transition:.3s;
+
+}
+
+.botao-sair:hover{
+
+    background:rgba(255,255,255,.08);
+
+}
+.titulo-bolsas-container{
+    position:relative;
+    display:inline-block;
+    margin-top:70px;
+    margin-left:-50px;
+}
+
+.titulo-bolsas{
+    color:#E3AC6C;
+    font-size:40px;
+    font-weight:bold;
+    margin:0;
+}
+
+.linha-bolsas{
+    position:absolute;
+   left:80%;
+   top:110%;
+   margin-left:20px;
+   width:140px;
+   height:2px;
+   background:#E3AC6C;
+}
+
+.icone-lua{
+    position:absolute;
+    right:0;
+    bottom:2px;
+
+    width:22px;
+    height:auto;
+}
+.titulo-bolsas-container{
+    position:relative;
+    display:inline-block;
+    margin-top:70px;
+    margin-left:-50px;
+}
+
+.subtitulo-bolsas{
+    display:flex;
+    align-items:center;
+
+    margin-top:55px;
+    margin-left:-50px;
+
+    width:620px;
+    justify-content:space-between;
+}
+
+.subtitulo-bolsas span{
+    color:white;
+    font-size:2rem;
+}
+
+.bolinha{
+    font-size:1.3rem;
+    margin:0 20px;
+}
+
+.bolinha{
+
+    color:white;
+
+    font-size:1.2rem;
+
+    line-height:1;
+
+}
+.menu-lateral-bolsas{
+    margin-top:45px;
+    margin-left:-15px;
+
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+}
+
+.item-menu-bolsas{
+    color:white;
+    font-size:1.25rem;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.item-menu-bolsas::before{
+    content:"•";
+    color:rgba(255,255,255,.65);
+    margin-right:12px;
+}
+
+.item-menu-bolsas:hover{
+    color:#E3AC6C;
+}
+
+.item-menu-bolsas.ativo{
+    color:#E3AC6C;
+    position:relative;
+    padding-left:18px;
+}
+
+.item-menu-bolsas.ativo::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:50%;
+    transform:translateY(-50%);
+    width:2px;
+    height:28px;
+    background:#E3AC6C;
+}
+.titulo-secao-bolsa{
+
+    color:#E3AC6C;
+    font-size:2rem;
+    font-weight:normal;
+    margin-bottom:28px;
+
+}
+
+/*
+.secao-bolsa{
+    width:100%;
+    max-width:980px;
+    margin:70px auto 0;
+}
+
+.titulo-secao-bolsa{
+
+    color:#E3AC6C;
+    font-size:2rem;
+    font-weight:normal;
+    margin-bottom:28px;
+
+}
+
+.lista-bolsas{
+
+    margin-left:28px;
+
+}
+
+.lista-bolsas li{
+
+    color:white;
+    font-size:1.2rem;
+    line-height:1.55;
+    margin-bottom:34px;
+
+}
+
+.lista-bolsas strong{
+
+    font-weight:normal;
+
+}*/
+
+/* Footer */
+.footer{
+    position:relative;
+    z-index:2;
+    background:#171414;
+    border-top:1px solid rgba(255,255,255,.45);
+    margin-top:130px; /* ajuste aqui */
+} 
+
+.footer-conteudo{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    padding:48px 24px 38px;
+}
+
+.footer-esquerda img{
+    width:95px;
+    margin-bottom:28px;
+}
+
+.footer-esquerda p,
+.footer-direita p{
+    color:#ECECEC;
+    font-size:1.15rem;
+    line-height:1.7;
+}
+
+.footer-direita h3{
+    color:#F39CFF;
+    font-size:2rem;
+    font-weight:normal;
+    margin-bottom:28px;
+}
+
+.footer-copy{
+    border-top:1px solid rgba(255,255,255,.45);
+    text-align:center;
+    padding:28px 20px;
+    color:#AFAFAF;
+    font-size:1.05rem;
+}
+
+/* Botões + conversa com a home */
+.menu-bolsas a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-7px;
+
+    width:0;
+
+    height:2px;
+
+    background:#E3AC6C;
+
+    transition:.3s;
+
+    transform:translateX(-50%);
+
+}
+
+.menu-bolsas a:hover::after{
+
+    width:100%;
+
+}
+.menu-bolsas .ativo{
+
+    color:#E3AC6C;
+
+}
+
+.menu-bolsas .ativo::after{
+
+    width:100%;
+
+}
+.menu-bolsas{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:45px;
+
+    padding:18px 0;
+
+    border-top:1px solid rgba(255,255,255,.10);
+    border-bottom:1px solid rgba(255,255,255,.10);
+
+    background:#050912;
+
+}
+.menu-bolsas a{
+
+    font-family: 'Sora', sans-serif;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size: 18px;
+
+    transition:.30s;    
+
+    position:relative;
+
+}
+.menu-bolsas a:hover{
+
+    color:#E3AC6C;
+
+}
+.menu-bolsas a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-2px;
+
+    width:0;
+
+    height:2px;
+
+    background:#E3AC6C;
+
+    transform:translateX(-50%);
+
+    transition:.3s;
+
+}
+
+.menu-bolsas a:hover::after{
+
+    width:100%;
+
+}
+/* Página atual */
+.menu-bolsas .ativo{
+
+    color:#E3AC6C;
+
+}
+
+.menu-bolsas .ativo::after{
+
+    width:100%;
+
+}
+/* Final suporte */
+.form-suporte{
+    width:100%;
+    max-width:980px;
+    margin:40px auto 0;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.form-suporte label{
+    color:white;
+    font-size:1.35rem;
+    margin:22px 0 10px;
+}
+
+.form-suporte input,
+.form-suporte textarea{
+
+    width:100%;
+
+    background:transparent;
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.45);
+
+    border-radius:12px;
+
+    padding:16px;
+
+    font-size:1.1rem;
+
+    outline:none;
+
+    font-family:inherit;
+}
+
+.form-suporte input{
+
+    height:55px;
+
+}
+
+.form-suporte textarea{
+
+    min-height:220px;
+
+    resize:none;
+
+    overflow:hidden;
+
+}
+
+.form-suporte input:focus,
+.form-suporte textarea:focus{
+
+    border-color:#E3AC6C;
+
+}
+
+.contador{
+
+    color:white;
+
+    margin-top:12px;
+
+    font-size:1rem;
+
+}
+.rodape-form{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:18px;
+
+}
+
+.contador{
+
+    color:white;
+
+    font-size:1rem;
+
+    transition:.3s;
+
+}
+
+#restantes{
+
+    color:white;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+#limite{
+
+    display:none;
+
+    margin-left:10px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.botao-enviar{
+
+    width:160px;
+    height:52px;
+
+    background:transparent;
+
+    color:#E3AC6C;
+
+    border:1px solid #E3AC6C;
+
+    border-radius:12px;
+
+    font-size:1.05rem;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:all .35s ease;
+
+}
+
+.botao-enviar:hover{
+
+    color:white;
+
+    background:rgba(227,172,108,.10);
+
+    border-color:#F0C58A;
+
+    box-shadow:
+        0 0 8px rgba(227,172,108,.55),
+        0 0 20px rgba(227,172,108,.35),
+        0 0 35px rgba(227,172,108,.22);
+
+    transform:translateY(-2px);
+
+}
+/* FAQ das perguntas frequentes */
+.perguntas-frequentes{
+    width: 100%;
+    max-width: 1000px;
+}
+.perguntas-frequentes h1{
+    font-size: 3rem;
+    margin-bottom: 60px;
+    color: #E3AC6C
+}
+.faq {
+    width: 100%;
+    list-style: none;
+}
+.faq li{
+    width: 100%;
+    margin-bottom: 14px;
+}
+.faq li label {
+
+    font-family: Outfit;
+    padding: 15px 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(176, 168, 168);
+
+    background:rgba(255,255,255,.10);
+    border-left:4px solid #E3AC6C;
+
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+}
+.faq li label:hover{
+
+    background:rgba(227,172,108,.22);
+
+}
+
+.faq li label span{
+    display: inline-block;
+    padding: 8px;
+
+    background:#E3AC6C;
+    color:#050912;
+    font-weight:bold;
+
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+/* É como se eu criasse um elemento antes do label no html, por ser no css se chama pseudoelemento, aqui é 
+onde o + e - ficarão,  */
+.faq li label::before {
+    content: '+';
+    margin-right: 10px;
+    font-size: 24px;
+
+    color:#E3AC6C;
+    font-weight:bold;
+}
+.faq input[type=checkbox]:checked + label::before {
+    content:'-';
+}
+
+/* Assim todos os inputs do tipo radio (as bolinhas) vão ficar escondidas, mas funcionando. */
+.faq input[type=checkbox]{
+    display:none
+}
+/* Cor da resposta/texto */
+.faq .resposta {
+    color:#acacac;
+    padding: 0 14px;
+    background:rgba(255,255,255,.15);
+    line-height: 32px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s, padding .5s;
+}
+.faq input[type=checkbox]:checked + label + .resposta {
+    max-height: 400px;
+    padding: 10px 10px 20px;
+}
+/* Nova regra */
+.faq input[type=checkbox]:checked + label{
+
+    background:rgba(227,172,108,.15);
+
+}
+
+.faq input[type=checkbox]:checked + label span {
+    background:#F2C98F;
+}
+
+/* Estilização do Menu de Acessibilidade e do VLibras */
+.asw-container .asw-widget .asw-menu-btn {
+  background: linear-gradient(135deg, #5b2a86, #a23cc4) !important;
+  outline: 4px solid rgba(231, 182, 230, 0.6) !important;
+  box-shadow: 0 0 16px rgba(162, 60, 196, 0.5) !important;
+}
+.asw-container .asw-widget .asw-menu-btn:hover {
+  background: linear-gradient(135deg, #7b3aa8, #c056e0) !important;
+}
+
+/* ===========================================
+   RESPONSIVO - PÁGINAS PADRÃO "BOLSAS"
+   =========================================== */
+
+.btn-menu-hamburguer{
+    display:none;
+    flex-direction:column;
+    justify-content:space-between;
+    width:26px;
+    height:18px;
+    background:transparent;
+    border:none;
+    padding:0;
+    cursor:pointer;
+}
+
+.btn-menu-hamburguer span{
+    display:block;
+    width:100%;
+    height:2px;
+    background:#fff;
+    border-radius:2px;
+    transition:transform .3s ease, opacity .3s ease;
+}
+
+.btn-menu-hamburguer.ativo span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
+.btn-menu-hamburguer.ativo span:nth-child(2){ opacity:0; }
+.btn-menu-hamburguer.ativo span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
+
+@media (max-width:1240px){
+    .bolsas-container{
+        padding:0 24px;
+    }
+}
+
+@media (max-width:860px){
+
+    .header-bolsas{
+        padding:16px 20px;
+    }
+
+    .titulo-header{
+        font-size:0px;
+    }
+
+    .logo-bolsas img{
+        width:70px;
+    }
+
+    .botao-sair{
+        width:88px;
+        height:40px;
+        font-size:15px;
+    }
+
+    .menu-bolsas{
+        flex-wrap:wrap;
+        justify-content:flex-start;
+        gap:0;
+        padding:14px 20px;
+        position:relative;
+    }
+
+    .btn-menu-hamburguer{
+        display:flex;
+        margin-left: 95%;
+    }
+
+    .menu-bolsas a{
+        display:none;
+        width:100%;
+        padding:8px 0;
+    }
+
+    .menu-bolsas.aberto{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:2px;
+    }
+
+    .menu-bolsas.aberto a{
+        display:block;
+    }
+
+    .menu-bolsas a::after{
+        display:none;
+    }
+
+    .titulo-bolsas-container{
+        margin-left:0;
+        margin-top:40px;
+    }
+
+    .titulo-bolsas{
+        font-size:28px;
+    }
+
+    .linha-bolsas{
+        display:none;
+    }
+
+    .subtitulo-bolsas{
+        margin-left:0;
+        width:100%;
+        flex-wrap:wrap;
+        gap:10px;
+        margin-top:30px;
+    }
+
+    .subtitulo-bolsas span{
+        font-size:1.2rem;
+    }
+
+    .menu-lateral-bolsas{
+        margin-left:0;
+        margin-top:30px;
+        gap:14px;
+    }
+
+    .item-menu-bolsas{
+        font-size:1.05rem;
+    }
+
+    .secao-bolsa{
+        margin-top:45px;
+    }
+
+    .titulo-secao-bolsa{
+        font-size:1.4rem;
+        margin-bottom:18px;
+    }
+
+    .lista-bolsas{
+        margin-left:16px;
+    }
+
+    .lista-bolsas li{
+        font-size:1rem;
+        margin-bottom:22px;
+    }
+
+    .footer-conteudo{
+        flex-direction:column;
+        gap:26px;
+        padding:36px 20px 30px;
+    }
+
+    .footer-direita h3{
+        font-size:1.5rem;
+        margin-bottom:16px;
+    }
+
+    .footer-esquerda p,
+    .footer-direita p{
+        font-size:1rem;
+    }
+
+    .menu-bolsas a:hover{
+    color: #E3AC6C;
+    padding-left: 26px;
+    border-left: 2px solid #E3AC6C;
+    }
+}
+
+@media (max-width:420px){
+    .titulo-header{
+        display:none;
+    }
+
+    .header-bolsas{
+        justify-content:space-between;
+    }
+}
+
+@media (max-width:860px){
+
+    .perguntas-frequentes{
+        width:100%;
+    }
+
+    .perguntas-frequentes h1{
+        font-size:1.8rem;
+        margin-bottom:34px;
+    }
+
+    .faq li label{
+        font-size:15px;
+        padding:12px 8px;
+    }
+
+    .faq li label span{
+        padding:6px;
+        margin-right:8px;
+    }
+
+    .faq .resposta{
+        line-height:1.6;
+        font-size:.95rem;
+    }
+
+    .form-suporte{
+        margin:30px auto 0;
+    }
+
+    .form-suporte label{
+        font-size:1.1rem;
+        margin:18px 0 8px;
+    }
+
+    .form-suporte input,
+    .form-suporte textarea{
+        padding:12px;
+        font-size:1rem;
+    }
+
+    .form-suporte input{
+        height:48px;
+    }
+
+    .rodape-form{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+    }
+
+    .botao-enviar{
+        width:100%;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<header class="header-bolsas">
+
+    <a href="home.php" class="logo-bolsas">
+        <img src="logo-ucen.png" alt="Logo UCEN">
+    </a>
+
+    <h1 class="titulo-header">
+        Universidade de Ciências Exatas Nebula
+    </h1>
+
+    <a href="home.php" class="botao-sair">
+        Sair
+    </a>
+
+</header>
+
+<nav class="menu-bolsas" id="menuBolsas">
+<button class="btn-menu-hamburguer" id="btnMenuBolsas" aria-label="Abrir menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+<a href="home.php#graduacoes">Graduações</a>
+<!-- <a href="home_bolsas.html">
+    Bolsas
+</a>
+<a href="home_descontos_e_parcelas.html">
+    Descontos e parcelas
+</a> --> 
+<a href="home_contato.html"> 
+    Contato
+</a>
+<a href="home_ajuda.html" class="ativo">Ajuda</a>
+<a href="home.php#vestibular">Vestibular</a>
+<a href="ingresso_enem.html">
+    Ingresso pelo ENEM
+</a>
+</nav>
+
+<!-- Menu de Acessibilidade -->
+
+<script src="https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js" async></script>
+<!-- Fim do Código do Menu de Acessibilidade -->
+
+<!-- Início do Código VLibras -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+<!-- Fim do Código VLibras -->
+
+<main class="conteudo-bolsas">
+
+    <img src="fundo_universo.jpg"
+         class="bg-bolsas"
+         alt="">
+
+    <div class="bolsas-container">
+
+        <!-- TODO O CONTEÚDO DA PÁGINA VAI AQUI -->
+    <div class="titulo-bolsas-container">
+    <h2 class="titulo-bolsas">
+        AJUDA & FAQ (Central do Candidato)
+    </h2>
+    <div class="linha-bolsas">
+        <img src="bandeira.png" class="icone-lua" alt="">
+    </div>
+</div>
+
+<div class="subtitulo-bolsas">
+
+    <span>Central de Suporte</span>
+    <span class="bolinha">•</span>
+    <span>Nebula</span>
+    </div>
+
+<div class="menu-lateral-bolsas">
+    <div class="item-menu-bolsas">
+        Dúvidas frequêntes
+    </div>
+
+    <div class="item-menu-bolsas ativo">
+        Informações sobre o Vestibular, Datas, Conteúdo e Suporte
+    </div>
+</div>
+
+    <!-- Dúvidas Frequêntes -->
+<div class="perguntas-frequentes">
+    <h1>Perguntas frequentes</h1>
+    
+    <ul class="faq">
+
+        <li>
+            <input type="checkbox" name="perguntas" id="primeiro">
+            <label for="primeiro"><span>1</span> Como funciona o Vestibular Unificado Nebula?</label>
+            <div class="resposta">
+                <p>O nosso processo seletivo é composto por uma prova única 
+             de 60 questões de múltipla escolha mais uma redação analítica. A prova pode ser realizada de forma 
+             presencial no campus ou de forma online (via Teams) com monitoramento de um de nossos Instrutores. Caso escolha de forma online,
+             receberá o link pelo e-mail informado na inscrição.</p>
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" name="perguntas" id="segundo">
+            <label for="segundo"><span>2</span> Qual é o valor da taxa de inscrição?</label>
+            <div class="resposta">
+                <p>A taxa de inscrição padrão é de R$ 90,00. Candidatos que se estudaram o Ensino Médio em Escola Pública ou em Escola Privada com bolsa
+                   podem solicitar a isenção total dessa taxa através do portal até 15 dias antes da prova.</p>
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" name="perguntas" id="terceiro">
+            <label for="terceiro"><span>3</span> Qual é o cronograma e data do vestibular?</label>
+            <div class="resposta">
+                <p>Abertura das Inscrições: 01 de Julho<br>
+            Encerramento das Inscrições: 21 de Outubro (até as 23:59)<br>
+            Aplicação da Prova: 25 de Novembro - 12h às 15h (Horário de Brasília)<br>
+            O Candidato receberá por e-mail se foi ou não aprovado após a realização da prova.</p>
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" name="perguntas" id="quarto">
+            <label for="quarto"><span>4</span> Quais conteúdos caem no vestibular?</label>
+            <div class="resposta">
+                <p>Ciências Exatas e da Natureza (30 Questões):<br>
+            Física (Mecânica, Óptica e Termodinâmica), Matemática (Álgebra, Geometria e 
+            Cálculo Básico) e Química Aplicada.<br><br>      
+        
+            Linguagens e Códigos (20 Questões):<br>
+            Língua Portuguesa, Interpretação de Texto, Literatura Científica e Língua Estrangeira (Inglês Técnico).<br><br>     
+        
+            Ciências Humanas (10 Questões):<br>
+            História da Ciência, Filosofia e Atualidades Tecnológicas.<br><br>
+        
+            Redação:<br>
+            Texto dissertativo-argumentativo baseado em um tema atual sobre ciência, ética ou exploração espacial.<br><br></p>
+            </div>
+        </li>
+        <li>
+            <input type="checkbox" name="perguntas" id="quinto">
+            <label for="quinto"><span>5</span> Os cursos possuem reconhecimento oficial?</label>
+            <div class="resposta">
+                <p>Sim, todas as nossas graduações e engenharias (Astronomia, Geofísica, Astrofísica, 
+            Ciências Atmosféricas, Engenharia Aeroespacial, Engenharia Elétrica, Física, Matemática, 
+            Ciências da Computação e Engenharia de Telecomunicações) possuem autorização e nota máxima junto 
+            aos órgãos de regulamentação educacional.</p>
+            </div>
+        </li>
+
+    </ul>
+</div><br><br>
+
+
+<section>
+    <section class="secao-bolsa">
+
+    <h3 class="titulo-secao-bolsa">
+        Fale com a equipe de suporte!
+    </h3>
+
+    <form class="form-suporte" id="formChamadoHome" novalidate>
+
+        <label for="chamadoNome">Nome:</label>
+        <input type="text" id="chamadoNome" maxlength="120" autocomplete="name" required>
+
+        <label for="chamadoEmail">E-mail:</label>
+        <input type="email" id="chamadoEmail" maxlength="120" autocomplete="email" required>
+
+        <label for="mensagem">Assunto:</label>
+        <textarea id="mensagem" maxlength="10000" oninput="autoResize(this)" required></textarea>
+
+        <p id="msgChamadoHome" role="status" style="display:none; margin:12px 0 0; font-weight:600;"></p>
+
+        <div class="rodape-form">
+
+    <p class="contador">
+        Até <span id="restantes">10.000</span> caracteres.
+        <span id="limite">
+            Limite de caracteres atingido.
+        </span>
+    </p>
+
+    <button type="submit" class="botao-enviar" id="btnEnviarChamadoHome">
+        Enviar
+    </button>
+
+</div>
+
+    </form>
+
+</section>
+</div>
+<!-- Rodapé -->
+<footer class="footer">
+
+    <div class="footer-conteudo">
+
+        <div class="footer-esquerda">
+            <img src="logo-ucen.png" alt="Logo FTAN">
+
+            <p>
+                Campus central: Avenida das Estrelas, nº 372,
+            </p>
+
+            <p>
+                Jardim Primavera, Cidade Altas Flores/SP - CEP 14797-000
+            </p>
+        </div>
+
+        <div class="footer-direita">
+
+            <h3>Suporte ao aluno</h3>
+
+            <p>E-mail: suporte.ucen@gmail.com</p>
+            <p>Telefone: 4006-8947</p>
+            <p>WhatsApp: (11) 94562-2899</p>
+            <p>Horário: Seg à Sex das 08h às 22:30h</p>
+
+        </div>
+
+    </div>
+
+    <div class="footer-copy">
+        © 2026 Universidade de Ciências Exatas Nebula.<br>
+        Todos os direitos reservados.
+    </div>
+
+</footer>
+
+
+</main>
+<script>
+
+    // ===== VLibras: botão e barra roxos, combinando com o menu de acessibilidade =====
+(function () {
+    var ROXO = 'hue-rotate(65deg) saturate(1.15)';
+
+    var CSS =
+        '#vlibras-button { border-radius: 12px !important; overflow: hidden !important; outline: 2px solid rgba(231,182,230,.6) !important; box-shadow: 0 0 16px rgba(162,60,196,.5) !important; background: #5b2a86 !important; }' +
+        '#vlibras-button img { filter: ' + ROXO + ' !important; }' +
+        '#vlibras-popup { filter: ' + ROXO + ' !important; border-radius: 20px !important; }';
+
+
+    var tentativas = 0;
+    var timer = setInterval(function () {
+        var host = document.getElementById('vlibras-access-wrapper');
+        if (host && host.shadowRoot) {
+            var s = document.createElement('style');
+            s.textContent = CSS;
+            host.shadowRoot.appendChild(s);
+            clearInterval(timer);
+        } else if (++tentativas > 50) {
+            clearInterval(timer);
+        }
+    }, 200);
+})();
+
+function autoResize(campo){
+
+    campo.style.height = "auto";
+    campo.style.height = campo.scrollHeight + "px";
+
+    const limite = 10000;
+    const restantes = limite - campo.value.length;
+
+    document.getElementById("restantes").textContent =
+        restantes.toLocaleString("pt-BR");
+
+    const contador = document.querySelector(".contador");
+    const aviso = document.getElementById("limite");
+
+if(restantes <= 0){
+
+    contador.style.color = "#ff4d4d";
+    contador.style.textShadow =
+        "0 0 8px rgba(255,77,77,.6), 0 0 18px rgba(255,77,77,.35)";
+
+    document.getElementById("restantes").style.color = "white";
+
+    aviso.style.display = "inline";
+    aviso.style.color = "#ff4d4d";
+
+    aviso.style.textShadow =
+        "0 0 8px rgba(255,77,77,.6), 0 0 18px rgba(255,77,77,.35)";
+
+}else{
+
+    contador.style.color = "white";
+    contador.style.textShadow = "none";
+
+    document.getElementById("restantes").style.color = "white";
+
+    aviso.style.display = "none";
+    aviso.style.textShadow = "none";
+
+}
+}
+
+// Fazer as caixas se fecharem depois de clicar em outra com uma já aberta
+const perguntas = document.querySelectorAll('.faq input[type="checkbox"]');
+
+perguntas.forEach(pergunta => {
+
+    pergunta.addEventListener('change', () => {
+
+        perguntas.forEach(item => {
+
+            if(item !== pergunta){
+                item.checked = false;
+            }
+
+        });
+
+    });
+
+});
+</script>
+<script>
+// Envia a mensagem para a Central de Atendimento (tabela chamados)
+(function () {
+    const form  = document.getElementById("formChamadoHome");
+    const msg   = document.getElementById("msgChamadoHome");
+    const botao = document.getElementById("btnEnviarChamadoHome");
+    if (!form) return;
+
+    function mostrar(texto, ok) {
+        msg.textContent = texto;
+        msg.style.color = ok ? "#7be0a0" : "#ff7b7b";
+        msg.style.display = "block";
+    }
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const dados = {
+            origem: "home",
+            nome: document.getElementById("chamadoNome").value.trim(),
+            email: document.getElementById("chamadoEmail").value.trim(),
+            mensagem: document.getElementById("mensagem").value.trim()
+        };
+
+        if (!dados.nome || !dados.email || !dados.mensagem) {
+            mostrar("Preencha nome, e-mail e assunto.", false);
+            return;
+        }
+
+        botao.disabled = true;
+        try {
+            const resposta = await fetch("atendimento_crud/chamado_criar.php", {
+                method: "POST",
+                body: new URLSearchParams(dados)
+            });
+            const json = await resposta.json();
+
+            if (!json.sucesso) {
+                mostrar(json.erro || "Não foi possível enviar sua mensagem.", false);
+            } else {
+                form.reset();
+                autoResize(document.getElementById("mensagem"));
+                mostrar("Mensagem enviada! Protocolo " + json.protocolo + ". Nossa equipe entrará em contato pelo e-mail informado.", true);
+            }
+        } catch (erro) {
+            mostrar("Não foi possível conectar ao servidor.", false);
+        }
+        botao.disabled = false;
+    });
+})();
+</script>
+<script>
+    const btnMenuBolsas = document.getElementById("btnMenuBolsas");
+    const menuBolsas = document.getElementById("menuBolsas");
+
+    if (btnMenuBolsas && menuBolsas) {
+
+        btnMenuBolsas.addEventListener("click", () => {
+
+            const aberto = menuBolsas.classList.toggle("aberto");
+
+            btnMenuBolsas.classList.toggle("ativo", aberto);
+            btnMenuBolsas.setAttribute("aria-expanded", aberto);
+
+        });
+
+        menuBolsas.querySelectorAll("a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                menuBolsas.classList.remove("aberto");
+                btnMenuBolsas.classList.remove("ativo");
+                btnMenuBolsas.setAttribute("aria-expanded", "false");
+
+            });
+
+        });
+
+    }
+</script>
+</body>
+</html>

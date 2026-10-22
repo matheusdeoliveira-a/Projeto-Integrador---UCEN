@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <title>Início - Portal do Professor - FTAN</title>
+    <link rel="stylesheet" href="professor_inicio.css">
+    <link rel="icon" type="image/svg+xml" href="favicon/professor.svg">
+
+</head>
+<body>
+
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
+
+    <header class="cabecalho">
+
+        <div class="barra-portal">
+           <!-- <a class="logo" href="professor_inicio.html">
+                <img src="logo-ucen.png" alt="Logo">
+            </a> --> 
+            <a class="logo">
+                <img src="logo-ucen.png" alt="Logo">
+            </a>
+
+            <!-- PESQUISA -->
+
+            <div class="caixa-pesquisa" id="caixaPesquisa">
+
+                <input type="text" placeholder="Pesquisar..." readonly>
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+            <div class="overlay-pesquisa" id="overlayPesquisa">
+
+                <div class="painel-pesquisa">
+
+                    <div class="barra-expandida">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+
+                        <button id="fecharPesquisa">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="resultado-pesquisa">
+
+                        <ul id="lista-header">
+                            <li data-url="professor_inicio.html">Início</li>
+                            <li data-url="professor_turmas.html">Minhas Turmas</li>
+                            <li data-url="professor_arquivos.html">Arquivos</li>
+                            <li data-url="professor_notas.html">Notas e Frequência</li>
+                            <li data-url="professor_agenda.html">Agenda</li>
+                            <li data-url="professor_calendario.html">Calendário</li>
+                            <li data-url="professor_perfil.html">Meu perfil</li>
+                        </ul>
+
+                        <div id="mensagem-header">
+                            Nenhum resultado encontrado.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- PERFIL -->
+
+            <div class="acoes-cabecalho">
+                <a href="professor_perfil.html" class="perfil"></a>
+                <a href="tela-de-carregamento.html?destino=logout_professor.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ==========================================
+         MENU LATERAL
+    ========================================== -->
+
+    <aside class="menu" id="menu">
+
+        <div class="menu-cabecalho">
+
+            <button class="botao-menu-fechar" id="botaoMenuFechar" type="button">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <span>Menu</span>
+
+        </div>
+
+        <nav class="menu-navegacao">
+
+            <a class="item-menu ativo" href="professor_inicio.html">
+                <i class="fa-solid fa-house"></i>
+                Início
+            </a>
+
+            <a class="item-menu" href="professor_turmas.html">
+                <i class="fa-solid fa-graduation-cap"></i>
+                Minhas Turmas
+            </a>
+
+            <a class="item-menu" href="professor_arquivos.html">
+                <i class="fa-solid fa-folder-open"></i>
+                Arquivos
+            </a>
+
+            <a class="item-menu" href="professor_notas.html">
+                <i class="fa-solid fa-clipboard-list"></i>
+                Notas e Frequência
+            </a>
+
+            <a class="item-menu" href="professor_agenda.html">
+                <i class="fa-solid fa-calendar-days"></i>
+                Agenda
+            </a>
+
+            <a class="item-menu" href="professor_calendario.html">
+                <i class="fa-solid fa-calendar"></i>
+                Calendário
+            </a>
+
+            <a class="item-menu" href="professor_perfil.html">
+                <i class="fa-solid fa-circle-user"></i>
+                Meu perfil
+            </a>
+
+        </nav>
+    </aside>
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL - INÍCIO
+    ========================================== -->
+
+    <main class="conteudo">
+
+        <div class="area-conteudo" id="areaConteudo">
+
+            <section class="pagina pagina-interna" data-conteudo="inicio">
+
+                <!-- CABEÇALHO DA PÁGINA -->
+                <div class="cabecalho-pagina">
+                    <span class="categoria-pagina" id="dataAtual"></span>
+                    <div class="titulo-linha">
+                        <h1>Olá, Prof. <span data-eu="primeiro_nome"></span>!</h1>
+                    </div>
+                    <p class="saudacao-professor">
+                        Acompanhe os principais assuntos das suas turmas hoje!
+                    </p>
+                </div>
+
+                <!-- PRÓXIMA AULA -->
+                <div class="card-proxima-aula">
+                    <div class="proxima-aula-texto">
+                        <div class="rotulo-proxima-aula">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                            <span class="subtitulo-card">Próxima aula</span>
+                        </div>
+                        <h2 class="titulo-materia" id="tituloProximaAula">Carregando...</h2>
+                        <p class="horario-aula" id="horarioProximaAula"></p>
+                    </div>
+
+                    <div class="botao-vestibular">
+                        <a href="professor_agenda.html" id="btnVerAgenda" class="btn-inscricao">
+                            Ver Agenda
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PRÓXIMAS AVALIAÇÕES -->
+                <div class="secao-inicio">
+
+                    <div class="secao-inicio-cabecalho">
+                        <h2>Próximas Avaliações</h2>                        
+                    </div>
+
+                    <div class="painel-avaliacoes">
+                        <a href="professor_calendario.html" id="btnVerTodasAvaliações" class="btn-link-calendario">
+                            Ver mais
+                        </a>
+
+                        <div id="listaProximasAvaliacoes">
+                            <div class="item-avaliacao">
+                                <div class="info-materia">
+                                    <p>Carregando...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        
+
+                    </div>
+
+                </div>
+
+                <!-- AVISOS IMPORTANTES (desativado) -->
+
+                <!-- <div class="secao-inicio">
+
+                    <div class="secao-inicio-cabecalho">
+                        <h2>Avisos Importantes</h2>
+                    </div>
+
+                    <div class="painel-avisos">
+
+                        <div class="item-aviso urgente">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <div class="texto-aviso">
+                                <h4>Lançamento de notas do P2 encerra em 3 dias</h4>
+                                <p>Turmas: Banco de Dados e Programação - prazo até 24/11.</p>
+                            </div>
+                        </div>
+
+                        <div class="item-aviso">
+                            <i class="fa-solid fa-bell"></i>
+                            <div class="texto-aviso">
+                                <h4>Reunião pedagógica de fim de semestre</h4>
+                                <p>Sala de reuniões da coordenação - 27/11 às 18h.</p>
+                            </div>
+                        </div>
+
+                        <div class="item-aviso">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                            <div class="texto-aviso">
+                                <h4>3 alunos abaixo da frequência mínima</h4>
+                                <p>Verifique a aba Notas e Frequência da turma de Engenharia de Software.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div> -->
+
+                <!-- RESUMO DAS TURMAS -->
+                <div class="secao-inicio">
+
+                    <div class="secao-inicio-cabecalho">
+                        <h2>Resumo das Turmas</h2>
+                    </div>
+
+                    <div class="grid-resumo-turmas" id="resumoTurmasProfessor">
+                        <p class="aviso-resumo-turmas">Carregando suas turmas...</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Rodapé do Portal -->
+    <footer id="contato">
+
+        <div class="footer-superior">
+            <div class="footer-esquerda">
+                <img src="logo-ucen.png" alt="Logo">
+                <h3 class="texto-footer">
+                    Campus central: Avenida das Estrelas, nº 372,<br>
+                    Jardim Primavera, Cidade Altas Flores/SP - CEP 14797-000
+                </h3>
+            </div>
+
+            <div class="footer-direita">
+                <h3 class="titulo-footer">
+                    Suporte ao professor
+                </h3>
+                <h3 class="texto-footer">
+                    E-mail: suporte.ucen@gmail.com<br>
+                    Telefone: 4006-8947<br>
+                    WhatsApp: (11) 94562-2899<br>
+                    Horário: Seg à Sex das 08h às 22:30h
+                </h3>
+            </div>
+        </div>
+
+        <div class="footer-inferior">
+            <h3 class="copyright">
+                © 2026 Universidade de Ciências e Exatas Nebula<br>
+                Todos os direitos reservados.
+            </h3>
+        </div>
+
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script src="professor_inicio.js" defer></script>
+    <script src="usuario_portal.js" defer></script>
+</body>
+</html>

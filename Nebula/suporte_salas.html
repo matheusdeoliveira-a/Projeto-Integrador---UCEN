@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Salas & Agenda - Portal do Suporte - UCEN</title>
+    <link rel="stylesheet" href="suporte_salas.css">
+
+    <link rel="icon" type="image/svg+xml" href="favicon/engrenagem.svg">
+</head>
+<body>
+<header class="cabecalho">
+    <div class="barra-portal">
+        <a class="logo" href="suporte_inicio.html"><img src="logo-ucen.png" alt="Logo"></a>
+        <div class="caixa-pesquisa" id="caixaPesquisa">
+            <input type="text" placeholder="Pesquisar..." readonly>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div class="overlay-pesquisa" id="overlayPesquisa">
+            <div class="painel-pesquisa">
+                <div class="barra-expandida">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="pesquisa-header" placeholder="Pesquisar..." autocomplete="off">
+                    <button id="fecharPesquisa" type="button"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="resultado-pesquisa">
+                    <ul id="lista-header">
+                        <li data-url="suporte_inicio.html">Início</li>
+                        <li data-url="suporte_academico.html">Acadêmico</li>
+                        <li data-url="suporte_professores.html">Professores</li>
+                        <li data-url="suporte_financeiro.html">Financeiro</li>
+                        <li data-url="suporte_atendimento.html">Central de Atendimento</li>
+                        <li data-url="suporte_salas.html">Salas & Agenda</li>
+                        <li data-url="suporte_relatorios.html">Relatórios</li>
+                        <li data-url="suporte_configuracoes.html">Configurações</li>
+                    </ul>
+                    <div id="mensagem-header">Nenhum resultado encontrado.</div>
+                </div>
+            </div>
+        </div>
+        <div class="acoes-cabecalho">
+            <a href="suporte_configuracoes.html" class="perfil">S</a>
+            <a href="tela-de-carregamento.html?destino=logout_suporte.php" class="btn-sair" title="Sair" aria-label="Sair da conta"><i class="fa-solid fa-right-from-bracket"></i></a>
+        </div>
+    </div>
+</header>
+
+<aside class="menu" id="menu">
+    <div class="menu-cabecalho">
+        <button class="botao-menu-fechar" id="botaoMenuFechar" type="button"><i class="fa-solid fa-bars"></i></button>
+        <span>Menu</span>
+    </div>
+    <nav class="menu-navegacao">
+        <a class="item-menu" href="suporte_inicio.html"><i class="fa-solid fa-house"></i> Início</a>
+        <a class="item-menu" href="suporte_academico.html"><i class="fa-solid fa-users"></i> Acadêmico</a>
+        <a class="item-menu" href="suporte_professores.html"><i class="fa-solid fa-briefcase"></i> Professores</a>
+        <a class="item-menu" href="suporte_financeiro.html"><i class="fa-solid fa-wallet"></i> Financeiro</a>
+        <a class="item-menu" href="suporte_atendimento.html"><i class="fa-solid fa-envelope"></i> Central de Atendimento</a>
+        <a class="item-menu ativo" href="suporte_salas.html"><i class="fa-solid fa-calendar-days"></i> Salas & Agenda</a>
+        <a class="item-menu" href="suporte_relatorios.html"><i class="fa-solid fa-chart-simple"></i> Relatórios</a>
+        <a class="item-menu" href="suporte_configuracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+    </nav>
+</aside>
+
+<main class="conteudo">
+    <div class="area-conteudo">
+        <section class="pagina pagina-interna">
+            <div class="cabecalho-pagina">
+                <span class="categoria-pagina">Espaços e horários</span>
+                <div class="titulo-linha"><h1>Salas & Agenda</h1><span></span></div>
+                <p>Organize salas, horários, aulas e reservas da instituição em um único painel.</p>
+            </div>
+
+            <div class="grid-cards-estatisticas">
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Salas cadastradas</span>
+                    <h2 class="valor-estatistica" id="statSalas">--</h2>
+                </div>
+                <div class="card-estatistica card-verde">
+                    <span class="subtitulo-estatistica">Em uso hoje</span>
+                    <h2 class="valor-estatistica" id="statUso">--</h2>
+                </div>
+                <div class="card-estatistica card-amarelo">
+                    <span class="subtitulo-estatistica">Reservas</span>
+                    <h2 class="valor-estatistica" id="statReservas">--</h2>
+                </div>
+                <div class="card-estatistica card-roxo">
+                    <span class="subtitulo-estatistica">Ocupação</span>
+                    <h2 class="valor-estatistica" id="statOcupacao">--</h2>
+                </div>
+            </div>
+
+            <div class="acoes-pagina">
+                <button class="btn-principal" id="novaReserva"><i class="fa-solid fa-plus"></i> Nova reserva</button>
+                <button class="btn-secundario" id="novaSala"><i class="fa-solid fa-door-open"></i> Cadastrar sala</button>
+            </div>
+
+            <div class="layout-agenda">
+                <div class="painel-calendario">
+                    <div class="cabecalho-calendario">
+                        <button id="mesAnterior" type="button"><i class="fa-solid fa-chevron-left"></i></button>
+                        <h2 id="mesTitulo">Setembro 2026</h2>
+                        <button id="mesProximo" type="button"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <div class="dias-semana">
+                        <span>DOM</span><span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SÁB</span>
+                    </div>
+                    <div class="grade-calendario" id="gradeCalendario"></div>
+                </div>
+
+                <div class="painel-agenda">
+                    <div class="cabecalho-painel">
+                        <div>
+                            <span class="categoria-pagina">Agenda do dia</span>
+                            <h2 id="dataSelecionada">08 de setembro</h2>
+                        </div>
+                        <select id="filtroSala">
+                            <option value="">Todas as salas</option>
+                        </select>
+                    </div>
+                    <div id="listaAgenda" class="lista-agenda"></div>
+                </div>
+            </div>
+
+            <div class="secao-tabela">
+                <div class="secao-titulo">
+                    <h2>Salas cadastradas</h2>
+                </div>
+                <div class="tabela-container">
+                    <table class="tabela">
+                        <thead>
+                            <tr>
+                                <th>Sala</th>
+                                <th>Localização</th>
+                                <th>Capacidade</th>
+                                <th>Recursos</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaSalas"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<div class="modal-overlay" id="modalAno">
+    <div class="modal modal-ano">
+        <button class="fechar-modal" data-close="modalAno" type="button">&times;</button>
+        <h2 id="tituloAnoModal">Ano de 2026</h2>
+        <p>Clique em um mês para ir direto até ele.</p>
+        <div class="grid-meses-ano" id="gridMesesAno"></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalReserva">
+    <div class="modal">
+        <button class="fechar-modal" data-close="modalReserva" type="button">&times;</button>
+        <h2>Nova reserva</h2>
+        <p>Formulário demonstrativo para a futura integração com PHP/MySQL.</p>
+        <form id="formReserva">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Evento / Aula</label>
+                    <input id="eventoReserva" required>
+                </div>
+                <div class="input-group">
+                    <label>Sala</label>
+                    <select id="salaReserva"></select>
+                </div>
+                <div class="input-group">
+                    <label>Data</label>
+                    <input id="dataReserva" type="date" required>
+                </div>
+                <div class="input-group">
+                    <label>Horário (início – término)</label>
+                    <div class="horario-duplo">
+                        <input id="horaReserva" type="time" value="19:00" required aria-label="Horário de início">
+                        <span>–</span>
+                        <input id="horaFimReserva" type="time" value="21:00" required aria-label="Horário de término">
+                    </div>
+                </div>
+                <div class="input-group full">
+                    <label>Responsável</label>
+                    <input id="responsavelReserva" required>
+                </div>
+            </div>
+            <div class="aviso-conflito" id="avisoConflito" aria-live="polite">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span id="textoAviso"></span>
+            </div>
+            <div class="form-actions">
+                <button class="btn-secundario" type="button" data-close="modalReserva">Cancelar</button>
+                <button class="btn-principal" type="submit"><i class="fa-solid fa-check"></i> Salvar reserva</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalSala">
+    <div class="modal">
+        <button class="fechar-modal" data-close="modalSala" type="button">&times;</button>
+        <h2>Cadastrar sala</h2>
+        <p>Formulário demonstrativo para a futura integração com PHP/MySQL.</p>
+        <form id="formSala">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Nome da sala</label>
+                    <input id="nomeSala" required>
+                </div>
+                <div class="input-group">
+                    <label>Capacidade</label>
+                    <input id="capacidadeSala" type="number" min="1" required>
+                </div>
+                <div class="input-group full">
+                    <label>Localização</label>
+                    <input id="localSala" required>
+                </div>
+                <div class="input-group full">
+                    <label>Recursos</label>
+                    <input id="recursosSala" placeholder="Projetor, computadores, quadro...">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn-secundario" type="button" data-close="modalSala">Cancelar</button>
+                <button class="btn-principal" type="submit"><i class="fa-solid fa-check"></i> Cadastrar sala</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+
+    <div class="footer-inferior">
+
+        <h3 class="copyright">
+            © 2026 Universidade de Ciências e Exatas Nebula<br>
+            Todos os direitos reservados.
+        </h3>
+    </div>
+</footer>
+<script src="suporte_permissoes.js" defer></script>
+<script src="suporte_salas.js" defer></script>
+</body>
+</html>
